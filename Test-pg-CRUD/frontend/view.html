@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>CRUD Usuarios</title>
+</head>
+<body>
+
+<h2>Formulario Usuario</h2>
+
+<input type="hidden" id="id">
+<input id="nombre" placeholder="Nombre">
+<input id="codigo" placeholder="Código">
+<input id="donacion" placeholder="Donación">
+
+<button onclick="guardar()">Guardar</button>
+<button onclick="cancelarEdicion()">Cancelar</button>
+
+<h2>Lista de Usuarios</h2>
+
+<table border="1">
+  <thead>
+    <tr>
+      <th>ID</th>
+      <th>Nombre</th>
+      <th>Codigo</th>
+      <th>Donacion</th>
+      <th>Acciones</th>
+    </tr>
+  </thead>
+  <tbody id="tabla"></tbody>
+</table>
+
+<script>
+
+const API = "http://localhost:3000/usuarios";
+
+async function guardar() {
+  const id = document.getElementById("id").value;
+  const nombre = document.getElementById("nombre").value;
+  const codigo = document.getElementById("codigo").value;
+  const donacion = document.getElementById("donacion").value;
+
+  if (id) {
+    // UPDATE
+    await fetch(API + "/" + id, {
+      method: "PUT",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ nombre, codigo, donacion })
+    });
+  } else {
+    // CREATE
+    await fetch(API, {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ nombre, codigo, donacion })
+    });
+  }
+
+  limpiarFormulario();
+  cargarUsuarios();
+}
+
+async function cargarUsuarios() {
+  const res = await fetch(API);
+  const data = await res.json();
+
+  const tabla = document.getElementById("tabla");
+  tabla.innerHTML = "";
+
+  data.forEach(user => {
+    tabla.innerHTML += `
+      <tr>
+        <td>${user.id}</td>
+        <td>${user.nombre}</td>
+        <td>${user.codigo}</td>
+        <td>${user.donacion}</td>
+        <td>
+          <button onclick="editar(${user.id}, '${user.nombre}', '${user.codigo}', ${user.donacion})">Editar</button>
+          <button onclick="eliminar(${user.id})">Eliminar</button>
+        </td>
+      </tr>
+    `;
+  });
+}
+
+function editar(id, nombre, codigo, donacion) {
+  document.getElementById("id").value = id;
+  document.getElementById("nombre").value = nombre;
+  document.getElementById("codigo").value = codigo;
+  document.getElementById("donacion").value = donacion;
+}
+
+function cancelarEdicion() {
+  limpiarFormulario();
+}
+
+function limpiarFormulario() {
+  document.getElementById("id").value = "";
+  document.getElementById("nombre").value = "";
+  document.getElementById("codigo").value = "";
+  document.getElementById("donacion").value = "";
+}
+
+async function eliminar(id) {
+  await fetch(API + "/" + id, {
+    method: "DELETE"
+  });
+
+  cargarUsuarios();
+}
+
+cargarUsuarios();
+
+</script>
+
+</body>
+</html>
