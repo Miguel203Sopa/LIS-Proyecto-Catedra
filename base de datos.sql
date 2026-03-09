@@ -1,16 +1,18 @@
 
---schema propio
-CREATE SCHEMA fundacion;
+-- SCHEMA
 
+
+DROP SCHEMA IF EXISTS fundacion CASCADE;
+CREATE SCHEMA fundacion;
 SET search_path TO fundacion;
 
---Tipos enumerados utilizados para restringir valores permitidos.
+-- ENUM TYPES
+
 
 CREATE TYPE rol_usuario AS ENUM (
 'admin',
 'voluntario'
 );
-
 
 CREATE TYPE sexo_animal AS ENUM (
 'macho',
@@ -31,53 +33,73 @@ CREATE TYPE tipo_registro_medico AS ENUM (
 'cirugia'
 );
 
+-- PERSONAS (Entidad base)
 
 
---Administradores y voluntarios que tienen acceso al sistema.
-CREATE TABLE usuarios (
-    id_usuario SERIAL PRIMARY KEY,
+CREATE TABLE personas (
+    id_persona SERIAL PRIMARY KEY,
     nombre VARCHAR(100) NOT NULL,
     apellido VARCHAR(100) NOT NULL,
-    correo VARCHAR(150) NOT NULL UNIQUE,
-    password_hash TEXT NOT NULL,
+    dui VARCHAR(10) UNIQUE,
+    correo VARCHAR(150) UNIQUE,
     telefono VARCHAR(20),
-    rol VARCHAR(20) NOT NULL,
-    activo BOOLEAN DEFAULT TRUE,
-    fecha_registro TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-
-    CONSTRAINT chk_rol_usuario
-        CHECK (rol IN ('admin','voluntario'))
-);
-
---Índice para autenticación
-CREATE INDEX idx_usuarios_correo
-ON usuarios(correo);
-
---Personas que solicitan adoptar animales
-
-CREATE TABLE adoptantes (
-    id_adoptante SERIAL PRIMARY KEY,
-    nombre VARCHAR(100) NOT NULL,
-    apellido VARCHAR(100) NOT NULL,
-    dui VARCHAR(10) NOT NULL UNIQUE,
-    telefono VARCHAR(20),
-    direccion TEXT,
     fecha_registro TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
 
-CREATE INDEX idx_adoptantes_dui
-ON adoptantes(dui);
+CREATE INDEX idx_personas_dui
+ON personas(dui);
+
+CREATE INDEX idx_personas_correo
+ON personas(correo);
+
+-- USUARIOS DEL SISTEMA
+
+
+CREATE TABLE usuarios (
+    id_usuario SERIAL PRIMARY KEY,
+    id_persona INTEGER NOT NULL UNIQUE,
+    password_hash TEXT NOT NULL,
+    rol rol_usuario NOT NULL,
+    activo BOOLEAN DEFAULT TRUE,
+
+    CONSTRAINT fk_usuario_persona
+        FOREIGN KEY (id_persona)
+        REFERENCES personas(id_persona)
+        ON DELETE CASCADE
+);
+
+
+-- ADOPTANTES
+
+
+CREATE TABLE adoptantes (
+    id_adoptante SERIAL PRIMARY KEY,
+    id_persona INTEGER NOT NULL UNIQUE,
+    direccion TEXT,
+
+    CONSTRAINT fk_adoptante_persona
+        FOREIGN KEY (id_persona)
+        REFERENCES personas(id_persona)
+        ON DELETE CASCADE
+);
+
+
+-- ESPECIES
+
 
 CREATE TABLE especies (
     id_especie SMALLSERIAL PRIMARY KEY,
     nombre VARCHAR(20) NOT NULL UNIQUE
 );
 
---datos inciales
-CREATE TABLE especie (
-    id_especie SMALLSERIAL PRIMARY KEY,
-    nombre VARCHAR(20) NOT NULL UNIQUE
-);
+INSERT INTO especies (nombre)
+VALUES
+('Perro'),
+('Gato');
+
+
+-- ANIMALES
+
 
 CREATE TABLE animales (
     id_animal SERIAL PRIMARY KEY,
@@ -96,13 +118,14 @@ CREATE TABLE animales (
         REFERENCES especies(id_especie)
 );
 
---indices
-
 CREATE INDEX idx_animales_especie
 ON animales(id_especie);
 
 CREATE INDEX idx_animales_estado
 ON animales(estado);
+
+-- ADOPCIONES
+
 
 CREATE TABLE adopciones (
     id_adopcion SERIAL PRIMARY KEY,
@@ -134,6 +157,10 @@ ON adopciones(id_adoptante);
 
 CREATE INDEX idx_adopciones_usuario
 ON adopciones(id_usuario_aprobacion);
+
+
+-- HISTORIAL MEDICO
+
 
 CREATE TABLE historial_medico (
     id_historial SERIAL PRIMARY KEY,
