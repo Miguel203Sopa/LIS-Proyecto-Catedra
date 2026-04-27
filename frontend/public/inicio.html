@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>Inicio</title>
+  <link rel="stylesheet" href="/Css/styles.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+  <style>
+    body { margin: 0; padding: 0; background: transparent; }
+  </style>
+</head>
+<body>
+
+  <div id="carouselExampleAutoplaying" class="carousel slide" data-bs-ride="carousel">
+
+    <div class="carousel-indicators">
+      <button type="button" data-bs-target="#carouselExampleAutoplaying" data-bs-slide-to="0" class="active"
+        aria-current="true" aria-label="Slide 1"></button>
+      <button type="button" data-bs-target="#carouselExampleAutoplaying" data-bs-slide-to="1"
+        aria-label="Slide 2"></button>
+      <button type="button" data-bs-target="#carouselExampleAutoplaying" data-bs-slide-to="2"
+        aria-label="Slide 3"></button>
+    </div>
+
+    <div class="carousel-inner">
+
+      <!-- Item 1 -->
+      <div class="carousel-item active">
+        <div class="d-flex flex-wrap align-items-center justify-content-center p-4">
+          <div class="texto flex-fill p-3">
+            <h1>Refugio de Animales</h1>
+            <h2><strong>En El Salvador sin fines de lucro</strong></h2>
+            <p>Al servicio de rescate, rehabilitación y cuidado de perros sin hogar.</p>
+          </div>
+          <div class="imagen flex-fill p-3 text-center">
+            <img src="Imagenes/Dog example.png" class="rounded float-end" alt="Perro1">
+          </div>
+        </div>
+      </div>
+
+      <!-- Item 2 -->
+      <div class="carousel-item">
+        <div class="d-flex flex-wrap align-items-center justify-content-center p-4">
+          <div class="texto flex-fill p-3">
+            <h1>Segunda Tarjeta</h1>
+            <p>Contenido adicional para la segunda tarjeta.</p>
+          </div>
+          <div class="imagen flex-fill p-3 text-center">
+            <img src="Imagenes/Dog example.png" class="rounded float-end" alt="Perro">
+          </div>
+        </div>
+      </div>
+
+      <!-- Item 3 -->
+      <div class="carousel-item">
+        <div class="d-flex flex-wrap align-items-center justify-content-center p-4">
+          <div class="texto flex-fill p-3">
+            <h1>Tercera Tarjeta</h1>
+            <p>Contenido adicional para la tercera tarjeta.</p>
+          </div>
+          <div class="imagen flex-fill p-3 text-center">
+            <img src="Imagenes/Dog3.png" class="img-fluid rounded" alt="Perro3">
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

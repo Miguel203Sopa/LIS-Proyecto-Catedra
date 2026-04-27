@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>Adopciones</title>
+  <link rel="stylesheet" href="/Css/styles.css">
+  <link rel="stylesheet" href="/Css/Adopciones.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+  <style>
+    body { margin: 0; padding: 0; background: transparent; }
+  </style>
+</head>
+<body>
+
+<section class="Adopcines">
+  <div class="contenedor1">
+    <div class="conte1-texto1">
+      <h1>Encuentra tu alma Gemela</h1>
+      <h2><strong>Adopciones de peluditos</strong></h2>
+      <p>Conoce a nuestros amigos peluditos que desean formar parte de una nueva familia.</p>
+    </div>
+    <div class="imagen">
+      <img src="Imagenes/Dog example.png" alt="Perro1">
+    </div>
+  </div>
+
+  <div class="contenedor2">
+    <div class="conte2">
+      <br>
+      <h2>Forma parte en la mision</h2>
+      <hr>
+      <p>Es una alegria saber que estas pensando adoptar a un milagrito, todos nuestros amigos estan esperando una
+        nueva familia. En esta pagina podras conocer al amigo que deseas adoptar ademas del proceso de adopcion de este.
+      </p>
+      <br>
+      <div class="contenedorjr">
+        <h3>Requisitos para tener en cuenta</h3>
+        <br>
+        <p>
+          Nos encanta poder entregar a un peludito, pero estos amigos son una gran responsabilidad,
+          por ello recomendamos tener en consideracion ciertos detalles para buscar el bienestar de nuestros amigos.
+        </p>
+        <ol class="lista-iconos">
+          <li><i class="fa-solid fa-heart"></i> La persona responsable debe ser mayor de X Edad.</li>
+          <li><i class="fa-solid fa-heart"></i> Se debe de poseer un lugar adecuado para el peludito.</li>
+          <li><i class="fa-solid fa-heart"></i> Debe de llenar un formulario de adopcion.</li>
+          <li><i class="fa-solid fa-heart"></i> Es importante contar con responsabilidad economica para el peludito y sus necesidades.</li>
+          <li><i class="fa-solid fa-heart"></i> Los datos ingresados seran revisados y verificados por la fundacion.</li>
+          <li><i class="fa-solid fa-heart"></i> Se debe de contar con el espacio necesario para el peludito que supla sus necesidades.</li>
+        </ol>
+      </div>
+
+      <div class="menu-bar">
+        <br>
+        <ul>
+          <li class="#"><a href="#"><i class="fa-solid fa-paw"></i> Mascota</a>
+            <div class="sub-menu">
+              <ul>
+                <li><a href="#">Perro</a></li>
+                <li><a href="#">Gato</a></li>
+              </ul>
+            </div>
+          </li>
+          <li><a href="#"><i class="fa-solid fa-mars-and-venus"></i> Genero</a>
+            <div class="sub-menu">
+              <ul>
+                <li><a href="#">Macho</a></li>
+                <li><a href="#">Hembra</a></li>
+              </ul>
+            </div>
+          </li>
+          <li><a href="#"><i class="fa-solid fa-ruler"></i> Tamaño</a>
+            <div class="sub-menu">
+              <ul>
+                <li><a href="#">Pequeño</a></li>
+                <li><a href="#">Mediano</a></li>
+                <li><a href="#">Grande</a></li>
+              </ul>
+            </div>
+          </li>
+          <li><a href="#"><i class="fa-solid fa-calendar"></i> Edad</a>
+            <div class="sub-menu">
+              <ul>
+                <li><a href="#">0 - 3 años</a></li>
+                <li><a href="#">3 - 7 años</a></li>
+                <li><a href="#">7 - 10 años</a></li>
+              </ul>
+            </div>
+          </li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="container py-5">
+      <div class="row justify-content-center">
+        <div class="col-lg-9">
+          <div class="row">
+
+            <!-- Ficha 1 -->
+            <div class="col-12 col-md-4 mb-4">
+              <div class="flip-card">
+                <div class="flip-inner">
+                  <div class="front text-center">
+                    <img src="Imagenes/Dog example.png" class="img-container">
+                    <h3 class="card__name">Rafalito</h3>
+                    <span>Género: Hembra</span><br>
+                    <span>Edad: 4 años</span><br>
+                    <span>Tamaño: Mediano</span>
+                  </div>
+                  <div class="back text-center d-flex flex-column justify-content-center">
+                    <h3>Rafalito</h3>
+                    <img src="Imagenes/Dog example.png" class="card__img-back">
+                    <span>Vacunas: Completas</span>
+                    <span>Edad: 4 años</span>
+                    <span>Info: xxx</span>
+                    <button class="btn btn-outline-dark mt-2">Adopción</button>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Ficha 2 -->
+            <div class="col-12 col-md-4 mb-4">
+              <div class="flip-card">
+                <div class="flip-inner">
+                  <div class="front text-center">
+                    <img src="Imagenes/Dog 3.png" class="img-container">
+                    <h3>Rafalito</h3>
+                    <span>Género: Macho</span><br>
+                    <span>Edad: 8 años</span><br>
+                    <span>Tamaño: Mediano</span>
+                  </div>
+                  <div class="back text-center d-flex flex-column justify-content-center">
+                    <h3>Rafalito</h3>
+                    <img src="Imagenes/Dog 3.png" class="card__img-back">
+                    <span>Vacunas: Completas</span>
+                    <span>Edad: 8 años</span>
+                    <span>Info: xxx</span>
+                    <button class="btn btn-outline-dark mt-2">Adopción</button>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Ficha 3 -->
+            <div class="col-12 col-md-4 mb-4">
+              <div class="flip-card">
+                <div class="flip-inner">
+                  <div class="front text-center">
+                    <img src="Imagenes/Dog2.png" class="img-container">
+                    <h3>Rafita</h3>
+                    <span>Género: Hembra</span><br>
+                    <span>Edad: 2 años</span><br>
+                    <span>Tamaño: Grande</span>
+                  </div>
+                  <div class="back text-center d-flex flex-column justify-content-center">
+                    <h3>Rafita</h3>
+                    <img src="Imagenes/Dog2.png" class="card__img-back">
+                    <span>Vacunas: Completas</span>
+                    <span>Edad: 2 años</span>
+                    <span>Info: xxx</span>
+                    <button class="btn btn-outline-dark mt-2">Adopción</button>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
