@@ -10,6 +10,8 @@ RUN rm -rf /var/lib/apt/lists/* \
     && docker-php-ext-install pdo pdo_pgsql \
     && apt-get clean
 
+RUN a2enmod rewrite
+
 WORKDIR /var/www/html
 COPY . /var/www/html/
 
