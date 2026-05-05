@@ -2,7 +2,7 @@
 <html lang="es">
 <head>
   <meta charset="UTF-8">
-  <title>Fundacion de Proteccion animales Somos Angeles</title>
+  <title>Fundación Somos Ángeles - Panel de Control</title>
   <link rel="shortcut icon" href="/Imagenes/Puppy.png">
   <link rel="stylesheet" href="/Css/styles.css">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
@@ -19,6 +19,18 @@
       border: none;
       display: block;
     }
+    /* Estilo para diferenciar las opciones de Admin */
+    .admin-section-header {
+      color: #b39ddb;
+      font-size: 10px;
+      text-transform: uppercase;
+      padding: 15px 25px 5px;
+      font-weight: bold;
+      letter-spacing: 1px;
+    }
+    .sidebar ul li.admin-item a {
+      background: rgba(103, 58, 183, 0.1);
+    }
   </style>
 </head>
 <body>
@@ -33,25 +45,18 @@
     </div>
     <div class="top_menu">
       <div class="logo">
-        <img src="Imagenes/Screenshot 2026-02-08 184854.png">
+        <!-- Manteniendo tu logo original -->
+        <img src="Imagenes/Screenshot 2026-02-08 184854.png" alt="Logo">
       </div>
       <ul>
-        <li>
-          <a href="#" class="icon">
-            <i class="fa-solid fa-gear"></i>
-          </a>
-        </li>
-        <li>
-          <a href="#" class="icon">
-            <i class="fas fa-bell"></i>
-          </a>
-        </li>
+        <li><a href="#" class="icon"><i class="fa-solid fa-gear"></i></a></li>
+        <li><a href="#" class="icon"><i class="fas fa-bell"></i></a></li>
         <li>
           <a href="#" class="icon">
             <i class="fa-solid fa-user"
                data-bs-toggle="popover"
                data-bs-html="true"
-               data-bs-content="<a href='login.html'>Usuario</a><br><a href='#'>Iniciar sesión</a>">
+               data-bs-content="<div class='text-center'><strong>Sesión</strong><br><hr><a href='login.html' class='btn btn-sm btn-danger'>Cerrar Sesión</a></div>">
             </i>
           </a>
         </li>
@@ -60,9 +65,10 @@
   </div>
 
   <div class="sidebar">
-    <ul>
+    <ul id="sidebar-menu">
+      <!-- OPCIONES PÚBLICAS (Todos las ven) -->
       <li id="nav-inicio">
-        <a href="#" onclick="cargarPagina('inicio.html', 'nav-inicio')">
+        <a href="#" onclick="cargarPagina('inicio.html', 'nav-inicio')" class="active">
           <span class="icon"><i class="fa-solid fa-house"></i></span>
           <span class="title">Principal</span>
         </a>
@@ -85,6 +91,8 @@
           <span class="title">Donaciones</span>
         </a>
       </li>
+      
+      <!-- AQUÍ SE INYECTARÁN LAS PESTAÑAS DE ADMIN -->
     </ul>
   </div>
 
@@ -99,31 +107,64 @@
 
 </div>
 
+<!-- SCRIPTS DE FUNCIONALIDAD -->
 <script>
+  // 1. Toggle Hamburger Menu
   document.querySelector(".hamburger").addEventListener("click", function () {
     document.querySelector(".wrapper").classList.toggle("sidebar-collapse");
   });
 
+  // 2. Carga Dinámica de Iframe
   function cargarPagina(url, navId) {
     document.getElementById('content-frame').src = url;
 
-    document.querySelectorAll('.sidebar ul li').forEach(function(li) {
-      li.querySelector('a').classList.remove('active');
+    // Quitar 'active' de todos los li
+    document.querySelectorAll('.sidebar ul li a').forEach(function(a) {
+      a.classList.remove('active');
     });
 
+    // Añadir 'active' al seleccionado
     const li = document.getElementById(navId);
     if (li) li.querySelector('a').classList.add('active');
 
     return false;
   }
 
-  window.addEventListener('DOMContentLoaded', function() {
-    document.querySelector('#nav-inicio a').classList.add('active');
+  // 3. Lógica de Personalización para Admin
+  document.addEventListener("DOMContentLoaded", function() {
+    const userRole = localStorage.getItem("userRole");
+    const sidebarMenu = document.getElementById("sidebar-menu");
+
+    if (userRole === "admin") {
+      const adminTabs = `
+        <div class="admin-section-header">Administración</div>
+        <li id="nav-admin-animales" class="admin-item">
+          <a href="#" onclick="cargarPagina('admin_animales.html', 'nav-admin-animales')">
+            <span class="icon"><i class="fa-solid fa-paw"></i></span>
+            <span class="title">Gestión Animales</span>
+          </a>
+        </li>
+        <li id="nav-admin-voluntarios" class="admin-item">
+          <a href="#" onclick="cargarPagina('admin_voluntarios.html', 'nav-admin-voluntarios')">
+            <span class="icon"><i class="fa-solid fa-users-gear"></i></span>
+            <span class="title">Gestión Usuarios</span>
+          </a>
+        </li>
+        <li id="nav-admin-adopciones" class="admin-item">
+          <a href="#" onclick="cargarPagina('admin_adopciones.html', 'nav-admin-adopciones')">
+            <span class="icon"><i class="fa-solid fa-clipboard-check"></i></span>
+            <span class="title">Gestión Adopciones</span>
+          </a>
+        </li>
+      `;
+      sidebarMenu.innerHTML += adminTabs;
+    }
   });
 </script>
 
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
 <script>
+  // Inicializar Popovers de Bootstrap
   const popoverTriggerList = document.querySelectorAll('[data-bs-toggle="popover"]');
   const popoverList = [...popoverTriggerList].map(el => new bootstrap.Popover(el));
 </script>
