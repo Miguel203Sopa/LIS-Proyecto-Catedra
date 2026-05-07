@@ -107,3 +107,21 @@ body {
 .ingresar a:hover {
     text-decoration: underline;
 }
+
+/* Google */
+.google-btn {
+    background: #fff;
+    color: #333;
+    border: 1px solid #ddd;
+}
+
+.google-btn:hover {
+    background: #f3f3f3;
+}
+
+/* Alert */
+.alert {
+    margin-top: 15px;
+    border-radius: 10px;
+    font-size: 14px;
+}
