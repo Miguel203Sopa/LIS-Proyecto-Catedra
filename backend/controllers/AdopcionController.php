@@ -1,5 +1,5 @@
 <?php
-require_once "../clases/Adopcion.php";
+require_once __DIR__ . "/../clases/Adopcion.php";
 
 class AdopcionController {
     private $model;

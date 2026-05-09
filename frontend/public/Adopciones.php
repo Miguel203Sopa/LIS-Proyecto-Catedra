@@ -3,8 +3,8 @@
 <head>
   <meta charset="UTF-8">
   <title>Adopciones</title>
-  <link rel="stylesheet" href="/Css/styles.css">
-  <link rel="stylesheet" href="/Css/Adopciones.css">
+  <link rel="stylesheet" href="/assets/css/styles.css">
+  <link rel="stylesheet" href="/assets/css/Adopciones.css">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
   <style>
@@ -21,7 +21,7 @@
       <p>Conoce a nuestros amigos peluditos que desean formar parte de una nueva familia.</p>
     </div>
     <div class="imagen">
-      <img src="Imagenes/Dog example.png" alt="Perro1">
+      <img src="/assets/imagenes/Dog example.png" alt="Perro1">
     </div>
   </div>
 
@@ -102,7 +102,7 @@
               <div class="flip-card">
                 <div class="flip-inner">
                   <div class="front text-center">
-                    <img src="Imagenes/Dog example.png" class="img-container">
+                    <img src="/assets/imagenes/Dog example.png" class="img-container">
                     <h3 class="card__name">Rafalito</h3>
                     <span>Género: Hembra</span><br>
                     <span>Edad: 4 años</span><br>
@@ -110,7 +110,7 @@
                   </div>
                   <div class="back text-center d-flex flex-column justify-content-center">
                     <h3>Rafalito</h3>
-                    <img src="Imagenes/Dog example.png" class="card__img-back">
+                    <img src="/assets/imagenes/Dog example.png" class="card__img-back">
                     <span>Vacunas: Completas</span>
                     <span>Edad: 4 años</span>
                     <span>Info: xxx</span>
@@ -125,7 +125,7 @@
               <div class="flip-card">
                 <div class="flip-inner">
                   <div class="front text-center">
-                    <img src="Imagenes/Dog 3.png" class="img-container">
+                    <img src="/assets/imagenes/Dog 3.png" class="img-container">
                     <h3>Rafalito</h3>
                     <span>Género: Macho</span><br>
                     <span>Edad: 8 años</span><br>
@@ -133,7 +133,7 @@
                   </div>
                   <div class="back text-center d-flex flex-column justify-content-center">
                     <h3>Rafalito</h3>
-                    <img src="Imagenes/Dog 3.png" class="card__img-back">
+                    <img src="/assets/imagenes/Dog 3.png" class="card__img-back">
                     <span>Vacunas: Completas</span>
                     <span>Edad: 8 años</span>
                     <span>Info: xxx</span>
@@ -148,7 +148,7 @@
               <div class="flip-card">
                 <div class="flip-inner">
                   <div class="front text-center">
-                    <img src="Imagenes/Dog2.png" class="img-container">
+                    <img src="/assets/imagenes/Dog2.png" class="img-container">
                     <h3>Rafita</h3>
                     <span>Género: Hembra</span><br>
                     <span>Edad: 2 años</span><br>
@@ -156,7 +156,7 @@
                   </div>
                   <div class="back text-center d-flex flex-column justify-content-center">
                     <h3>Rafita</h3>
-                    <img src="Imagenes/Dog2.png" class="card__img-back">
+                    <img src="/assets/imagenes/Dog2.png" class="card__img-back">
                     <span>Vacunas: Completas</span>
                     <span>Edad: 2 años</span>
                     <span>Info: xxx</span>

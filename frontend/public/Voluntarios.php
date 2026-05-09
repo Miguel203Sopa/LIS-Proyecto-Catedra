@@ -4,8 +4,8 @@
 <head>
   <meta charset="UTF-8">
   <title>Voluntarios</title>
-  <link rel="stylesheet" href="/Css/styles.css">
-  <link rel="stylesheet" href="/Css/donaciones.css">
+  <link rel="stylesheet" href="/assets/css/styles.css">
+  <link rel="stylesheet" href="/assets/css/donaciones.css">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
   <style>
@@ -37,7 +37,7 @@
         </p>
       </div>
       <div class="bloque-info1">
-        <img src="Imagenes/Donation.png" alt="donaciones">
+        <img src="/assets/imagenes/Donation.png" alt="donaciones">
       </div>
       <div>
         <h2>La necesidad de ayudar</h2>
@@ -100,7 +100,7 @@
                 <button class="btn btn-primary" ></button>
               </div>
             </dialog>
-            <script src="Js/modal.js"></script>
+            <script src="/assets/js/modal.js"></script>
           </div>
         </div>
 
@@ -124,7 +124,7 @@
         </ul>
       </div>
       <div class="bloque-info1">
-        <img src="Imagenes/TioSam.png" alt="donaciones">
+        <img src="/assets/imagenes/TioSam.png" alt="donaciones">
       </div>
     </div>
   </section>

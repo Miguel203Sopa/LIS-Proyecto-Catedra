@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <title>Inicio</title>
-  <link rel="stylesheet" href="/Css/styles.css">
+  <link rel="stylesheet" href="/assets/css/styles.css">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
   <style>
@@ -34,7 +34,7 @@
             <p>Al servicio de rescate, rehabilitación y cuidado de perros sin hogar.</p>
           </div>
           <div class="imagen flex-fill p-3 text-center">
-            <img src="Imagenes/Dog example.png" class="rounded float-end" alt="Perro1">
+            <img src="/assets/imagenes/Dog example.png" class="rounded float-end" alt="Perro1">
           </div>
         </div>
       </div>
@@ -47,7 +47,7 @@
             <p>Contenido adicional para la segunda tarjeta.</p>
           </div>
           <div class="imagen flex-fill p-3 text-center">
-            <img src="Imagenes/Dog example.png" class="rounded float-end" alt="Perro">
+            <img src="/assets/imagenes/Dog example.png" class="rounded float-end" alt="Perro">
           </div>
         </div>
       </div>
@@ -60,7 +60,7 @@
             <p>Contenido adicional para la tercera tarjeta.</p>
           </div>
           <div class="imagen flex-fill p-3 text-center">
-            <img src="Imagenes/Dog3.png" class="img-fluid rounded" alt="Perro3">
+            <img src="/assets/imagenes/Dog3.png" class="img-fluid rounded" alt="Perro3">
           </div>
         </div>
       </div>

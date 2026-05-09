@@ -140,6 +140,6 @@ INSERT INTO usuarios (
 )
 VALUES (
     1,
-    'n9ouzgQXjBY9Y96X4sRySGKeHWx1',
+    '5G5ohRBjzmfJMK30JukvwcanfzQ2',
     'admin'
 );

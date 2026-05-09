@@ -14,8 +14,8 @@ class Session
         self::start();
 
         $_SESSION['usuario'] = [
-            "id" => $usuario['id_usuario'],
-            "uid" => $usuario['firebase_uid'],
+            "id" => $usuario['id'],
+            "uid" => $usuario['uid'],
             "nombre" => $usuario['nombre'],
             "apellido" => $usuario['apellido'],
             "correo" => $usuario['correo'],

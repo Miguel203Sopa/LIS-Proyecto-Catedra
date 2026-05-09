@@ -4,8 +4,8 @@
 <head>
   <meta charset="UTF-8">
   <title>Donaciones</title>
-  <link rel="stylesheet" href="/Css/styles.css">
-  <link rel="stylesheet" href="/Css/donaciones.css">
+  <link rel="stylesheet" href="/assets/css/styles.css">
+  <link rel="stylesheet" href="/assets/css/donaciones.css">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
   <style>
@@ -37,7 +37,7 @@
               <p>Cuenta de Ahorros: 003100XXXXXX</p>
             </div>
             <div class="col-texto">
-              <img src="Imagenes/BancoAgricola.jpg" alt="BancoAgricola" class="rounded float-end">
+              <img src="/assets/imagenes/BancoAgricola.jpg" alt="BancoAgricola" class="rounded float-end">
             </div>
           </div>
           <div class="cuenta-detalle">
@@ -46,7 +46,7 @@
               <p>Cuenta Corriente: 012XXXXXXXX</p>
             </div>
             <div class="col-img">
-              <img src="Imagenes/BancoCusca.jpg" alt="imagenCusc">
+              <img src="/assets/imagenes/BancoCusca.jpg" alt="imagenCusc">
             </div>
           </div>
           <br>
@@ -82,7 +82,7 @@
         </ul>
       </div>
       <div class="bloque-info1">
-        <img src="Imagenes/PinkBank.png" alt="donaciones">
+        <img src="/assets/imagenes/PinkBank.png" alt="donaciones">
       </div>
     </div>
   </section>

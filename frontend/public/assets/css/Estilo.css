@@ -1,0 +1,242 @@
+body {
+  font-family: 'Roboto', sans-serif;
+  font-size: 18px;
+  font-weight: 300;
+}
+h1 {
+  font-family: 'Roboto', sans-serif;
+  font-size: 48px !important;
+  font-weight: 200 !important;
+}
+h2 {
+  font-family: 'Roboto', sans-serif;
+  font-size: 30px !important;
+  font-weight: 300;
+}
+h3 {
+  font-family: 'Roboto', sans-serif;
+  font-size: 22px !important;
+}
+/* General */
+.logo { font-weight: 500 !important;}
+.text-warning {  color: #ede861 !important;}
+.text-muted { color: #bcbcbc !important;}
+.text-success { color: #beab7b !important;}
+.text-light { color: #f4f4f4 !important;}
+.bg-dark { background-color: #333333 !important;}
+.bg-light { background-color: #f4f4f4 !important;}
+.bg-black { background-color: #333333  !important;}
+.bg-success { background-color: #beab7b !important;}
+.btn-success {
+  background-color: #beab72 !important;
+  border-color: #beab7b !important;
+}
+.pagination .page-link:hover {color: #000;}
+.pagination .page-link:hover, .pagination .page-link.active {
+  background-color: #beab72;
+  color: #fff;
+}
+/* Nav */
+#templatemo_nav_top { min-height: 40px;}
+#templatemo_nav_top * { font-size: .9em !important;}
+#templatemo_main_nav a { color: #333333;}
+#templatemo_main_nav a:hover { color: #beab72;}
+#templatemo_main_nav .navbar .nav-icon { margin-right: 20px;}
+
+#template-mo-zay-hero-carousel { background: #f4f4f4 !important;}
+.templatemo-accordion a { color: #000;}
+.templatemo-accordion a:hover { color: #333d4a;}
+.shop-top-menu a:hover { color: #69bb7e !important;}
+.product-wap { box-shadow: 0px 5px 10px 0px rgba(0, 0, 0, 0.10);}
+.product-wap .product-color-dot.color-dot-red { background:#f71515;}
+.product-wap .product-color-dot.color-dot-blue { background:#6db4fe;}
+.product-wap .product-color-dot.color-dot-black { background:#000000;}
+.product-wap .product-color-dot.color-dot-light { background:#e0e0e0;}
+.product-wap .product-color-dot.color-dot-green { background:#0bff7e;}
+#targetas{
+  background-color: #f4f4f4; /*Este es para la seccion de targetas*/
+}
+
+.card.product-wap .card .product-overlay {
+  background: rgba(0,0,0,.2);
+  visibility: hidden;
+  opacity: 0;
+  transition: .3s;
+}
+.card.product-wap:hover .card .product-overlay {
+  visibility: visible;
+  opacity: 1;
+}
+.card:hover{
+transform:scale(1.05);
+transition:0.3s;
+}
+.card{
+box-shadow:0 4px 15px rgba(0,0,0,0.2);
+}
+.card.product-wap a { color: #000;}
+#carousel-related-product .slick-slide:focus { outline: none !important;}
+#carousel-related-product .slick-dots li button:before {
+  font-size: 15px;
+  margin-top: 20px;
+}
+/* Imagen de carusel */
+.brand-img {
+  filter: grayscale(100%);
+  opacity: 0.5;
+  transition: .5s;
+}
+.brand-img:hover {
+  filter: grayscale(0%);
+  opacity: 1;
+}
+/* Carousel Hero */
+#template-mo-zay-hero-carousel .carousel-indicators li {
+  margin-top: -50px;
+  background-color: #beab72;
+}
+#template-mo-zay-hero-carousel .carousel-control-next i,
+#template-mo-zay-hero-carousel .carousel-control-prev i {
+  color: #59ab6e !important;
+  font-size: 2.8em !important;
+}
+/* Carusel br*/
+.tempaltemo-carousel .h1 {
+  font-size: .5em !important;
+  color: #000 !important;
+}
+/* Services */
+.services-icon-wap {transition: .3s;}
+.services-icon-wap:hover, .services-icon-wap:hover i {color: #fff;}
+.services-icon-wap:hover {background: #69bb7e;}
+/* Contact map */
+.leaflet-control a, .leaflet-control { font-size: 10px !important;}
+.form-control { border: 1px solid #e8e8e8;}
+/*Para el pie de pagina*/
+#tempaltemo_footer a { color: #dcdde1;}
+#tempaltemo_footer a:hover { color: #68bb7d;}
+#tempaltemo_footer ul.footer-link-list li { padding-top: 10px;}
+#tempaltemo_footer ul.footer-icons li {
+  width: 2.6em;
+  height: 2.6em;
+  line-height: 2.6em;
+}
+#tempaltemo_footer ul.footer-icons li:hover {
+  background-color: #beab72;
+  transition: .5s;
+}
+#tempaltemo_footer ul.footer-icons li:hover i {
+  color: #333333;
+  transition: .5s;
+}
+#tempaltemo-mo-zay-hero-carousel .carousel-item{
+      min-height: 400px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+#template-mo-zay-hero-carousel .carousel-item img {
+    max-height: 350px; 
+    width: auto;       
+    object-fit: contain; 
+}
+#tempaltemo_footer .border-light { border-color: #2d343f !important;}
+
+.product-wap .h3, .product-wap li, .product-wap i, .product-wap p {
+  font-size: 12px !important;
+}
+.product-wap .product-color-dot {
+  width: 6px;
+  height: 6px;
+}
+
+/* para evento hoover de las targetas */
+.flip-card {
+  perspective: 1000px;
+  height: 420px; 
+}
+
+.flip-inner {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  transition: transform 0.7s;
+  transform-style: preserve-3d;
+}
+
+/* Efecto hover */
+.flip-card:hover .flip-inner {
+  transform: rotateY(180deg);
+}
+
+/* Caras */
+.front,
+.back {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  backface-visibility: hidden;
+  top: 0;
+  left: 0;
+  border-radius: 10px;
+  padding: 20px;
+}
+
+/* Frente de carta*/
+.front {
+  background: #fff;
+  z-index: 2;
+}
+
+/* Atras de carta */
+.back {
+  background: #f8f9fa;
+  transform: rotateY(180deg);
+}
+
+/* Imagen de carta */
+.card__img {
+  max-height: 180px;
+  object-fit: contain;
+  margin-bottom: 15px;
+}
+.card__img-back {
+  width: 150px;         
+  height: 150px;       
+  border-radius: 10px; 
+  margin: 10px auto;     
+  display: block;
+}
+.sidebar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  bottom: 0;
+}
+
+.main-content {
+  margin-left: 64px; /* EXACTO al width cerrado */
+  padding: 20px;
+}
+
+/*Para ser responsibo el diseño*/
+
+@media (min-width: 576px) {
+  .tempaltemo-carousel .h1 { font-size: 1em !important;}
+}
+
+@media (min-width: 768px) {
+  #templatemo_main_nav .navbar-nav {max-width: 450px;}
+ }
+
+@media (min-width: 992px) {
+  #templatemo_main_nav .navbar-nav {max-width: 550px;}
+  #template-mo-zay-hero-carousel .carousel-item {min-height: 30rem !important;}
+  .product-wap .h3, .product-wap li, .product-wap i, .product-wap p {font-size: 18px !important;}
+  .product-wap .product-color-dot {
+    width: 12px;
+    height: 12px;
+  }
+}
+
+@media (min-width: 1200px) {}

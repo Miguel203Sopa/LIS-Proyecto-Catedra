@@ -16,7 +16,7 @@ class Auth
 
         if (!isset($_SESSION['usuario'])) {
 
-            header("Location: login.php");
+            header("Location: /login.php");
 
             exit;
         }
@@ -28,7 +28,7 @@ class Auth
 
         if ($_SESSION['usuario']['rol'] !== 'admin') {
 
-            header("Location: inicio.php");
+            header("Location: /inicio.php");
 
             exit;
         }
@@ -47,7 +47,7 @@ class Auth
 
         session_destroy();
 
-        header("Location: login.php");
+        header("Location: /login.php");
 
         exit;
     }
