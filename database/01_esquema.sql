@@ -114,32 +114,3 @@ ON animales_fotos(id_animal);
 CREATE INDEX idx_usuarios_uid
 ON usuarios(firebase_uid);
 
--- =====================================================
--- ADMIN INICIAL
--- =====================================================
-
-INSERT INTO personas (
-    nombre,
-    apellido,
-    dui,
-    correo,
-    telefono
-)
-VALUES (
-    'Administrador',
-    'Principal',
-    '06789413-5',
-    'admin@admin.com',
-    '0000-0000'
-);
-
-INSERT INTO usuarios (
-    id_persona,
-    firebase_uid,
-    rol
-)
-VALUES (
-    1,
-    '5G5ohRBjzmfJMK30JukvwcanfzQ2',
-    'admin'
-);
