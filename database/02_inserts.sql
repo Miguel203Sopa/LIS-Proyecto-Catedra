@@ -1,8 +1,5 @@
 
 
-
-
-
 --DATOS 
 
 --  INSERT DE ANIMALES (PERROS)
@@ -41,65 +38,20 @@ VALUES
 ('Kimi','Gato','2025-12-01','hembra','disponible','Esterilizada y desparasitada','2026-04-01','Rescatada en Villa Constitución.'),
 ('Príncipe','Gato','2025-06-01','macho','disponible','Sano','2026-04-05','Se entrega con promesa de castración.'),
 ('Oreo','Gato','2026-02-15','hembra','disponible','Sana','2026-04-18','Rescatada de un basurero.'),
-('Nata','Gato','2026-02-15','macho','disponible','Sano','2026-04-18','Rescatado de un basurero.');
+('Nata','Gato','2026-02-15','macho','disponible','Sano','2026-04-18','Rescatado de un basurero.'),
+('Luna','Gato','2026-01-20','hembra','disponible','Desparasitada y vacunada','2026-04-20','Rescatada de una colonia en Mejicanos.'),
+('Michi','Gato','2025-09-10','macho','disponible','Castrado y sano','2026-03-28','Encontrado deambulando en el mercado.'),
+('Canela','Gato','2026-03-01','hembra','en_tratamiento','Conjuntivitis en tratamiento','2026-04-22','Rescatada de un terreno baldío en Ilopango.'),
+('Simba','Gato','2025-11-15','macho','disponible','Desparasitado','2026-04-08','Abandonado amarrado en una bolsa en Antiguo Cuscatlán.'),
+('Mimi','Gato','2026-02-28','hembra','disponible','Sana','2026-04-25','Rescatada de la calle junto a su hermano.'),
+('Tobías','Gato','2026-02-28','macho','disponible','Sano','2026-04-25','Rescatado de la calle junto a su hermana.'),
+('Perla','Gato','2025-07-14','hembra','disponible','Esterilizada y desparasitada','2026-03-10','Rescatada en San Marcos, muy sociable.'),
+('Zeus','Gato','2025-10-05','macho','en_tratamiento','Desnutrición leve','2026-04-30','Rescatado en las cercanías del lago de Ilopango.');
 
 
+--AGREGUE MAS GATOS PORQ TENIA MAS IMAGENES DE LOS GATOS
 
 
---personas 
-
-DO $$
-DECLARE 
-    i INT;
-    nombres TEXT[] := ARRAY['Rodrigo','Lucia','Samuel','Monica','Fernando','Xenia','Gustavo','Irene','Ricardo','Camila','Emilio','Paola','Alvaro','Natalia','Javier','Beatriz','Hector','Elena','Eduardo','Sofia'];
-    apellidos TEXT[] := ARRAY['Zelaya','Portillo','Avelar','Sermeño','Orellana','Quinteros','Mejia','Vigil','Guillen','Arevalo','Carcamo','Menjivar','Batres','Lainez','Valladares','Canales','Palacios','Bonilla','Escobar','Alfaro'];
-    dominios TEXT[] := ARRAY['@gmail.com','@outlook.com','@yahoo.com','@icloud.com'];
-    
-    correo_gen TEXT;
-BEGIN
-    FOR i IN 1..20 LOOP
-        
-        correo_gen := LOWER(
-            CASE 
-                WHEN i % 4 = 0 THEN nombres[i] || '.' || apellidos[i]
-                WHEN i % 4 = 1 THEN SUBSTRING(nombres[i],1,1) || apellidos[i] || floor(random()*99)::text
-                WHEN i % 4 = 2 THEN nombres[i] || floor(random()*2000+80)::text
-                ELSE apellidos[i] || '.' || nombres[i]
-            END
-        ) || dominios[floor(random()*array_length(dominios,1))+1];
-
-        INSERT INTO fundacion.personas (nombre, apellido, correo, telefono)
-        VALUES (
-            nombres[i],
-            apellidos[i],
-            correo_gen,
-            '7' || floor(random()*9+1)::text || floor(random()*100)::text || '-' || LPAD(floor(random()*9999)::text,4,'0')
-        );
-        
-    END LOOP;
-END $$;
-
---voluntario y admin
-
-DO $$
-DECLARE 
-    r RECORD;
-    contador INT := 0;
-BEGIN
-    FOR r IN SELECT id_persona FROM fundacion.personas LIMIT 10 LOOP
-        contador := contador + 1;
-
-        INSERT INTO fundacion.usuarios (id_persona, rol, password)
-        VALUES (
-            r.id_persona,
-            (CASE 
-                WHEN contador = 1 THEN 'admin'
-                ELSE 'voluntario'
-            END)::fundacion.rol_usuario,
-            MD5(random()::text)
-        );
-    END LOOP;
-END $$;
 
 --historial medico
 
@@ -174,34 +126,215 @@ VALUES
 );
 
 
---pruebas
-
-SELECT u.id_usuario, p.nombre, p.apellido, u.rol, u.activo
-FROM fundacion.usuarios u
-JOIN fundacion.personas p ON u.id_persona = p.id_persona;
+--urls de las fotos 
 
 
-SELECT 
-    a.nombre AS animal,
-    p.nombre || ' ' || p.apellido AS adoptante,
-    u.id_usuario AS aprobado_por,
-    ad.fecha_adopcion,
-    ad.observaciones
-FROM fundacion.adopciones ad
-JOIN fundacion.animales a ON ad.id_animal = a.id_animal
-JOIN fundacion.personas p ON ad.id_persona = p.id_persona
-LEFT JOIN fundacion.usuarios u ON ad.id_usuario_aprobacion = u.id_usuario;
+-- PERROS
+INSERT INTO fundacion.animales_fotos (id_animal, url_foto, es_principal)
+SELECT id_animal, '/assets/imagenes/animales/malcon.png', TRUE
+FROM fundacion.animales WHERE nombre = 'Malcon' AND especie = 'Perro';
 
-SELECT 
-    a.nombre AS animal,
-    h.tipo,
-    h.descripcion,
-    h.veterinario,
-    h.fecha
-FROM fundacion.historial_medico h
-JOIN fundacion.animales a ON h.id_animal = a.id_animal;
+INSERT INTO fundacion.animales_fotos (id_animal, url_foto, es_principal)
+SELECT id_animal, '/assets/imagenes/animales/sicilia.png', TRUE
+FROM fundacion.animales WHERE nombre = 'Sicilia' AND especie = 'Perro';
+
+INSERT INTO fundacion.animales_fotos (id_animal, url_foto, es_principal)
+SELECT id_animal, '/assets/imagenes/animales/metapan.png', TRUE
+FROM fundacion.animales WHERE nombre = 'Metapán' AND especie = 'Perro';
+
+INSERT INTO fundacion.animales_fotos (id_animal, url_foto, es_principal)
+SELECT id_animal, '/assets/imagenes/animales/bimba.png', TRUE
+FROM fundacion.animales WHERE nombre = 'Bimba' AND especie = 'Perro';
+
+INSERT INTO fundacion.animales_fotos (id_animal, url_foto, es_principal)
+SELECT id_animal, '/assets/imagenes/animales/amaranta.png', TRUE
+FROM fundacion.animales WHERE nombre = 'Amaranta' AND especie = 'Perro';
+
+INSERT INTO fundacion.animales_fotos (id_animal, url_foto, es_principal)
+SELECT id_animal, '/assets/imagenes/animales/vera.png', TRUE
+FROM fundacion.animales WHERE nombre = 'Vera' AND especie = 'Perro';
+
+INSERT INTO fundacion.animales_fotos (id_animal, url_foto, es_principal)
+SELECT id_animal, '/assets/imagenes/animales/tomas.png', TRUE
+FROM fundacion.animales WHERE nombre = 'Tomás' AND especie = 'Perro';
+
+INSERT INTO fundacion.animales_fotos (id_animal, url_foto, es_principal)
+SELECT id_animal, '/assets/imagenes/animales/coco.png', TRUE
+FROM fundacion.animales WHERE nombre = 'Coco' AND especie = 'Perro';
+
+INSERT INTO fundacion.animales_fotos (id_animal, url_foto, es_principal)
+SELECT id_animal, '/assets/imagenes/animales/celeste.png', TRUE
+FROM fundacion.animales WHERE nombre = 'Celeste' AND especie = 'Perro';
+
+INSERT INTO fundacion.animales_fotos (id_animal, url_foto, es_principal)
+SELECT id_animal, '/assets/imagenes/animales/chiqui.png', TRUE
+FROM fundacion.animales WHERE nombre = 'Chiqui' AND especie = 'Perro';
+
+INSERT INTO fundacion.animales_fotos (id_animal, url_foto, es_principal)
+SELECT id_animal, '/assets/imagenes/animales/caramelo.png', TRUE
+FROM fundacion.animales WHERE nombre = 'Caramelo' AND especie = 'Perro';
+
+INSERT INTO fundacion.animales_fotos (id_animal, url_foto, es_principal)
+SELECT id_animal, '/assets/imagenes/animales/nyssa.png', TRUE
+FROM fundacion.animales WHERE nombre = 'Nyssa' AND especie = 'Perro';
+
+INSERT INTO fundacion.animales_fotos (id_animal, url_foto, es_principal)
+SELECT id_animal, '/assets/imagenes/animales/dotty.png', TRUE
+FROM fundacion.animales WHERE nombre = 'Dotty' AND especie = 'Perro';
+
+INSERT INTO fundacion.animales_fotos (id_animal, url_foto, es_principal)
+SELECT id_animal, '/assets/imagenes/animales/nena.png', TRUE
+FROM fundacion.animales WHERE nombre = 'Nena' AND especie = 'Perro';
+
+INSERT INTO fundacion.animales_fotos (id_animal, url_foto, es_principal)
+SELECT id_animal, '/assets/imagenes/animales/bebita.png', TRUE
+FROM fundacion.animales WHERE nombre = 'Bebita' AND especie = 'Perro';
+
+INSERT INTO fundacion.animales_fotos (id_animal, url_foto, es_principal)
+SELECT id_animal, '/assets/imagenes/animales/dottyto.png', TRUE
+FROM fundacion.animales WHERE nombre = 'Dottyto' AND especie = 'Perro';
+
+INSERT INTO fundacion.animales_fotos (id_animal, url_foto, es_principal)
+SELECT id_animal, '/assets/imagenes/animales/dottyta.png', TRUE
+FROM fundacion.animales WHERE nombre = 'Dottyta' AND especie = 'Perro';
+
+INSERT INTO fundacion.animales_fotos (id_animal, url_foto, es_principal)
+SELECT id_animal, '/assets/imagenes/animales/rocky.png', TRUE
+FROM fundacion.animales WHERE nombre = 'Rocky' AND especie = 'Perro';
+
+-- GATOS
+INSERT INTO fundacion.animales_fotos (id_animal, url_foto, es_principal)
+SELECT id_animal, '/assets/imagenes/animales/anuel.png', TRUE
+FROM fundacion.animales WHERE nombre = 'Anuel' AND especie = 'Gato';
+
+INSERT INTO fundacion.animales_fotos (id_animal, url_foto, es_principal)
+SELECT id_animal, '/assets/imagenes/animales/ariel.png', TRUE
+FROM fundacion.animales WHERE nombre = 'Ariel' AND especie = 'Gato';
+
+INSERT INTO fundacion.animales_fotos (id_animal, url_foto, es_principal)
+SELECT id_animal, '/assets/imagenes/animales/kika.png', TRUE
+FROM fundacion.animales WHERE nombre = 'Kika' AND especie = 'Gato';
+
+INSERT INTO fundacion.animales_fotos (id_animal, url_foto, es_principal)
+SELECT id_animal, '/assets/imagenes/animales/soya.png', TRUE
+FROM fundacion.animales WHERE nombre = 'Soya' AND especie = 'Gato';
+
+INSERT INTO fundacion.animales_fotos (id_animal, url_foto, es_principal)
+SELECT id_animal, '/assets/imagenes/animales/negrita.png', TRUE
+FROM fundacion.animales WHERE nombre = 'Negrita' AND especie = 'Gato';
+
+INSERT INTO fundacion.animales_fotos (id_animal, url_foto, es_principal)
+SELECT id_animal, '/assets/imagenes/animales/cami.png', TRUE
+FROM fundacion.animales WHERE nombre = 'Cami' AND especie = 'Gato';
+
+INSERT INTO fundacion.animales_fotos (id_animal, url_foto, es_principal)
+SELECT id_animal, '/assets/imagenes/animales/kimi.png', TRUE
+FROM fundacion.animales WHERE nombre = 'Kimi' AND especie = 'Gato';
+
+INSERT INTO fundacion.animales_fotos (id_animal, url_foto, es_principal)
+SELECT id_animal, '/assets/imagenes/animales/principe.png', TRUE
+FROM fundacion.animales WHERE nombre = 'Príncipe' AND especie = 'Gato';
+
+INSERT INTO fundacion.animales_fotos (id_animal, url_foto, es_principal)
+SELECT id_animal, '/assets/imagenes/animales/oreo.png', TRUE
+FROM fundacion.animales WHERE nombre = 'Oreo' AND especie = 'Gato';
+
+INSERT INTO fundacion.animales_fotos (id_animal, url_foto, es_principal)
+SELECT id_animal, '/assets/imagenes/animales/nata.png', TRUE
+FROM fundacion.animales WHERE nombre = 'Nata' AND especie = 'Gato';
+
+INSERT INTO fundacion.animales_fotos (id_animal, url_foto, es_principal)
+SELECT id_animal, '/assets/imagenes/animales/luna.png', TRUE
+FROM fundacion.animales WHERE nombre = 'Luna' AND especie = 'Gato';
+
+INSERT INTO fundacion.animales_fotos (id_animal, url_foto, es_principal)
+SELECT id_animal, '/assets/imagenes/animales/michi.png', TRUE
+FROM fundacion.animales WHERE nombre = 'Michi' AND especie = 'Gato';
+
+INSERT INTO fundacion.animales_fotos (id_animal, url_foto, es_principal)
+SELECT id_animal, '/assets/imagenes/animales/canela.png', TRUE
+FROM fundacion.animales WHERE nombre = 'Canela' AND especie = 'Gato';
+
+INSERT INTO fundacion.animales_fotos (id_animal, url_foto, es_principal)
+SELECT id_animal, '/assets/imagenes/animales/simba.png', TRUE
+FROM fundacion.animales WHERE nombre = 'Simba' AND especie = 'Gato';
+
+INSERT INTO fundacion.animales_fotos (id_animal, url_foto, es_principal)
+SELECT id_animal, '/assets/imagenes/animales/mimi.png', TRUE
+FROM fundacion.animales WHERE nombre = 'Mimi' AND especie = 'Gato';
+
+INSERT INTO fundacion.animales_fotos (id_animal, url_foto, es_principal)
+SELECT id_animal, '/assets/imagenes/animales/tobias.png', TRUE
+FROM fundacion.animales WHERE nombre = 'Tobías' AND especie = 'Gato';
+
+INSERT INTO fundacion.animales_fotos (id_animal, url_foto, es_principal)
+SELECT id_animal, '/assets/imagenes/animales/perla.png', TRUE
+FROM fundacion.animales WHERE nombre = 'Perla' AND especie = 'Gato';
+
+INSERT INTO fundacion.animales_fotos (id_animal, url_foto, es_principal)
+SELECT id_animal, '/assets/imagenes/animales/zeus.png', TRUE
+FROM fundacion.animales WHERE nombre = 'Zeus' AND especie = 'Gato';
 
 
-SELECT estado, COUNT(*) 
-FROM fundacion.animales
-GROUP BY estado;
+--admin
+
+INSERT INTO personas (
+    nombre,
+    apellido,
+    dui,
+    correo,
+    telefono
+)
+VALUES (
+    'Administrador',
+    'Principal',
+    '06789413-5',
+    'admin@admin.com',
+    '0000-0000'
+);
+
+INSERT INTO usuarios (
+    id_persona,
+    firebase_uid,
+    rol
+)
+VALUES (
+    1,
+    '5G5ohRBjzmfJMK30JukvwcanfzQ2',
+    'admin'
+);
+
+--voluntarios
+
+INSERT INTO personas (nombre, apellido, dui, correo, telefono)
+VALUES ('Gabriela', 'Rivas Molina', '04729183-6', 'gaby.rivas94@gmail.com', '7381-4920');
+INSERT INTO usuarios (id_persona, firebase_uid, rol)
+VALUES (2, 'alejandro aramburu', 'voluntario');
+
+INSERT INTO personas (nombre, apellido, dui, correo, telefono)
+VALUES ('Fernando', 'Castellanos Vega', '07163842-1', 'fer_castev@hotmail.com', '6274-8531');
+INSERT INTO usuarios (id_persona, firebase_uid, rol)
+VALUES (3, 'iñaki godoy', 'voluntario');
+
+INSERT INTO personas (nombre, apellido, dui, correo, telefono)
+VALUES ('Marcela', 'Orellana Cruz', '02984751-3', 'marce.orellana@outlook.com', '7849-2063');
+INSERT INTO usuarios (id_persona, firebase_uid, rol)
+VALUES (4, 'han jisung', 'voluntario');
+
+INSERT INTO personas (nombre, apellido, dui, correo, telefono)
+VALUES ('Rodrigo', 'Henríquez Paz', '08341627-9', 'rodh.paz22@gmail.com', '6512-7394');
+INSERT INTO usuarios (id_persona, firebase_uid, rol)
+VALUES (5, 'lee felix', 'voluntario');
+
+INSERT INTO personas (nombre, apellido, dui, correo, telefono)
+VALUES ('Valeria', 'Mendoza Flores', '05617394-2', 'vale_mendoz@gmail.com', '7163-5827');
+INSERT INTO usuarios (id_persona, firebase_uid, rol)
+VALUES (6, 'choi yeonjun', 'voluntario');
+
+ --cambiar el firebase uid
+ 
+
+
+
+
+
