@@ -5,7 +5,6 @@ class Auth
     public static function start()
     {
         if (session_status() === PHP_SESSION_NONE) {
-
             session_start();
         }
     }
@@ -16,8 +15,7 @@ class Auth
 
         if (!isset($_SESSION['usuario'])) {
 
-            header("Location: /login.php");
-
+            header("Location: /login.php?error=sesion");
             exit;
         }
     }
@@ -28,8 +26,7 @@ class Auth
 
         if ($_SESSION['usuario']['rol'] !== 'admin') {
 
-            header("Location: /inicio.php");
-
+            header("Location: /login.php?error=permiso");
             exit;
         }
     }
@@ -48,7 +45,6 @@ class Auth
         session_destroy();
 
         header("Location: /login.php");
-
         exit;
     }
 }

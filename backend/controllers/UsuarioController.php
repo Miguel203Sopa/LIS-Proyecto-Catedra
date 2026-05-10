@@ -2,6 +2,7 @@
 require_once __DIR__ . "/../clases/Usuario.php";
 
 class UsuarioController {
+
     private $model;
 
     public function __construct() {
@@ -17,25 +18,38 @@ class UsuarioController {
     }
 
     public function store($data) {
+
         $this->model->crear(
             $data['id_persona'],
-            $data['rol'],
-            $data['password']
+            $data['firebase_uid'],
+            $data['rol']
         );
-        echo json_encode(["msg" => "Usuario creado"]);
+
+        echo json_encode([
+            "msg" => "Usuario creado"
+        ]);
     }
 
     public function update($id, $data) {
+
         $this->model->actualizar(
             $id,
+            $data['firebase_uid'],
             $data['rol'],
             $data['activo']
         );
-        echo json_encode(["msg" => "Usuario actualizado"]);
+
+        echo json_encode([
+            "msg" => "Usuario actualizado"
+        ]);
     }
 
     public function delete($id) {
+
         $this->model->eliminar($id);
-        echo json_encode(["msg" => "Usuario eliminado"]);
+
+        echo json_encode([
+            "msg" => "Usuario eliminado"
+        ]);
     }
 }

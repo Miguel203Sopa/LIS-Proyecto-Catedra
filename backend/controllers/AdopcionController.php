@@ -21,16 +21,27 @@ class AdopcionController {
             $data['id_animal'],
             $data['id_persona']
         );
-        echo json_encode(["msg" => "Adopción creada"]);
+
+        echo json_encode([
+            "success" => true,
+            "message" => "Adopción creada"
+        ]);
+        
     }
 
     public function update($id, $data) {
         $this->model->actualizar($id, $data['estado'], $data['observaciones']);
-        echo json_encode(["msg" => "Adopción actualizada"]);
+        echo json_encode([
+            "success" => true,
+            "message" => "Adopción actualizada"
+        ]);
     }
 
     public function delete($id) {
         $this->model->eliminar($id);
-        echo json_encode(["msg" => "Adopción eliminada"]);
+        echo json_encode([
+            "success" => true,
+            "message" => "Adopción eliminada"
+        ]);
     }
 }

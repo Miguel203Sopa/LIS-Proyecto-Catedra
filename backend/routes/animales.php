@@ -24,6 +24,14 @@ switch ($method) {
 
         break;
 
+    case "DELETE":
+
+    if ($id) {
+        $controller->delete($id);
+    }
+
+    break;
+
     default:
         echo json_encode([
             "success" => false,

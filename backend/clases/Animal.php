@@ -114,4 +114,17 @@ class Animal
             $id
         ]);
     }
+
+    /* ================= ELIMINAR ================= */
+
+public function eliminar($id)
+{
+    $stmt = $this->db->prepare("
+        DELETE FROM fundacion.animales
+        WHERE id_animal = ?
+    ");
+
+    return $stmt->execute([$id]);
+}
+
 }

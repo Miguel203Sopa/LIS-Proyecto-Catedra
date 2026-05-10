@@ -167,4 +167,30 @@ class AnimalController
             ]);
         }
     }
+
+    /* ================= ELIMINAR ================= */
+
+public function delete($id)
+    {
+        header("Content-Type: application/json");
+
+        try {
+
+            $ok = $this->animal->eliminar($id);
+
+            echo json_encode([
+                "success" => $ok,
+                "message" => $ok
+                    ? "Animal eliminado"
+                    : "No se pudo eliminar"
+            ]);
+
+        } catch (Exception $e) {
+
+            echo json_encode([
+                "success" => false,
+                "message" => $e->getMessage()
+            ]);
+        }
+    }
 }
