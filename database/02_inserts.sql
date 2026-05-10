@@ -213,31 +213,31 @@ VALUES
 (
     (SELECT id_animal FROM animales WHERE nombre = 'Malcon'),
     (SELECT id_persona FROM personas WHERE dui = '06138294-5'),
-    (SELECT id_usuario FROM usuarios WHERE firebase_uid = 'mK9vXpL2nQwR7tYsA4jB'),
+    (SELECT id_usuario FROM usuarios WHERE firebase_uid = 'coito'),
     'Adopción exitosa'
 ),
 (
     (SELECT id_animal FROM animales WHERE nombre = 'Bimba'),
     (SELECT id_persona FROM personas WHERE dui = '01793485-4'),
-    (SELECT id_usuario FROM usuarios WHERE firebase_uid = 'zH3cFdU8eGiO5rWmT1yN'),
+    (SELECT id_usuario FROM usuarios WHERE firebase_uid = 'gay el q lo lea'),
     'Familia responsable'
 ),
 (
     (SELECT id_animal FROM animales WHERE nombre = 'Rocky'),
     (SELECT id_persona FROM personas WHERE dui = '07462831-8'),
-    (SELECT id_usuario FROM usuarios WHERE firebase_uid = 'qP6sBkV0lJxE9hDnM2uC'),
+    (SELECT id_usuario FROM usuarios WHERE firebase_uid = 'si ves esto sos puto'),
     'Seguimiento en proceso'
 ),
 (
     (SELECT id_animal FROM animales WHERE nombre = 'Ariel'),
     (SELECT id_persona FROM personas WHERE dui = '04985273-1'),
-    (SELECT id_usuario FROM usuarios WHERE firebase_uid = 'wA7tRyI4oZgL1pKfX8vQ'),
+    (SELECT id_usuario FROM usuarios WHERE firebase_uid = 'xxx'),
     'Adopción aprobada'
 ),
 (
     (SELECT id_animal FROM animales WHERE nombre = 'Kika'),
     (SELECT id_persona FROM personas WHERE dui = '02637194-6'),
-    (SELECT id_usuario FROM usuarios WHERE firebase_uid = 'bN5mUcH2sDwF6jYeT0rP'),
+    (SELECT id_usuario FROM usuarios WHERE firebase_uid = 'q vivan las pajas'),
     'Entrega programada'
 );
 
