@@ -67,8 +67,9 @@ body {
 /* Contenedor principal */
 .panel-container {
     margin: 120px auto;
+    margin-top: 60px;
     width: 90%;
-    max-width: 1000px;
+    max-width: 1200px;
     background: rgba(255, 255, 255, 0.7);
     backdrop-filter: blur(10px);
     border-radius: 20px;
@@ -155,4 +156,40 @@ body {
 
 .hidden {
     display: none;
+}
+
+/* Contenedor del formulario */
+.form-wrapper{
+    margin-top: 20px;
+    padding: 25px;
+    border-radius: 16px;
+    background: rgba(255,255,255,0.06);
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(255,255,255,0.1);
+}
+
+/* Formulario */
+.animal-form label{
+    font-weight: 600;
+    margin-bottom: 6px;
+    display: block;
+}
+
+.animal-form input,
+.animal-form select,
+.animal-form textarea{
+    border-radius: 10px;
+    padding: 10px;
+}
+
+/* Separación general entre bloques */
+.row.g-4{
+    --bs-gutter-x: 1.5rem;
+    --bs-gutter-y: 1.5rem;
+}
+
+/* Mejora visual del botón */
+.animal-form button{
+    border-radius: 12px;
+    font-weight: 600;
 }

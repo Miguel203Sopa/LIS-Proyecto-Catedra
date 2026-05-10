@@ -115,7 +115,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 </button>
 
                 <div class="ingresar">
-                    <a href="inicio.php">
+                    <a href="index.php">
                         <i class="fa-solid fa-arrow-left"></i>Volver al inicio
                     </a>
                 </div>

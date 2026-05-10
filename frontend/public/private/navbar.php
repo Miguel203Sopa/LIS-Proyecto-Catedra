@@ -10,8 +10,6 @@ $usuario = Auth::user();
 
     <div class="menu">
         <a href="dashboard.php">Inicio</a>
-        <a href="animales.php">Animales</a>
-        <a href="usuarios.php">Usuarios</a>
 
         <span class="usuario">
             <?php echo htmlspecialchars($usuario['nombre'] . ' ' . $usuario['apellido']); ?>

@@ -1,6 +1,6 @@
 <?php
 
-require_once "../controllers/AuthController.php";
+require_once  __DIR__ . "/../controllers/AuthController.php";
 
 switch ($method) {
 

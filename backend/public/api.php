@@ -20,23 +20,23 @@ $id = $parts[1] ?? null;
 switch ($resource) {
 
     case "auth":
-        require "../routes/auth.php";
+        require __DIR__ . "/../routes/auth.php";
         break;
 
     case "personas":
-        require "../routes/personas.php";
+        require __DIR__ . "/../routes/personas.php";
         break;
 
     case "animales":
-        require "../routes/animales.php";
+        require __DIR__ . "/../routes/animales.php";
         break;
 
     case "adopciones":
-        require "../routes/adopciones.php";
+        require __DIR__ . "/../routes/adopciones.php";
         break;
 
     case "usuarios":
-        require "../routes/usuarios.php";
+        require __DIR__ . "/../routes/usuarios.php";
         break;
 
     default:

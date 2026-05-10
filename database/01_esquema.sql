@@ -5,16 +5,19 @@ CREATE SCHEMA fundacion;
 
 SET search_path TO fundacion;
 
+-- =====================================================
 -- ENUMS
+-- =====================================================
+
 CREATE TYPE rol_usuario AS ENUM ('admin', 'voluntario');
 
 CREATE TYPE sexo_animal AS ENUM ('macho', 'hembra');
 
 CREATE TYPE estado_animal AS ENUM (
     'disponible',
-    'en_proceso',
+    'en proceso',
     'adoptado',
-    'en_tratamiento'
+    'en tratamiento'
 );
 
 CREATE TYPE tipo_registro_medico AS ENUM (
@@ -46,7 +49,7 @@ CREATE TABLE personas (
 CREATE TABLE usuarios (
     id_usuario SERIAL PRIMARY KEY,
     id_persona INTEGER UNIQUE REFERENCES personas(id_persona) ON DELETE CASCADE,
-    firebase_uid VARCHAR(255) UNIQUE NOT NULL,
+    firebase_uid VARCHAR(255) UNIQUE,
     rol rol_usuario NOT NULL,
     activo BOOLEAN DEFAULT TRUE
 );
@@ -55,7 +58,7 @@ CREATE TABLE usuarios (
 -- ANIMALES
 -- =====================================================
 
-CREATE TABLE animales (
+CREATE TABLE fundacion.animales (
     id_animal SERIAL PRIMARY KEY,
     nombre VARCHAR(100),
     especie VARCHAR(50),
@@ -68,7 +71,7 @@ CREATE TABLE animales (
 );
 
 -- =====================================================
--- FOTOS DE ANIMALES
+-- FOTOS
 -- =====================================================
 
 CREATE TABLE animales_fotos (
@@ -109,8 +112,5 @@ CREATE TABLE historial_medico (
 -- ÍNDICES
 -- =====================================================
 
-CREATE INDEX idx_fotos_animal
-ON animales_fotos(id_animal);
-CREATE INDEX idx_usuarios_uid
-ON usuarios(firebase_uid);
-
+CREATE INDEX idx_fotos_animal ON animales_fotos(id_animal);
+CREATE INDEX idx_usuarios_uid ON usuarios(firebase_uid);

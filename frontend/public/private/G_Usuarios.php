@@ -8,6 +8,7 @@
 </head>
 
 <body>
+    <?php include __DIR__ . '/navbar.php'; ?>
     <div id="content-body" class="container">
         <div class="contenedor-cristal">
             <h1>Gestión de Usuarios</h1>
