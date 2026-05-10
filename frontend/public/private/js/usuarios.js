@@ -4,55 +4,84 @@ const tabla = document.getElementById("tablaUsuarios");
 
 const modal = document.getElementById("modalUsuario");
 
+/* ================= INIT ================= */
+
 window.onload = () => {
     cargarUsuarios();
 };
 
+/* ================= CARGAR ================= */
+
 async function cargarUsuarios() {
 
-    const res = await fetch(API);
+    try {
 
-    const usuarios = await res.json();
+        const res = await fetch(API);
 
-    tabla.innerHTML = "";
+        const json = await res.json();
 
-    usuarios.forEach(usuario => {
+        const usuarios = json.data || [];
 
-        tabla.innerHTML += `
-            <tr>
+        tabla.innerHTML = "";
 
-                <td>${usuario.id_usuario}</td>
+        usuarios.forEach(usuario => {
 
-                <td>${usuario.id_persona}</td>
+            tabla.innerHTML += `
+                <tr>
 
-                <td>${usuario.firebase_uid ?? ''}</td>
+                    <td>${usuario.id_usuario}</td>
 
-                <td>${usuario.rol}</td>
+                    <td>
+                        ${usuario.nombre}
+                        ${usuario.apellido}
+                    </td>
 
-                <td>
-                    ${usuario.activo ? 'Sí' : 'No'}
-                </td>
+                    <td>${usuario.correo}</td>
 
-                <td>
+                    <td>${usuario.firebase_uid ?? ''}</td>
 
-                    <button onclick='editarUsuario(${JSON.stringify(usuario)})'>
-                        Editar
-                    </button>
+                    <td>${usuario.rol}</td>
 
-                    <button onclick='eliminarUsuario(${usuario.id_usuario})'>
-                        Eliminar
-                    </button>
+                    <td>
+                        ${usuario.activo ? 'Sí' : 'No'}
+                    </td>
 
-                </td>
+                    <td class="acciones">
 
-            </tr>
-        `;
-    });
+                        <button 
+                            class="btn-editar"
+                            onclick='editarUsuario(${JSON.stringify(usuario)})'>
+
+                            Editar
+                        </button>
+
+                        <button 
+                            class="btn-eliminar"
+                            onclick='eliminarUsuario(${usuario.id_usuario})'>
+
+                            Eliminar
+                        </button>
+
+                    </td>
+
+                </tr>
+            `;
+        });
+
+    } catch (error) {
+
+        console.error(error);
+
+        alert("Error cargando usuarios");
+    }
 }
+
+/* ================= MODAL ================= */
 
 function abrirModal() {
 
-    document.getElementById("tituloModal").innerText = "Nuevo Usuario";
+    document.getElementById("tituloModal").innerText =
+        "Nuevo Usuario";
 
     limpiarFormulario();
 
@@ -76,47 +105,69 @@ function limpiarFormulario() {
     document.getElementById("activo").value = "true";
 }
 
+/* ================= EDITAR ================= */
+
 function editarUsuario(usuario) {
 
-    document.getElementById("tituloModal").innerText = "Editar Usuario";
+    document.getElementById("tituloModal").innerText =
+        "Editar Usuario";
 
-    document.getElementById("id_usuario").value = usuario.id_usuario;
+    document.getElementById("id_usuario").value =
+        usuario.id_usuario;
 
-    document.getElementById("id_persona").value = usuario.id_persona;
+    document.getElementById("id_persona").value =
+        usuario.id_persona;
 
-    document.getElementById("firebase_uid").value = usuario.firebase_uid;
+    document.getElementById("firebase_uid").value =
+        usuario.firebase_uid ?? "";
 
-    document.getElementById("rol").value = usuario.rol;
+    document.getElementById("rol").value =
+        usuario.rol;
 
-    document.getElementById("activo").value = usuario.activo;
+    document.getElementById("activo").value =
+        usuario.activo ? "true" : "false";
 
     modal.showModal();
 }
 
+/* ================= GUARDAR ================= */
+
 async function guardarUsuario() {
 
-    const id = document.getElementById("id_usuario").value;
+    try {
 
-    const datos = {
+        const id =
+            document.getElementById("id_usuario").value;
 
-        id_persona:
-            document.getElementById("id_persona").value,
+        const datos = {
 
-        firebase_uid:
-            document.getElementById("firebase_uid").value,
+            id_persona:
+                document.getElementById("id_persona").value,
 
-        rol:
-            document.getElementById("rol").value,
+            firebase_uid:
+                document.getElementById("firebase_uid").value,
 
-        activo:
-            document.getElementById("activo").value === "true"
-    };
+            rol:
+                document.getElementById("rol").value,
 
-    if (id) {
+            activo:
+                document.getElementById("activo").value === "true"
+        };
 
-        await fetch(`${API}/${id}`, {
+        let url = API;
 
-            method: "PUT",
+        let method = "POST";
+
+        if (id) {
+
+            url = `${API}/${id}`;
+
+            method = "PUT";
+        }
+
+        const res = await fetch(url, {
+
+            method: method,
 
             headers: {
                 "Content-Type": "application/json"
@@ -125,24 +176,30 @@ async function guardarUsuario() {
             body: JSON.stringify(datos)
         });
 
-    } else {
+        const json = await res.json();
 
-        await fetch(API, {
+        if (!json.success) {
 
-            method: "POST",
+            alert(json.message);
 
-            headers: {
-                "Content-Type": "application/json"
-            },
+            return;
+        }
 
-            body: JSON.stringify(datos)
-        });
+        alert(json.message);
+
+        cerrarModal();
+
+        cargarUsuarios();
+
+    } catch (error) {
+
+        console.error(error);
+
+        alert("Error guardando usuario");
     }
-
-    cerrarModal();
-
-    cargarUsuarios();
 }
+
+/* ================= ELIMINAR ================= */
 
 async function eliminarUsuario(id) {
 
@@ -150,9 +207,29 @@ async function eliminarUsuario(id) {
         return;
     }
 
-    await fetch(`${API}/${id}`, {
-        method: "DELETE"
-    });
+    try {
 
-    cargarUsuarios();
+        const res = await fetch(`${API}/${id}`, {
+            method: "DELETE"
+        });
+
+        const json = await res.json();
+
+        if (!json.success) {
+
+            alert(json.message);
+
+            return;
+        }
+
+        alert(json.message);
+
+        cargarUsuarios();
+
+    } catch (error) {
+
+        console.error(error);
+
+        alert("Error eliminando usuario");
+    }
 }

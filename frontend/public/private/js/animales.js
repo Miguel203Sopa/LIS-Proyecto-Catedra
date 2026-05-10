@@ -1,6 +1,6 @@
 
 
-        const API = "/api.php/animales";
+        const API = "http://backend_app/api.php/animales";
 
         let editando = null;
 
@@ -11,6 +11,10 @@
             try {
 
                 const res = await fetch(API);
+
+                    if (!res.ok) {
+                        throw new Error("Error obteniendo animales");
+                    }
 
                 const json = await res.json();
 
@@ -207,9 +211,8 @@
 
             editando = null;
 
-            document.querySelector(
-                "#formAnimal button[type='submit']"
-            ).innerHTML = `
+           document.querySelector(
+            "#formAnimal button[type='submit']").innerHTML = `
                 <i class="fa-solid fa-floppy-disk"></i>
                 Guardar Animal
             `;
@@ -277,8 +280,12 @@
 
             try {
 
-                const res =
-                    await fetch(`${API}?id=${id}`);
+               const res = await fetch(`${API}?id=${id}`);
+
+                if (!res.ok) {
+                    throw new Error("Error obteniendo animal");
+                }
+
 
                 const json = await res.json();
 
@@ -335,8 +342,11 @@
                         typeof historial === "string"
                     ) {
 
-                        historial =
-                            JSON.parse(historial);
+                        try {
+                            historial = JSON.parse(historial);
+                        } catch {
+                            historial = [];
+                        }
                     }
 
                     if (Array.isArray(historial)) {
@@ -384,12 +394,15 @@
 
             try {
 
-                const res = await fetch(
-                    `${API}?id=${id}`,
+                const res = await fetch(`${API}?id=${id}`,
                     {
                         method: "DELETE"
                     }
                 );
+
+                    if (!res.ok) {
+                        throw new Error("Error eliminando animal");
+                    }
 
                 const json = await res.json();
 

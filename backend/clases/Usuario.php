@@ -1,113 +1,124 @@
 <?php
+
 require_once __DIR__ . "/Conexion.php";
 
-class Persona {
+class Usuario
+{
     private $db;
 
-    public function __construct() {
+    public function __construct()
+    {
         $this->db = Conexion::conectar();
     }
 
-    // LISTAR
-    public function listar() {
-        $sql = "SELECT * FROM fundacion.personas
-                ORDER BY id_persona ASC";
+    /* ================= LISTAR ================= */
 
-        $stmt = $this->db->prepare($sql);
-        $stmt->execute();
+    public function listar()
+    {
+        $stmt = $this->db->query("
+            SELECT
+                u.id_usuario,
+                u.id_persona,
+                u.firebase_uid,
+                u.rol,
+                u.activo,
+                p.nombre,
+                p.apellido,
+                p.correo
+            FROM fundacion.usuarios u
+            INNER JOIN fundacion.personas p
+                ON p.id_persona = u.id_persona
+            ORDER BY u.id_usuario DESC
+        ");
 
         return $stmt->fetchAll(PDO::FETCH_ASSOC);
     }
 
-    // OBTENER UNA
-    public function obtener($id) {
-        $sql = "SELECT * FROM fundacion.personas
-                WHERE id_persona = :id";
+    /* ================= OBTENER ================= */
 
-        $stmt = $this->db->prepare($sql);
+    public function obtener($id)
+    {
+        $stmt = $this->db->prepare("
+            SELECT
+                u.id_usuario,
+                u.id_persona,
+                u.firebase_uid,
+                u.rol,
+                u.activo,
+                p.nombre,
+                p.apellido,
+                p.correo
+            FROM fundacion.usuarios u
+            INNER JOIN fundacion.personas p
+                ON p.id_persona = u.id_persona
+            WHERE u.id_usuario = ?
+        ");
 
-        $stmt->execute([
-            ":id" => $id
-        ]);
+        $stmt->execute([$id]);
 
         return $stmt->fetch(PDO::FETCH_ASSOC);
     }
 
-    // CREAR
-    public function crear($nombre, $apellido, $dui, $correo, $telefono) {
+    /* ================= CREAR ================= */
 
-        $sql = "INSERT INTO fundacion.personas
-                (
-                    nombre,
-                    apellido,
-                    dui,
-                    correo,
-                    telefono
-                )
-                VALUES
-                (
-                    :nombre,
-                    :apellido,
-                    :dui,
-                    :correo,
-                    :telefono
-                )";
+    public function crear(
+        $id_persona,
+        $firebase_uid,
+        $rol
+    ) {
 
-        $stmt = $this->db->prepare($sql);
+        $stmt = $this->db->prepare("
+            INSERT INTO fundacion.usuarios
+            (
+                id_persona,
+                firebase_uid,
+                rol
+            )
+            VALUES (?, ?, ?)
+        ");
 
         return $stmt->execute([
-            ":nombre" => $nombre,
-            ":apellido" => $apellido,
-            ":dui" => $dui,
-            ":correo" => $correo,
-            ":telefono" => $telefono
+            $id_persona,
+            $firebase_uid,
+            $rol
         ]);
     }
 
-    // ACTUALIZAR
+    /* ================= ACTUALIZAR ================= */
+
     public function actualizar(
         $id,
-        $nombre,
-        $apellido,
-        $dui,
-        $correo,
-        $telefono,
+        $firebase_uid,
+        $rol,
         $activo
     ) {
 
-        $sql = "UPDATE fundacion.personas
-                SET
-                    nombre = :nombre,
-                    apellido = :apellido,
-                    dui = :dui,
-                    correo = :correo,
-                    telefono = :telefono,
-                    activo = :activo
-                WHERE id_persona = :id";
-
-        $stmt = $this->db->prepare($sql);
+        $stmt = $this->db->prepare("
+            UPDATE fundacion.usuarios
+            SET
+                firebase_uid = ?,
+                rol = ?,
+                activo = ?
+            WHERE id_usuario = ?
+        ");
 
         return $stmt->execute([
-            ":id" => $id,
-            ":nombre" => $nombre,
-            ":apellido" => $apellido,
-            ":dui" => $dui,
-            ":correo" => $correo,
-            ":telefono" => $telefono,
-            ":activo" => $activo
+            $firebase_uid,
+            $rol,
+            $activo,
+            $id
         ]);
     }
 
-    // ELIMINAR
-    public function eliminar($id) {
+    /* ================= ELIMINAR ================= */
 
-        $sql = "DELETE FROM fundacion.personas
-                WHERE id_persona = :id";
+    public function eliminar($id)
+    {
+        $stmt = $this->db->prepare("
+            DELETE FROM fundacion.usuarios
+            WHERE id_usuario = ?
+        ");
 
-        $stmt = $this->db->prepare($sql);
-
-        return $stmt->execute([
-            ":id" => $id
-        ]);
+        return $stmt->execute([$id]);
     }
 }

@@ -12,6 +12,7 @@ class Animal
     }
 
     /* ================= LISTAR ================= */
+
     public function listar()
     {
         $stmt = $this->db->query("
@@ -34,6 +35,7 @@ class Animal
     }
 
     /* ================= OBTENER ================= */
+
     public function obtener($id)
     {
         $stmt = $this->db->prepare("
@@ -48,15 +50,18 @@ class Animal
     }
 
     /* ================= CREAR ================= */
+
     public function crear(
         $nombre,
         $especie,
         $fecha_nacimiento,
         $sexo,
+        $estado,
         $estado_salud,
         $descripcion,
         $historial_json
     ) {
+
         $stmt = $this->db->prepare("
             INSERT INTO fundacion.animales
             (
@@ -64,19 +69,21 @@ class Animal
                 especie,
                 fecha_nacimiento,
                 sexo,
+                estado,
                 estado_salud,
                 descripcion,
                 historial_medico
             )
-            VALUES (?, ?, ?, ?, ?, ?, ?::jsonb)
+            VALUES (?, ?, ?, ?, ?, ?, ?, ?::jsonb)
             RETURNING id_animal
         ");
 
         $stmt->execute([
             $nombre,
             $especie,
-            $fecha_nacimiento,
+            $fecha_nacimiento ?: null,
             $sexo,
+            $estado,
             $estado_salud,
             $descripcion,
             $historial_json
@@ -86,18 +93,26 @@ class Animal
     }
 
     /* ================= ACTUALIZAR ================= */
+
     public function actualizar(
         $id,
         $nombre,
+        $especie,
+        $fecha_nacimiento,
+        $sexo,
         $estado,
         $estado_salud,
         $descripcion,
         $historial_json
     ) {
+
         $stmt = $this->db->prepare("
             UPDATE fundacion.animales
-            SET 
+            SET
                 nombre = ?,
+                especie = ?,
+                fecha_nacimiento = ?,
+                sexo = ?,
                 estado = ?,
                 estado_salud = ?,
                 descripcion = ?,
@@ -107,6 +122,9 @@ class Animal
 
         return $stmt->execute([
             $nombre,
+            $especie,
+            $fecha_nacimiento ?: null,
+            $sexo,
             $estado,
             $estado_salud,
             $descripcion,
@@ -115,16 +133,28 @@ class Animal
         ]);
     }
 
+    /* ================= FOTO ================= */
+
+    public function actualizarFoto($id, $foto)
+    {
+        $stmt = $this->db->prepare("
+            UPDATE fundacion.animales
+            SET foto_url = ?
+            WHERE id_animal = ?
+        ");
+
+        return $stmt->execute([$foto, $id]);
+    }
+
     /* ================= ELIMINAR ================= */
 
-public function eliminar($id)
-{
-    $stmt = $this->db->prepare("
-        DELETE FROM fundacion.animales
-        WHERE id_animal = ?
-    ");
+    public function eliminar($id)
+    {
+        $stmt = $this->db->prepare("
+            DELETE FROM fundacion.animales
+            WHERE id_animal = ?
+        ");
 
-    return $stmt->execute([$id]);
-}
-
+        return $stmt->execute([$id]);
+    }
 }

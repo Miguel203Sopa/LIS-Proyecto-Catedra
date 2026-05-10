@@ -15,6 +15,7 @@ class AnimalController
     }
 
     /* ================= LISTAR ================= */
+
     public function index()
     {
         header("Content-Type: application/json");
@@ -28,6 +29,7 @@ class AnimalController
     }
 
     /* ================= OBTENER ================= */
+
     public function show($id)
     {
         header("Content-Type: application/json");
@@ -41,14 +43,15 @@ class AnimalController
     }
 
     /* ================= CREAR ================= */
+
     public function store($data, $files)
     {
         header("Content-Type: application/json");
 
         try {
+
             $this->db->beginTransaction();
 
-            /* ================= HISTORIAL JSON ================= */
             $historial = [];
 
             if (!empty($data['historial_tipo'])) {
@@ -60,6 +63,7 @@ class AnimalController
                     $vet = $data['historial_veterinario'][$i] ?? null;
 
                     if ($tipo || $desc || $vet) {
+
                         $historial[] = [
                             "tipo" => $tipo,
                             "descripcion" => $desc,
@@ -69,39 +73,59 @@ class AnimalController
                 }
             }
 
-            /* ================= CREAR ANIMAL ================= */
             $idAnimal = $this->animal->crear(
                 $data['nombre'],
                 $data['especie'],
-                $data['fecha_nacimiento'],
+                $data['fecha_nacimiento'] ?? null,
                 $data['sexo'],
-                $data['estado_salud'],
-                $data['descripcion'],
+                $data['estado'] ?? 'disponible',
+                $data['estado_salud'] ?? null,
+                $data['descripcion'] ?? null,
                 json_encode($historial)
             );
 
             /* ================= IMAGEN ================= */
-            if (!empty($files['imagen'])) {
+
+            if (
+                isset($files['imagen']) &&
+                $files['imagen']['error'] === UPLOAD_ERR_OK
+            ) {
 
                 $file = $files['imagen'];
 
-                $ext = pathinfo($file['name'], PATHINFO_EXTENSION);
-                $name = uniqid("animal_") . "." . $ext;
+                $ext = strtolower(
+                    pathinfo($file['name'], PATHINFO_EXTENSION)
+                );
 
-                $path = __DIR__ . "/../uploads/" . $name;
+                $permitidas = ['jpg', 'jpeg', 'png', 'webp'];
 
-                move_uploaded_file($file['tmp_name'], $path);
+                if (!in_array($ext, $permitidas)) {
 
-                $stmt = $this->db->prepare("
-                    UPDATE fundacion.animales
-                    SET foto_url = ?
-                    WHERE id_animal = ?
-                ");
+                    throw new Exception(
+                        "Formato de imagen no permitido"
+                    );
+                }
 
-                $stmt->execute([
-                    "/uploads/" . $name,
-                    $idAnimal
-                ]);
+                $nombreArchivo =
+                    uniqid("animal_") . "." . $ext;
+
+                $rutaFisica =
+                    __DIR__ . "/../uploads/" . $nombreArchivo;
+
+                if (!move_uploaded_file(
+                    $file['tmp_name'],
+                    $rutaFisica
+                )) {
+
+                    throw new Exception(
+                        "No se pudo guardar la imagen"
+                    );
+                }
+
+                $this->animal->actualizarFoto(
+                    $idAnimal,
+                    "/uploads/" . $nombreArchivo
+                );
             }
 
             $this->db->commit();
@@ -124,13 +148,13 @@ class AnimalController
     }
 
     /* ================= ACTUALIZAR ================= */
-    public function update($id, $data)
+
+    public function update($id, $data, $files)
     {
         header("Content-Type: application/json");
 
         try {
 
-            /* ================= HISTORIAL NUEVO ================= */
             $historial = [];
 
             if (!empty($data['historial_tipo'])) {
@@ -148,15 +172,50 @@ class AnimalController
             $ok = $this->animal->actualizar(
                 $id,
                 $data['nombre'],
+                $data['especie'],
+                $data['fecha_nacimiento'] ?? null,
+                $data['sexo'],
                 $data['estado'],
-                $data['estado_salud'],
-                $data['descripcion'],
+                $data['estado_salud'] ?? null,
+                $data['descripcion'] ?? null,
                 json_encode($historial)
             );
 
+            /* ================= NUEVA FOTO ================= */
+
+            if (
+                isset($files['imagen']) &&
+                $files['imagen']['error'] === UPLOAD_ERR_OK
+            ) {
+
+                $file = $files['imagen'];
+
+                $ext = strtolower(
+                    pathinfo($file['name'], PATHINFO_EXTENSION)
+                );
+
+                $nombreArchivo =
+                    uniqid("animal_") . "." . $ext;
+
+                $rutaFisica =
+                    __DIR__ . "/../uploads/" . $nombreArchivo;
+
+                move_uploaded_file(
+                    $file['tmp_name'],
+                    $rutaFisica
+                );
+
+                $this->animal->actualizarFoto(
+                    $id,
+                    "/uploads/" . $nombreArchivo
+                );
+            }
+
             echo json_encode([
                 "success" => $ok,
-                "message" => $ok ? "Actualizado correctamente" : "Error al actualizar"
+                "message" => $ok
+                    ? "Animal actualizado correctamente"
+                    : "No se pudo actualizar"
             ]);
 
         } catch (Exception $e) {
@@ -170,7 +229,7 @@ class AnimalController
 
     /* ================= ELIMINAR ================= */
 
-public function delete($id)
+    public function delete($id)
     {
         header("Content-Type: application/json");
 

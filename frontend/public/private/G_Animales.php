@@ -281,6 +281,21 @@ $usuario = Auth::user();
 
                 </div>
 
+                <!-- Boton de Salida --> 
+                 <div class="col-12">
+
+                    <button
+                        type="button"
+                        class="btn btn-secondary w-100 py-2 mt-2"
+                        onclick="limpiarFormulario()">
+
+                        <i class="fa-solid fa-xmark"></i>
+                        Cancelar edición
+
+                    </button>
+
+                </div>
+
             </div>
 
         </form>

@@ -1,9 +1,13 @@
 <?php
+
 require_once __DIR__ . "/../controllers/UsuarioController.php";
 
 $controller = new UsuarioController();
 
-$data = json_decode(file_get_contents("php://input"), true);
+$data = json_decode(
+    file_get_contents("php://input"),
+    true
+);
 
 switch ($method) {
 
@@ -48,7 +52,8 @@ switch ($method) {
         http_response_code(405);
 
         echo json_encode([
-            "error" => "Método no permitido"
+            "success" => false,
+            "message" => "Método no permitido"
         ]);
 
         break;
