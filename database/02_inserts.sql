@@ -1,321 +1,82 @@
+INSERT INTO fundacion.personas (nombre, apellido, dui, correo, telefono) VALUES
+('Administrador','Principal','06789413-5','admin@admin.com','0000-0000'),
+('Gabriela','Rivas Molina','04729183-6','gaby.rivas94@gmail.com','7381-4920'),
+('Fernando','Castellanos Vega','07163842-1','fer_castev@hotmail.com','6274-8531'),
+('Marcela','Orellana Cruz','02984751-3','marce.orellana@outlook.com','7849-2063'),
+('Rodrigo','Henríquez Paz','08341627-9','rodh.paz22@gmail.com','6512-7394'),
+('Valeria','Mendoza Flores','05617394-2','vale_mendoz@gmail.com','7163-5827'),
+('Diego','Portillo Aguilar','03872549-0','dportillo.ag@protonmail.com','6938-1472'),
+('Sofía','Guzmán Leiva','09254873-7','sofi.guzleiva@gmail.com','7425-6381'),
+('Alejandro','Morales Serrano','06138294-5','alex.morser@outlook.com','6817-3940'),
+('Karla','Escobar Turcios','01793485-4','karlita.esc@gmail.com','7592-4816'),
+('Josué','Amaya Pineda','07462831-8','josamaya_p@gmail.com','6384-7259'),
+('Daniela','Recinos Bonilla','04985273-1','dani.recbonilla@hotmail.com','7651-3082'),
+('Emilio','Fuentes Chávez','02637194-6','emi.fuench@gmail.com','6847-5193'),
+('Paola','Zelaya Ramos','08174362-3','pao.zelramos@outlook.com','7213-9468'),
+('Andrés','Villacorta Mejía','05829416-0','andres.villamej@gmail.com','6479-8321'),
+('Lucía','Martínez Herrera','03461728-9','lu.mtzh@gmail.com','7836-2547'),
+('César','Benítez Alfaro','09718243-5','csr.benitalf@icloud.com','6153-7984'),
+('Natalia','Soriano Pacheco','06293875-2','naty.soripach@gmail.com','7694-1823'),
+('Óscar','Lemus Coreas','01847362-7','oscar.lemco@outlook.com','6328-5047'),
+('Rebeca','Peraza Romero','07524916-4','rebe.perrom@gmail.com','7541-8362');
 
+INSERT INTO fundacion.usuarios (id_persona, firebase_uid, rol) VALUES
+((SELECT id_persona FROM fundacion.personas WHERE dui='06789413-5'),'20hlJDy4AxRHLiUptYRjqvwLr0v1','admin'),
+((SELECT id_persona FROM fundacion.personas WHERE dui='04729183-6'),'alewjandro aramburu','voluntario'),
+((SELECT id_persona FROM fundacion.personas WHERE dui='07163842-1'),'iñaki godoy','voluntario'),
+((SELECT id_persona FROM fundacion.personas WHERE dui='02984751-3'),'han jisung','voluntario'),
+((SELECT id_persona FROM fundacion.personas WHERE dui='08341627-9'),'lee felix','voluntario'),
+((SELECT id_persona FROM fundacion.personas WHERE dui='05617394-2'),'choi yeonjun','voluntario');
 
--- PERSONAS
-
-INSERT INTO fundacion.personas (nombre, apellido, dui, correo, telefono)
-VALUES ('Administrador', 'Principal', '06789413-5', 'admin@admin.com', '0000-0000');
-
-INSERT INTO fundacion.personas (nombre, apellido, dui, correo, telefono)
-VALUES ('Gabriela', 'Rivas Molina', '04729183-6', 'gaby.rivas94@gmail.com', '7381-4920');
-
-INSERT INTO fundacion.personas (nombre, apellido, dui, correo, telefono)
-VALUES ('Fernando', 'Castellanos Vega', '07163842-1', 'fer_castev@hotmail.com', '6274-8531');
-
-INSERT INTO fundacion.personas (nombre, apellido, dui, correo, telefono)
-VALUES ('Marcela', 'Orellana Cruz', '02984751-3', 'marce.orellana@outlook.com', '7849-2063');
-
-INSERT INTO fundacion.personas (nombre, apellido, dui, correo, telefono)
-VALUES ('Rodrigo', 'Henríquez Paz', '08341627-9', 'rodh.paz22@gmail.com', '6512-7394');
-
-INSERT INTO fundacion.personas (nombre, apellido, dui, correo, telefono)
-VALUES ('Valeria', 'Mendoza Flores', '05617394-2', 'vale_mendoz@gmail.com', '7163-5827');
-
-INSERT INTO fundacion.personas (nombre, apellido, dui, correo, telefono)
-VALUES ('Diego', 'Portillo Aguilar', '03872549-0', 'dportillo.ag@protonmail.com', '6938-1472');
-
-INSERT INTO fundacion.personas (nombre, apellido, dui, correo, telefono)
-VALUES ('Sofía', 'Guzmán Leiva', '09254873-7', 'sofi.guzleiva@gmail.com', '7425-6381');
-
-INSERT INTO fundacion.personas (nombre, apellido, dui, correo, telefono)
-VALUES ('Alejandro', 'Morales Serrano', '06138294-5', 'alex.morser@outlook.com', '6817-3940');
-
-INSERT INTO fundacion.personas (nombre, apellido, dui, correo, telefono)
-VALUES ('Karla', 'Escobar Turcios', '01793485-4', 'karlita.esc@gmail.com', '7592-4816');
-
-INSERT INTO fundacion.personas (nombre, apellido, dui, correo, telefono)
-VALUES ('Josué', 'Amaya Pineda', '07462831-8', 'josamaya_p@gmail.com', '6384-7259');
-
-INSERT INTO fundacion.personas (nombre, apellido, dui, correo, telefono)
-VALUES ('Daniela', 'Recinos Bonilla', '04985273-1', 'dani.recbonilla@hotmail.com', '7651-3082');
-
-INSERT INTO fundacion.personas (nombre, apellido, dui, correo, telefono)
-VALUES ('Emilio', 'Fuentes Chávez', '02637194-6', 'emi.fuench@gmail.com', '6847-5193');
-
-INSERT INTO fundacion.personas (nombre, apellido, dui, correo, telefono)
-VALUES ('Paola', 'Zelaya Ramos', '08174362-3', 'pao.zelramos@outlook.com', '7213-9468');
-
-INSERT INTO fundacion.personas (nombre, apellido, dui, correo, telefono)
-VALUES ('Andrés', 'Villacorta Mejía', '05829416-0', 'andres.villamej@gmail.com', '6479-8321');
-
-INSERT INTO fundacion.personas (nombre, apellido, dui, correo, telefono)
-VALUES ('Lucía', 'Martínez Herrera', '03461728-9', 'lu.mtzh@gmail.com', '7836-2547');
-
-INSERT INTO fundacion.personas (nombre, apellido, dui, correo, telefono)
-VALUES ('César', 'Benítez Alfaro', '09718243-5', 'csr.benitalf@icloud.com', '6153-7984');
-
-INSERT INTO fundacion.personas (nombre, apellido, dui, correo, telefono)
-VALUES ('Natalia', 'Soriano Pacheco', '06293875-2', 'naty.soripach@gmail.com', '7694-1823');
-
-INSERT INTO fundacion.personas (nombre, apellido, dui, correo, telefono)
-VALUES ('Óscar', 'Lemus Coreas', '01847362-7', 'oscar.lemco@outlook.com', '6328-5047');
-
-INSERT INTO fundacion.personas (nombre, apellido, dui, correo, telefono)
-VALUES ('Rebeca', 'Peraza Romero', '07524916-4', 'rebe.perrom@gmail.com', '7541-8362');
-
-
--- USUARIOS
-
-INSERT INTO fundacion.usuarios (id_persona, firebase_uid, rol)
-VALUES (
-    (SELECT id_persona FROM fundacion.personas WHERE dui = '06789413-5'),
-    '20hlJDy4AxRHLiUptYRjqvwLr0v1',
-    'admin'
-);
-
-INSERT INTO fundacion.usuarios (id_persona, firebase_uid, rol)
-VALUES (
-    (SELECT id_persona FROM fundacion.personas WHERE dui = '04729183-6'),
-    'alewjandro aramburu',
-    'voluntario'
-);
-
-INSERT INTO fundacion.usuarios (id_persona, firebase_uid, rol)
-VALUES (
-    (SELECT id_persona FROM fundacion.personas WHERE dui = '07163842-1'),
-    'iñaki godoy',
-    'voluntario'
-);
-
-INSERT INTO fundacion.usuarios (id_persona, firebase_uid, rol)
-VALUES (
-    (SELECT id_persona FROM fundacion.personas WHERE dui = '02984751-3'),
-    'han jisung',
-    'voluntario'
-);
-
-INSERT INTO fundacion.usuarios (id_persona, firebase_uid, rol)
-VALUES (
-    (SELECT id_persona FROM fundacion.personas WHERE dui = '08341627-9'),
-    'lee felix',
-    'voluntario'
-);
-
-INSERT INTO fundacion.usuarios (id_persona, firebase_uid, rol)
-VALUES (
-    (SELECT id_persona FROM fundacion.personas WHERE dui = '05617394-2'),
-    'choi yeonjun',
-    'voluntario'
-);
+INSERT INTO fundacion.animales (nombre, especie, fecha_nacimiento, sexo, estado, estado_salud, fecha_rescate, descripcion, foto_url, historial_medico) VALUES
 
 -- PERROS
-
-INSERT INTO fundacion.animales (nombre, especie, fecha_nacimiento, sexo, estado, estado_salud, fecha_rescate, descripcion)
-VALUES
-('Malcon',   'Perro', '2023-11-06', 'macho',  'disponible',     'Sano',                                    '2025-11-06', 'Rescatado en noviembre, busca hogar responsable.'),
-('Sicilia',  'Perro', '2026-02-15', 'hembra', 'en tratamiento', 'Positivo a enfermedad de garrapatas',     '2026-04-18', 'Cachorra juguetona rescatada en Nuevo Cuscatlán.'),
-('Metapán',  'Perro', '2026-03-01', 'macho',  'disponible',     'En control inicial',                      '2026-04-15', 'Rescatado de un barranco en Metapán.'),
-('Bimba',    'Perro', '2025-12-01', 'hembra', 'disponible',     'Sana y esterilizada',                     '2025-12-15', 'Rescatada de maltrato extremo, muy alegre.'),
-('Amaranta', 'Perro', '2024-05-01', 'hembra', 'disponible',     'Sana y esterilizada',                     '2026-01-12', 'Rescatada en estado deplorable, ya recuperada.'),
-('Vera',     'Perro', '2023-01-01', 'hembra', 'en tratamiento', 'Recuperación de cirugía de cadera',       '2025-11-30', 'Atropellada en Ciudad Marsella, muy social.'),
-('Tomás',    'Perro', '2025-06-01', 'hembra', 'disponible',     'Tratamiento Bravecto aplicado',           '2026-04-01', 'Busca hogar urgente.'),
-('Coco',     'Perro', '2026-02-01', 'hembra', 'disponible',     'Desnutrición leve, desparasitada',        '2026-04-10', 'Encontrada en un saco con sus hermanos.'),
-('Celeste',  'Perro', '2026-02-01', 'hembra', 'disponible',     'Desnutrición leve, desparasitada',        '2026-04-10', 'Encontrada en un saco con sus hermanos.'),
-('Chiqui',   'Perro', '2026-02-01', 'macho',  'disponible',     'Desnutrición leve, desparasitada',        '2026-04-10', 'Encontrado en un saco con sus hermanos.'),
-('Caramelo', 'Perro', '2026-02-01', 'macho',  'disponible',     'Desnutrición leve, desparasitada',        '2026-04-10', 'Encontrado en un saco con sus hermanos.'),
-('Nyssa',    'Perro', '2021-04-01', 'hembra', 'disponible',     'Sana y esterilizada',                     '2026-03-15', 'Rescatada en San Salvador, talla mediana.'),
-('Dotty',    'Perro', '2024-04-01', 'hembra', 'disponible',     'Sana y esterilizada',                     '2026-03-01', 'Rescatada con sus 10 cachorros.'),
-('Nena',     'Perro', '2022-01-01', 'hembra', 'disponible',     'Sana',                                    '2026-04-20', 'Dueños adultos mayores ya no pueden cuidarla.'),
-('Bebita',   'Perro', '2026-02-15', 'hembra', 'disponible',     'Sana',                                    '2026-04-18', 'Encontrada en Mercado Colón.'),
-('Dottyto',  'Perro', '2026-01-01', 'macho',  'disponible',     'Vacunas iniciales',                       '2026-03-15', 'Hijo de Dotty.'),
-('Dottyta',  'Perro', '2026-01-01', 'hembra', 'disponible',     'Vacunas iniciales',                       '2026-03-15', 'Hija de Dotty.'),
-('Rocky',    'Perro', '2025-08-01', 'macho',  'disponible',     'Sano',                                    '2026-04-01', 'Juguetón y amoroso.');
-
+('Malcon','Perro','2023-11-06','macho','disponible','Sano','2025-11-06','Rescatado en noviembre, busca hogar responsable.','/backend/uploads/malcon.png','[{"tipo":"control","descripcion":"Chequeo general inicial","veterinario":"Veterinaria Central"}]'),
+('Sicilia','Perro','2026-02-15','hembra','en tratamiento','Positivo a enfermedad de garrapatas','2026-04-18','Cachorra juguetona rescatada en Nuevo Cuscatlán.','/backend/uploads/sicilia.png','[{"tipo":"control","descripcion":"Chequeo general inicial","veterinario":"Veterinaria Central"},{"tipo":"tratamiento","descripcion":"Tratamiento contra enfermedad de garrapatas","veterinario":"Clínica San Francisco"}]'),
+('Metapán','Perro','2026-03-01','macho','disponible','En control inicial','2026-04-15','Rescatado de un barranco en Metapán.','/backend/uploads/metapan.png','[{"tipo":"control","descripcion":"Chequeo general inicial","veterinario":"Veterinaria Central"}]'),
+('Bimba','Perro','2025-12-01','hembra','disponible','Sana y esterilizada','2025-12-15','Rescatada de maltrato extremo, muy alegre.','/backend/uploads/bimba.png','[{"tipo":"control","descripcion":"Chequeo general inicial","veterinario":"Veterinaria Central"}]'),
+('Amaranta','Perro','2024-05-01','hembra','disponible','Sana y esterilizada','2026-01-12','Rescatada en estado deplorable, ya recuperada.','/backend/uploads/amaranta.png','[{"tipo":"control","descripcion":"Chequeo general inicial","veterinario":"Veterinaria Central"}]'),
+('Vera','Perro','2023-01-01','hembra','en tratamiento','Recuperación de cirugía de cadera','2025-11-30','Atropellada en Ciudad Marsella, muy social.','/backend/uploads/vera.png','[{"tipo":"cirugia","descripcion":"Cirugía de cadera y seguimiento","veterinario":"Hospivet"}]'),
+('Tomás','Perro','2025-06-01','hembra','disponible','Tratamiento Bravecto aplicado','2026-04-01','Busca hogar urgente.','/backend/uploads/tomas.png','[{"tipo":"control","descripcion":"Chequeo general inicial","veterinario":"Veterinaria Central"}]'),
+('Coco','Perro','2026-02-01','hembra','disponible','Desnutrición leve, desparasitada','2026-04-10','Encontrada en un saco con sus hermanos.','/backend/uploads/coco.png','[{"tipo":"control","descripcion":"Chequeo general inicial","veterinario":"Veterinaria Central"}]'),
+('Celeste','Perro','2026-02-01','hembra','disponible','Desnutrición leve, desparasitada','2026-04-10','Encontrada en un saco con sus hermanos.','/backend/uploads/celeste.png','[{"tipo":"control","descripcion":"Chequeo general inicial","veterinario":"Veterinaria Central"}]'),
+('Chiqui','Perro','2026-02-01','macho','disponible','Desnutrición leve, desparasitada','2026-04-10','Encontrado en un saco con sus hermanos.','/backend/uploads/chiqui.png','[{"tipo":"control","descripcion":"Chequeo general inicial","veterinario":"Veterinaria Central"}]'),
+('Caramelo','Perro','2026-02-01','macho','disponible','Desnutrición leve, desparasitada','2026-04-10','Encontrado en un saco con sus hermanos.','/backend/uploads/caramelo.png','[{"tipo":"control","descripcion":"Chequeo general inicial","veterinario":"Veterinaria Central"}]'),
+('Nyssa','Perro','2021-04-01','hembra','disponible','Sana y esterilizada','2026-03-15','Rescatada en San Salvador.','/backend/uploads/nyssa.png','[{"tipo":"control","descripcion":"Chequeo general inicial","veterinario":"Veterinaria Central"}]'),
+('Dotty','Perro','2024-04-01','hembra','disponible','Sana y esterilizada','2026-03-01','Rescatada con 10 cachorros.','/backend/uploads/dotty.png','[{"tipo":"control","descripcion":"Chequeo general inicial","veterinario":"Veterinaria Central"}]'),
+('Nena','Perro','2022-01-01','hembra','disponible','Sana','2026-04-20','Dueños adultos mayores.','/backend/uploads/nena.png','[{"tipo":"control","descripcion":"Chequeo general inicial","veterinario":"Veterinaria Central"}]'),
+('Bebita','Perro','2026-02-15','hembra','disponible','Sana','2026-04-18','Encontrada en Mercado Colón.','/backend/uploads/bebita.png','[{"tipo":"control","descripcion":"Chequeo general inicial","veterinario":"Veterinaria Central"}]'),
+('Dottyto','Perro','2026-01-01','macho','disponible','Vacunas iniciales','2026-03-15','Hijo de Dotty.','/backend/uploads/dottyto.png','[{"tipo":"control","descripcion":"Chequeo general inicial","veterinario":"Veterinaria Central"}]'),
+('Dottyta','Perro','2026-01-01','hembra','disponible','Vacunas iniciales','2026-03-15','Hija de Dotty.','/backend/uploads/dottyta.png','[{"tipo":"control","descripcion":"Chequeo general inicial","veterinario":"Veterinaria Central"}]'),
+('Rocky','Perro','2025-08-01','macho','disponible','Sano','2026-04-01','Juguetón.','/backend/uploads/rocky.png','[{"tipo":"control","descripcion":"Chequeo general inicial","veterinario":"Veterinaria Central"}]'),
 
 -- GATOS
+('Anuel','Gato','2026-03-15','macho','en tratamiento','Problemas de piel','2026-04-10','Abandonado.','/backend/uploads/anuel.png','[{"tipo":"tratamiento","descripcion":"Problemas dermatológicos","veterinario":"Clínica San Francisco"}]'),
+('Ariel','Gato','2026-02-15','hembra','disponible','Prueba negativa','2026-04-10','Gatita carey.','/backend/uploads/ariel.png','[{"tipo":"control","descripcion":"Chequeo general","veterinario":"Veterinaria Central"}]'),
+('Kika','Gato','2026-02-15','hembra','disponible','Desparasitada','2026-04-12','Rescatada en Apopa.','/backend/uploads/kika.png','[{"tipo":"control","descripcion":"Chequeo general","veterinario":"Veterinaria Central"}]'),
+('Soya','Gato','2025-08-01','hembra','disponible','Esterilizada','2026-03-15','Rescatada en Soyapango.','/backend/uploads/soya.png','[{"tipo":"control","descripcion":"Chequeo general","veterinario":"Veterinaria Central"}]'),
+('Negrita','Gato','2026-02-01','hembra','disponible','Desparasitada','2026-04-01','Rescatada parque.','/backend/uploads/negrita.png','[{"tipo":"control","descripcion":"Chequeo general","veterinario":"Veterinaria Central"}]'),
+('Cami','Gato','2025-04-01','hembra','en tratamiento','Herida infectada','2026-04-15','Santa Tecla.','/backend/uploads/cami.png','[{"tipo":"tratamiento","descripcion":"Herida infectada cuello","veterinario":"Veterinaria El Establo"}]'),
+('Kimi','Gato','2025-12-01','hembra','disponible','Esterilizada','2026-04-01','Villa Constitución.','/backend/uploads/kimi.png','[{"tipo":"control","descripcion":"Chequeo general","veterinario":"Veterinaria Central"}]'),
+('Príncipe','Gato','2025-06-01','macho','disponible','Sano','2026-04-05','Promesa castración.','/backend/uploads/principe.png','[{"tipo":"control","descripcion":"Chequeo general","veterinario":"Veterinaria Central"}]'),
+('Oreo','Gato','2026-02-15','hembra','disponible','Sana','2026-04-18','Basurero.','/backend/uploads/oreo.png','[{"tipo":"control","descripcion":"Chequeo general","veterinario":"Veterinaria Central"}]'),
+('Nata','Gato','2026-02-15','macho','disponible','Sano','2026-04-18','Basurero.','/backend/uploads/nata.png','[{"tipo":"control","descripcion":"Chequeo general","veterinario":"Veterinaria Central"}]'),
+('Luna','Gato','2026-01-20','hembra','disponible','Vacunada','2026-04-20','Mejicanos.','/backend/uploads/luna.png','[{"tipo":"control","descripcion":"Chequeo general","veterinario":"Veterinaria Central"}]'),
+('Michi','Gato','2025-09-10','macho','disponible','Castrado','2026-03-28','Mercado.','/backend/uploads/michi.png','[{"tipo":"control","descripcion":"Chequeo general","veterinario":"Veterinaria Central"}]'),
+('Canela','Gato','2026-03-01','hembra','en tratamiento','Conjuntivitis','2026-04-22','Ilopango.','/backend/uploads/canela.png','[{"tipo":"tratamiento","descripcion":"Conjuntivitis","veterinario":"Veterinaria Central"}]'),
+('Simba','Gato','2025-11-15','macho','disponible','Desparasitado','2026-04-08','Antiguo Cuscatlán.','/backend/uploads/simba.png','[{"tipo":"control","descripcion":"Chequeo general","veterinario":"Veterinaria Central"}]'),
+('Mimi','Gato','2026-02-28','hembra','disponible','Sana','2026-04-25','Rescate calle.','/backend/uploads/mimi.png','[{"tipo":"control","descripcion":"Chequeo general","veterinario":"Veterinaria Central"}]'),
+('Tobías','Gato','2026-02-28','macho','disponible','Sano','2026-04-25','Rescate calle.','/backend/uploads/tobias.png','[{"tipo":"control","descripcion":"Chequeo general","veterinario":"Veterinaria Central"}]'),
+('Perla','Gato','2025-07-14','hembra','disponible','Esterilizada','2026-03-10','San Marcos.','/backend/uploads/perla.png','[{"tipo":"control","descripcion":"Chequeo general","veterinario":"Veterinaria Central"}]'),
+('Zeus','Gato','2025-10-05','macho','en tratamiento','Desnutrición leve','2026-04-30','Ilopango.','/backend/uploads/zeus.png','[{"tipo":"control","descripcion":"Control nutricional","veterinario":"Hospivet"}]');
 
-INSERT INTO fundacion.animales (nombre, especie, fecha_nacimiento, sexo, estado, estado_salud, fecha_rescate, descripcion)
-VALUES
-('Anuel',    'Gato', '2026-03-15', 'macho',  'en tratamiento', 'Problemas de piel',                       '2026-04-10', 'Abandonado en casa de adultos mayores.'),
-('Ariel',    'Gato', '2026-02-15', 'hembra', 'disponible',     'Prueba negativa',                         '2026-04-10', 'Gatita carey rescatada.'),
-('Kika',     'Gato', '2026-02-15', 'hembra', 'disponible',     'Desparasitada',                           '2026-04-12', 'Rescatada en Apopa.'),
-('Soya',     'Gato', '2025-08-01', 'hembra', 'disponible',     'Esterilizada',                            '2026-03-15', 'Rescatada en Soyapango.'),
-('Negrita',  'Gato', '2026-02-01', 'hembra', 'disponible',     'Desparasitada',                           '2026-04-01', 'Rescatada de un parque.'),
-('Cami',     'Gato', '2025-04-01', 'hembra', 'en tratamiento', 'Herida infectada en cuello',              '2026-04-15', 'Rescatada en Santa Tecla.'),
-('Kimi',     'Gato', '2025-12-01', 'hembra', 'disponible',     'Esterilizada y desparasitada',            '2026-04-01', 'Rescatada en Villa Constitución.'),
-('Príncipe', 'Gato', '2025-06-01', 'macho',  'disponible',     'Sano',                                    '2026-04-05', 'Se entrega con promesa de castración.'),
-('Oreo',     'Gato', '2026-02-15', 'hembra', 'disponible',     'Sana',                                    '2026-04-18', 'Rescatada de un basurero.'),
-('Nata',     'Gato', '2026-02-15', 'macho',  'disponible',     'Sano',                                    '2026-04-18', 'Rescatado de un basurero.'),
-('Luna',     'Gato', '2026-01-20', 'hembra', 'disponible',     'Desparasitada y vacunada',                '2026-04-20', 'Rescatada de una colonia en Mejicanos.'),
-('Michi',    'Gato', '2025-09-10', 'macho',  'disponible',     'Castrado y sano',                         '2026-03-28', 'Encontrado deambulando en el mercado.'),
-('Canela',   'Gato', '2026-03-01', 'hembra', 'en tratamiento', 'Conjuntivitis en tratamiento',            '2026-04-22', 'Rescatada de un terreno baldío en Ilopango.'),
-('Simba',    'Gato', '2025-11-15', 'macho',  'disponible',     'Desparasitado',                           '2026-04-08', 'Abandonado amarrado en una bolsa en Antiguo Cuscatlán.'),
-('Mimi',     'Gato', '2026-02-28', 'hembra', 'disponible',     'Sana',                                    '2026-04-25', 'Rescatada de la calle junto a su hermano.'),
-('Tobías',   'Gato', '2026-02-28', 'macho',  'disponible',     'Sano',                                    '2026-04-25', 'Rescatado de la calle junto a su hermana.'),
-('Perla',    'Gato', '2025-07-14', 'hembra', 'disponible',     'Esterilizada y desparasitada',            '2026-03-10', 'Rescatada en San Marcos, muy sociable.'),
-('Zeus',     'Gato', '2025-10-05', 'macho',  'en tratamiento', 'Desnutrición leve',                       '2026-04-30', 'Rescatado en las cercanías del lago de Ilopango.');
+UPDATE fundacion.animales SET estado='adoptado'
+WHERE nombre IN ('Malcon','Bimba','Rocky','Ariel','Kika');
 
+INSERT INTO fundacion.adopciones (id_animal,id_persona,id_usuario_aprobacion,observaciones) VALUES
+((SELECT id_animal FROM fundacion.animales WHERE nombre='Malcon'),(SELECT id_persona FROM fundacion.personas WHERE dui='06138294-5'),(SELECT id_usuario FROM fundacion.usuarios WHERE firebase_uid='coito'),'Adopción exitosa'),
+((SELECT id_animal FROM fundacion.animales WHERE nombre='Bimba'),(SELECT id_persona FROM fundacion.personas WHERE dui='01793485-4'),(SELECT id_usuario FROM fundacion.usuarios WHERE firebase_uid='gay el q lo lea'),'Familia responsable'),
+((SELECT id_animal FROM fundacion.animales WHERE nombre='Rocky'),(SELECT id_persona FROM fundacion.personas WHERE dui='07462831-8'),(SELECT id_usuario FROM fundacion.usuarios WHERE firebase_uid='si ves esto sos puto'),'Seguimiento'),
+((SELECT id_animal FROM fundacion.animales WHERE nombre='Ariel'),(SELECT id_persona FROM fundacion.personas WHERE dui='04985273-1'),(SELECT id_usuario FROM fundacion.usuarios WHERE firebase_uid='xxx'),'Adopción aprobada'),
+((SELECT id_animal FROM fundacion.animales WHERE nombre='Kika'),(SELECT id_persona FROM fundacion.personas WHERE dui='02637194-6'),(SELECT id_usuario FROM fundacion.usuarios WHERE firebase_uid='q vivan las pajas'),'Entrega programada');
 
--- HISTORIAL MÉDICO
-
-
-
-INSERT INTO fundacion.historial_medico (id_animal, tipo, descripcion, veterinario)
-SELECT id_animal, 'control', 'Chequeo general inicial', 'Veterinaria Central'
-FROM fundacion.animales;
-
-
-INSERT INTO fundacion.historial_medico (id_animal, tipo, descripcion, veterinario)
-VALUES
-(
-    (SELECT id_animal FROM fundacion.animales WHERE nombre = 'Sicilia'),
-    'tratamiento',
-    'Tratamiento contra enfermedad de garrapatas',
-    'Clínica San Francisco'
-),
-(
-    (SELECT id_animal FROM fundacion.animales WHERE nombre = 'Vera'),
-    'cirugia',
-    'Cirugía de cadera y seguimiento postoperatorio',
-    'Hospivet'
-),
-(
-    (SELECT id_animal FROM fundacion.animales WHERE nombre = 'Cami'),
-    'tratamiento',
-    'Tratamiento de herida infectada en cuello',
-    'Veterinaria El Establo'
-),
-(
-    (SELECT id_animal FROM fundacion.animales WHERE nombre = 'Anuel'),
-    'tratamiento',
-    'Tratamiento dermatológico por problemas de piel',
-    'Clínica San Francisco'
-),
-(
-    (SELECT id_animal FROM fundacion.animales WHERE nombre = 'Canela'),
-    'tratamiento',
-    'Tratamiento de conjuntivitis bilateral',
-    'Veterinaria Central'
-),
-(
-    (SELECT id_animal FROM fundacion.animales WHERE nombre = 'Zeus'),
-    'control',
-    'Control nutricional por desnutrición leve',
-    'Hospivet'
-);
-
--- ADOPCIONES
-
-UPDATE fundacion.animales SET estado = 'adoptado'
-WHERE nombre IN ('Malcon', 'Bimba', 'Rocky', 'Ariel', 'Kika');
-
-INSERT INTO fundacion.adopciones (id_animal, id_persona, id_usuario_aprobacion, observaciones)
-VALUES
-(
-    (SELECT id_animal FROM fundacion.animales WHERE nombre = 'Malcon'),
-    (SELECT id_persona FROM fundacion.personas WHERE dui = '06138294-5'),
-    (SELECT id_usuario FROM fundacion.usuarios WHERE firebase_uid = 'coito'),
-    'Adopción exitosa'
-),
-(
-    (SELECT id_animal FROM fundacion.animales WHERE nombre = 'Bimba'),
-    (SELECT id_persona FROM fundacion.personas WHERE dui = '01793485-4'),
-    (SELECT id_usuario FROM fundacion.usuarios WHERE firebase_uid = 'gay el q lo lea'),
-    'Familia responsable'
-),
-(
-    (SELECT id_animal FROM fundacion.animales WHERE nombre = 'Rocky'),
-    (SELECT id_persona FROM fundacion.personas WHERE dui = '07462831-8'),
-    (SELECT id_usuario FROM fundacion.usuarios WHERE firebase_uid = 'si ves esto sos puto'),
-    'Seguimiento en proceso'
-),
-(
-    (SELECT id_animal FROM fundacion.animales WHERE nombre = 'Ariel'),
-    (SELECT id_persona FROM fundacion.personas WHERE dui = '04985273-1'),
-    (SELECT id_usuario FROM fundacion.usuarios WHERE firebase_uid = 'xxx'),
-    'Adopción aprobada'
-),
-(
-    (SELECT id_animal FROM fundacion.animales WHERE nombre = 'Kika'),
-    (SELECT id_persona FROM fundacion.personas WHERE dui = '02637194-6'),
-    (SELECT id_usuario FROM fundacion.usuarios WHERE firebase_uid = 'q vivan las pajas'),
-    'Entrega programada'
-);
-
-
--- FOTOS DE ANIMALES
-
--- PERROS
-INSERT INTO fundacion.animales_fotos (id_animal, url_foto, es_principal)
-SELECT id_animal, '/bakend/uploads/malcon.png',   TRUE FROM fundacion.animales WHERE nombre = 'Malcon'   AND especie = 'Perro';
-INSERT INTO fundacion.animales_fotos (id_animal, url_foto, es_principal)
-SELECT id_animal, '/bakend/uploads/sicilia.png',  TRUE FROM fundacion.animales WHERE nombre = 'Sicilia'  AND especie = 'Perro';
-INSERT INTO fundacion.animales_fotos (id_animal, url_foto, es_principal)
-SELECT id_animal, '/bakend/uploads/metapan.png',  TRUE FROM fundacion.animales WHERE nombre = 'Metapán'  AND especie = 'Perro';
-INSERT INTO fundacion.animales_fotos (id_animal, url_foto, es_principal)
-SELECT id_animal, '/bakend/uploads/bimba.png',    TRUE FROM fundacion.animales WHERE nombre = 'Bimba'    AND especie = 'Perro';
-INSERT INTO fundacion.animales_fotos (id_animal, url_foto, es_principal)
-SELECT id_animal, '/bakend/uploads/amaranta.png', TRUE FROM fundacion.animales WHERE nombre = 'Amaranta' AND especie = 'Perro';
-INSERT INTO fundacion.animales_fotos (id_animal, url_foto, es_principal)
-SELECT id_animal, '/bakend/uploads/vera.png',     TRUE FROM fundacion.animales WHERE nombre = 'Vera'     AND especie = 'Perro';
-INSERT INTO fundacion.animales_fotos (id_animal, url_foto, es_principal)
-SELECT id_animal, '/bakend/uploads/tomas.png',    TRUE FROM fundacion.animales WHERE nombre = 'Tomás'    AND especie = 'Perro';
-INSERT INTO fundacion.animales_fotos (id_animal, url_foto, es_principal)
-SELECT id_animal, '/bakend/uploads/coco.png',     TRUE FROM fundacion.animales WHERE nombre = 'Coco'     AND especie = 'Perro';
-INSERT INTO fundacion.animales_fotos (id_animal, url_foto, es_principal)
-SELECT id_animal, '/bakend/uploads/celeste.png',  TRUE FROM fundacion.animales WHERE nombre = 'Celeste'  AND especie = 'Perro';
-INSERT INTO fundacion.animales_fotos (id_animal, url_foto, es_principal)
-SELECT id_animal, '/bakend/uploads/chiqui.png',   TRUE FROM fundacion.animales WHERE nombre = 'Chiqui'   AND especie = 'Perro';
-INSERT INTO fundacion.animales_fotos (id_animal, url_foto, es_principal)
-SELECT id_animal, '/bakend/uploads/caramelo.png', TRUE FROM fundacion.animales WHERE nombre = 'Caramelo' AND especie = 'Perro';
-INSERT INTO fundacion.animales_fotos (id_animal, url_foto, es_principal)
-SELECT id_animal, '/bakend/uploads/nyssa.png',    TRUE FROM fundacion.animales WHERE nombre = 'Nyssa'    AND especie = 'Perro';
-INSERT INTO fundacion.animales_fotos (id_animal, url_foto, es_principal)
-SELECT id_animal, '/bakend/uploads/dotty.png',    TRUE FROM fundacion.animales WHERE nombre = 'Dotty'    AND especie = 'Perro';
-INSERT INTO fundacion.animales_fotos (id_animal, url_foto, es_principal)
-SELECT id_animal, '/bakend/uploads/nena.png',     TRUE FROM fundacion.animales WHERE nombre = 'Nena'     AND especie = 'Perro';
-INSERT INTO fundacion.animales_fotos (id_animal, url_foto, es_principal)
-SELECT id_animal, '/bakend/uploads/bebita.png',   TRUE FROM fundacion.animales WHERE nombre = 'Bebita'   AND especie = 'Perro';
-INSERT INTO fundacion.animales_fotos (id_animal, url_foto, es_principal)
-SELECT id_animal, '/bakend/uploads/dottyto.png',  TRUE FROM fundacion.animales WHERE nombre = 'Dottyto'  AND especie = 'Perro';
-INSERT INTO fundacion.animales_fotos (id_animal, url_foto, es_principal)
-SELECT id_animal, '/bakend/uploads/dottyta.png',  TRUE FROM fundacion.animales WHERE nombre = 'Dottyta'  AND especie = 'Perro';
-INSERT INTO fundacion.animales_fotos (id_animal, url_foto, es_principal)
-SELECT id_animal, '/bakend/uploads/rocky.png',    TRUE FROM fundacion.animales WHERE nombre = 'Rocky'    AND especie = 'Perro';
-
--- GATOS
-INSERT INTO fundacion.animales_fotos (id_animal, url_foto, es_principal)
-SELECT id_animal, '/bakend/uploads/anuel.png',    TRUE FROM fundacion.animales WHERE nombre = 'Anuel'    AND especie = 'Gato';
-INSERT INTO fundacion.animales_fotos (id_animal, url_foto, es_principal)
-SELECT id_animal, '/bakend/uploads/ariel.png',    TRUE FROM fundacion.animales WHERE nombre = 'Ariel'    AND especie = 'Gato';
-INSERT INTO fundacion.animales_fotos (id_animal, url_foto, es_principal)
-SELECT id_animal, '/bakend/uploads/kika.png',     TRUE FROM fundacion.animales WHERE nombre = 'Kika'     AND especie = 'Gato';
-INSERT INTO fundacion.animales_fotos (id_animal, url_foto, es_principal)
-SELECT id_animal, '/bakend/uploads/soya.png',     TRUE FROM fundacion.animales WHERE nombre = 'Soya'     AND especie = 'Gato';
-INSERT INTO fundacion.animales_fotos (id_animal, url_foto, es_principal)
-SELECT id_animal, '/bakend/uploads/negrita.png',  TRUE FROM fundacion.animales WHERE nombre = 'Negrita'  AND especie = 'Gato';
-INSERT INTO fundacion.animales_fotos (id_animal, url_foto, es_principal)
-SELECT id_animal, '/bakend/uploads/cami.png',     TRUE FROM fundacion.animales WHERE nombre = 'Cami'     AND especie = 'Gato';
-INSERT INTO fundacion.animales_fotos (id_animal, url_foto, es_principal)
-SELECT id_animal, '/bakend/uploads/kimi.png',     TRUE FROM fundacion.animales WHERE nombre = 'Kimi'     AND especie = 'Gato';
-INSERT INTO fundacion.animales_fotos (id_animal, url_foto, es_principal)
-SELECT id_animal, '/bakend/uploads/principe.png', TRUE FROM fundacion.animales WHERE nombre = 'Príncipe' AND especie = 'Gato';
-INSERT INTO fundacion.animales_fotos (id_animal, url_foto, es_principal)
-SELECT id_animal, '/bakend/uploads/oreo.png',     TRUE FROM fundacion.animales WHERE nombre = 'Oreo'     AND especie = 'Gato';
-INSERT INTO fundacion.animales_fotos (id_animal, url_foto, es_principal)
-SELECT id_animal, '/bakend/uploads/nata.png',     TRUE FROM fundacion.animales WHERE nombre = 'Nata'     AND especie = 'Gato';
-INSERT INTO fundacion.animales_fotos (id_animal, url_foto, es_principal)
-SELECT id_animal, '/bakend/uploads/luna.png',     TRUE FROM fundacion.animales WHERE nombre = 'Luna'     AND especie = 'Gato';
-INSERT INTO fundacion.animales_fotos (id_animal, url_foto, es_principal)
-SELECT id_animal, '/bakend/uploads/michi.png',    TRUE FROM fundacion.animales WHERE nombre = 'Michi'    AND especie = 'Gato';
-INSERT INTO fundacion.animales_fotos (id_animal, url_foto, es_principal)
-SELECT id_animal, '/bakend/uploads/canela.png',   TRUE FROM fundacion.animales WHERE nombre = 'Canela'   AND especie = 'Gato';
-INSERT INTO fundacion.animales_fotos (id_animal, url_foto, es_principal)
-SELECT id_animal, '/bakend/uploads/simba.png',    TRUE FROM fundacion.animales WHERE nombre = 'Simba'    AND especie = 'Gato';
-INSERT INTO fundacion.animales_fotos (id_animal, url_foto, es_principal)
-SELECT id_animal, '/bakend/uploads/mimi.png',     TRUE FROM fundacion.animales WHERE nombre = 'Mimi'     AND especie = 'Gato';
-INSERT INTO fundacion.animales_fotos (id_animal, url_foto, es_principal)
-SELECT id_animal, '/bakend/uploads/tobias.png',   TRUE FROM fundacion.animales WHERE nombre = 'Tobías'   AND especie = 'Gato';
-INSERT INTO fundacion.animales_fotos (id_animal, url_foto, es_principal)
-SELECT id_animal, '/bakend/uploads/perla.png',    TRUE FROM fundacion.animales WHERE nombre = 'Perla'    AND especie = 'Gato';
-INSERT INTO fundacion.animales_fotos (id_animal, url_foto, es_principal)
-SELECT id_animal, '/bakend/uploads/zeus.png',     TRUE FROM fundacion.animales WHERE nombre = 'Zeus'     AND especie = 'Gato';

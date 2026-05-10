@@ -44,34 +44,38 @@ $usuario = Auth::user();
 
         <!-- ================= FORM ================= -->
         <h3 class="mb-4">
-            <i class="fa-solid fa-plus"></i> Registrar Animal
+            <i class="fa-solid fa-circle-plus"></i> Registrar Animal
         </h3>
 
         <form id="formAnimal" enctype="multipart/form-data">
 
             <div class="row g-4">
 
+                <!-- nombre -->
                 <div class="col-md-6">
-                    <label class="form-label text-start d-block">Nombre</label>
+                    <label class="form-label"><i class="fa-solid fa-tag"></i> Nombre</label>
                     <input type="text" name="nombre" class="form-control" required>
                 </div>
 
+                <!-- especie -->
                 <div class="col-md-6">
-                    <label class="form-label text-start d-block">Especie</label>
+                    <label class="form-label"><i class="fa-solid fa-dna"></i> Especie</label>
                     <select name="especie" class="form-select" required>
                         <option value="">Seleccione</option>
-                        <option value="perro">Perro</option>
-                        <option value="gato">Gato</option>
+                        <option value="Perro">Perro</option>
+                        <option value="Gato">Gato</option>
                     </select>
                 </div>
 
+                <!-- fecha -->
                 <div class="col-md-6">
-                    <label class="form-label text-start d-block">Fecha nacimiento</label>
+                    <label class="form-label"><i class="fa-regular fa-calendar"></i> Fecha nacimiento</label>
                     <input type="date" name="fecha_nacimiento" class="form-control" required>
                 </div>
 
+                <!-- sexo -->
                 <div class="col-md-6">
-                    <label class="form-label text-start d-block">Sexo</label>
+                    <label class="form-label"><i class="fa-solid fa-venus-mars"></i> Sexo</label>
                     <select name="sexo" class="form-select" required>
                         <option value="">Seleccione</option>
                         <option value="macho">Macho</option>
@@ -79,8 +83,9 @@ $usuario = Auth::user();
                     </select>
                 </div>
 
+                <!-- estado -->
                 <div class="col-md-6">
-                    <label class="form-label text-start d-block">Estado del animal</label>
+                    <label class="form-label"><i class="fa-solid fa-heart-circle-check"></i> Estado</label>
                     <select name="estado" class="form-select" required>
                         <option value="disponible">Disponible</option>
                         <option value="en proceso">En proceso</option>
@@ -89,29 +94,32 @@ $usuario = Auth::user();
                     </select>
                 </div>
 
+                <!-- salud -->
                 <div class="col-md-6">
-                    <label class="form-label text-start d-block">Estado salud</label>
+                    <label class="form-label"><i class="fa-solid fa-notes-medical"></i> Estado salud</label>
                     <textarea name="estado_salud" class="form-control"></textarea>
                 </div>
 
+                <!-- descripcion -->
                 <div class="col-md-6">
-                    <label class="form-label text-start d-block">Descripción</label>
+                    <label class="form-label"><i class="fa-solid fa-align-left"></i> Descripción</label>
                     <textarea name="descripcion" class="form-control"></textarea>
                 </div>
 
+                <!-- imagen -->
                 <div class="col-md-6">
-                    <label class="form-label text-start d-block">Imagen</label>
-                    <input type="file" name="imagen" class="form-control" accept="image/*">
+                    <label class="form-label"><i class="fa-solid fa-image"></i> Imagen</label>
+                    <input type="file" name="imagen" class="form-control">
                 </div>
 
                 <!-- HISTORIAL -->
                 <div class="col-12">
-                    <label class="form-label text-start d-block">Historial médico</label>
+                    <label class="form-label"><i class="fa-solid fa-syringe"></i> Historial médico</label>
 
                     <div id="historial-container"></div>
 
                     <button type="button" class="btn btn-secondary btn-sm mt-2" onclick="addHistorial()">
-                        + Agregar registro
+                        <i class="fa-solid fa-plus"></i> Agregar registro
                     </button>
                 </div>
 
@@ -128,56 +136,59 @@ $usuario = Auth::user();
     </div>
 
     <script>
-        /* ================= API ================= */
-        const API = "http://localhost:3001/api.php/animales";
 
-        /* ================= CARGAR ANIMALES ================= */
+        const API = "/api.php/animales";
+
         async function cargarAnimales() {
-            try {
-                const res = await fetch(API);
-                const data = await res.json();
 
-                const tbody = document.querySelector("#tabla-animales tbody");
-                tbody.innerHTML = "";
+            const res = await fetch(API);
+            const json = await res.json();
 
-                const lista = Array.isArray(data) ? data : Object.values(data);
+            const lista = json.data || [];
 
-                lista.forEach(a => {
-                    tbody.innerHTML += `
-                <tr>
-                    <td>${a.id_animal ?? ''}</td>
-                    <td>${a.nombre ?? ''}</td>
-                    <td>${a.especie ?? ''}</td>
-                    <td>${a.estado ?? ''}</td>
-                    <td>${a.sexo ?? ''}</td>
-                    <td>
-                        <button class="btn btn-primary btn-sm">
-                            <i class="fa fa-edit"></i>
-                        </button>
-                    </td>
-                </tr>
-            `;
-                });
+            const tbody = document.querySelector("#tabla-animales tbody");
+            tbody.innerHTML = "";
 
-            } catch (err) {
-                console.error("Error cargando animales:", err);
-            }
+            lista.forEach(a => {
+                tbody.innerHTML += `
+            <tr>
+                <td>${a.id_animal}</td>
+                <td>${a.nombre}</td>
+                <td>${a.especie}</td>
+                <td>${a.estado}</td>
+                <td>${a.sexo}</td>
+                <td>
+                    <button class="btn btn-primary btn-sm">
+                        <i class="fa-solid fa-eye"></i>
+                    </button>
+                </td>
+            </tr>
+        `;
+            });
         }
 
-        /* ================= HISTORIAL DINÁMICO ================= */
         function addHistorial() {
+
             const container = document.getElementById("historial-container");
 
             const row = document.createElement("div");
             row.classList.add("row", "g-2", "mb-2");
 
             row.innerHTML = `
-        <div class="col-md-4">
-            <input name="historial_tipo[]" class="form-control" placeholder="Tipo" required>
+        <div class="col-md-3">
+            <select name="historial_tipo[]" class="form-select">
+                <option value="">Tipo</option>
+                <option value="vacunacion">Vacunación</option>
+                <option value="tratamiento">Tratamiento</option>
+                <option value="control">Control</option>
+                <option value="cirugia">Cirugía</option>
+            </select>
         </div>
-        <div class="col-md-5">
-            <input name="historial_descripcion[]" class="form-control" placeholder="Descripción" required>
+
+        <div class="col-md-6">
+            <input name="historial_descripcion[]" class="form-control" placeholder="Descripción">
         </div>
+
         <div class="col-md-3">
             <input name="historial_veterinario[]" class="form-control" placeholder="Veterinario">
         </div>
@@ -186,31 +197,32 @@ $usuario = Auth::user();
             container.appendChild(row);
         }
 
-        /* ================= CREAR ANIMAL ================= */
         document.getElementById("formAnimal").addEventListener("submit", async (e) => {
+
             e.preventDefault();
 
-            const formData = new FormData(e.target);
+            const form = e.target;
+            const formData = new FormData(form);
 
             const res = await fetch(API, {
                 method: "POST",
                 body: formData
             });
 
-            const data = await res.json();
+            const json = await res.json();
 
-            if (data.success) {
+            if (json.success) {
                 alert("Animal creado correctamente");
-                e.target.reset();
+                form.reset();
                 document.getElementById("historial-container").innerHTML = "";
                 cargarAnimales();
             } else {
-                alert(data.message || "Error al crear animal");
+                alert(json.message);
             }
         });
 
-        /* ================= INIT ================= */
         document.addEventListener("DOMContentLoaded", cargarAnimales);
+
     </script>
 
 </body>

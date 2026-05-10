@@ -1,25 +1,20 @@
 <?php
 
 require_once __DIR__ . "/../clases/Animal.php";
-require_once __DIR__ . "/../clases/FotoAnimal.php";
-require_once __DIR__ . "/../clases/HistorialMedico.php";
 require_once __DIR__ . "/../clases/Conexion.php";
 
 class AnimalController
 {
     private $animal;
-    private $foto;
-    private $historial;
     private $db;
 
     public function __construct()
     {
         $this->animal = new Animal();
-        $this->foto = new FotoAnimal();
-        $this->historial = new HistorialMedico();
         $this->db = Conexion::conectar();
     }
 
+    /* ================= LISTAR ================= */
     public function index()
     {
         header("Content-Type: application/json");
@@ -32,6 +27,7 @@ class AnimalController
         ]);
     }
 
+    /* ================= OBTENER ================= */
     public function show($id)
     {
         header("Content-Type: application/json");
@@ -44,6 +40,7 @@ class AnimalController
         ]);
     }
 
+    /* ================= CREAR ================= */
     public function store($data, $files)
     {
         header("Content-Type: application/json");
@@ -51,16 +48,39 @@ class AnimalController
         try {
             $this->db->beginTransaction();
 
+            /* ================= HISTORIAL JSON ================= */
+            $historial = [];
+
+            if (!empty($data['historial_tipo'])) {
+
+                for ($i = 0; $i < count($data['historial_tipo']); $i++) {
+
+                    $tipo = $data['historial_tipo'][$i] ?? null;
+                    $desc = $data['historial_descripcion'][$i] ?? null;
+                    $vet = $data['historial_veterinario'][$i] ?? null;
+
+                    if ($tipo || $desc || $vet) {
+                        $historial[] = [
+                            "tipo" => $tipo,
+                            "descripcion" => $desc,
+                            "veterinario" => $vet
+                        ];
+                    }
+                }
+            }
+
+            /* ================= CREAR ANIMAL ================= */
             $idAnimal = $this->animal->crear(
                 $data['nombre'],
                 $data['especie'],
                 $data['fecha_nacimiento'],
                 $data['sexo'],
                 $data['estado_salud'],
-                $data['descripcion']
+                $data['descripcion'],
+                json_encode($historial)
             );
 
-            /* FOTO */
+            /* ================= IMAGEN ================= */
             if (!empty($files['imagen'])) {
 
                 $file = $files['imagen'];
@@ -72,31 +92,23 @@ class AnimalController
 
                 move_uploaded_file($file['tmp_name'], $path);
 
-                $this->foto->agregar($idAnimal, "/uploads/" . $name);
-            }
+                $stmt = $this->db->prepare("
+                    UPDATE fundacion.animales
+                    SET foto_url = ?
+                    WHERE id_animal = ?
+                ");
 
-            /* HISTORIAL */
-            if (!empty($data['historial'])) {
-
-                $historial = json_decode($data['historial'], true);
-
-                if (is_array($historial)) {
-                    foreach ($historial as $h) {
-                        $this->historial->agregar(
-                            $idAnimal,
-                            $h['tipo'],
-                            $h['descripcion'],
-                            $h['veterinario'] ?? null
-                        );
-                    }
-                }
+                $stmt->execute([
+                    "/uploads/" . $name,
+                    $idAnimal
+                ]);
             }
 
             $this->db->commit();
 
             echo json_encode([
                 "success" => true,
-                "message" => "Animal creado",
+                "message" => "Animal creado correctamente",
                 "id_animal" => $idAnimal
             ]);
 
@@ -111,21 +123,48 @@ class AnimalController
         }
     }
 
+    /* ================= ACTUALIZAR ================= */
     public function update($id, $data)
     {
         header("Content-Type: application/json");
 
-        $ok = $this->animal->actualizar(
-            $id,
-            $data['nombre'],
-            $data['estado'],
-            $data['estado_salud'],
-            $data['descripcion']
-        );
+        try {
 
-        echo json_encode([
-            "success" => $ok,
-            "message" => $ok ? "Actualizado" : "Error al actualizar"
-        ]);
+            /* ================= HISTORIAL NUEVO ================= */
+            $historial = [];
+
+            if (!empty($data['historial_tipo'])) {
+
+                for ($i = 0; $i < count($data['historial_tipo']); $i++) {
+
+                    $historial[] = [
+                        "tipo" => $data['historial_tipo'][$i] ?? null,
+                        "descripcion" => $data['historial_descripcion'][$i] ?? null,
+                        "veterinario" => $data['historial_veterinario'][$i] ?? null
+                    ];
+                }
+            }
+
+            $ok = $this->animal->actualizar(
+                $id,
+                $data['nombre'],
+                $data['estado'],
+                $data['estado_salud'],
+                $data['descripcion'],
+                json_encode($historial)
+            );
+
+            echo json_encode([
+                "success" => $ok,
+                "message" => $ok ? "Actualizado correctamente" : "Error al actualizar"
+            ]);
+
+        } catch (Exception $e) {
+
+            echo json_encode([
+                "success" => false,
+                "message" => $e->getMessage()
+            ]);
+        }
     }
 }

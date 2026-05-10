@@ -7,21 +7,21 @@ $controller = new AnimalController();
 $method = $_SERVER['REQUEST_METHOD'];
 $id = $_GET['id'] ?? null;
 
+header("Content-Type: application/json");
+
 switch ($method) {
 
     case "GET":
-        $id
-            ? $controller->show($id)
-            : $controller->index();
+        $id ? $controller->show($id) : $controller->index();
         break;
 
     case "POST":
-        $controller->store($_POST, $_FILES);
-        break;
+        if ($id) {
+            $controller->update($id, $_POST);
+        } else {
+            $controller->store($_POST, $_FILES);
+        }
 
-    case "PUT":
-        parse_str(file_get_contents("php://input"), $data);
-        $controller->update($id, $data);
         break;
 
     default:
