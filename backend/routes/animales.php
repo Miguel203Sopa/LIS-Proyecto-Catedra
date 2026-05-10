@@ -1,4 +1,5 @@
 <?php
+
 require_once __DIR__ . "/../controllers/AnimalController.php";
 
 $controller = new AnimalController();
@@ -8,16 +9,24 @@ $id = $_GET['id'] ?? null;
 
 switch ($method) {
 
-    case 'GET':
-        $id ? $controller->show($id) : $controller->index();
+    case "GET":
+        $id
+            ? $controller->show($id)
+            : $controller->index();
         break;
 
-    case 'POST':
+    case "POST":
         $controller->store($_POST, $_FILES);
         break;
 
-    case 'PUT':
+    case "PUT":
         parse_str(file_get_contents("php://input"), $data);
         $controller->update($id, $data);
         break;
+
+    default:
+        echo json_encode([
+            "success" => false,
+            "message" => "Método no permitido"
+        ]);
 }

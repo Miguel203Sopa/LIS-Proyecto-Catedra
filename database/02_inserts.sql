@@ -246,76 +246,76 @@ VALUES
 
 -- PERROS
 INSERT INTO fundacion.animales_fotos (id_animal, url_foto, es_principal)
-SELECT id_animal, '/assets/imagenes/animales/malcon.png',   TRUE FROM fundacion.animales WHERE nombre = 'Malcon'   AND especie = 'Perro';
+SELECT id_animal, '/bakend/uploads/malcon.png',   TRUE FROM fundacion.animales WHERE nombre = 'Malcon'   AND especie = 'Perro';
 INSERT INTO fundacion.animales_fotos (id_animal, url_foto, es_principal)
-SELECT id_animal, '/assets/imagenes/animales/sicilia.png',  TRUE FROM fundacion.animales WHERE nombre = 'Sicilia'  AND especie = 'Perro';
+SELECT id_animal, '/bakend/uploads/sicilia.png',  TRUE FROM fundacion.animales WHERE nombre = 'Sicilia'  AND especie = 'Perro';
 INSERT INTO fundacion.animales_fotos (id_animal, url_foto, es_principal)
-SELECT id_animal, '/assets/imagenes/animales/metapan.png',  TRUE FROM fundacion.animales WHERE nombre = 'Metapán'  AND especie = 'Perro';
+SELECT id_animal, '/bakend/uploads/metapan.png',  TRUE FROM fundacion.animales WHERE nombre = 'Metapán'  AND especie = 'Perro';
 INSERT INTO fundacion.animales_fotos (id_animal, url_foto, es_principal)
-SELECT id_animal, '/assets/imagenes/animales/bimba.png',    TRUE FROM fundacion.animales WHERE nombre = 'Bimba'    AND especie = 'Perro';
+SELECT id_animal, '/bakend/uploads/bimba.png',    TRUE FROM fundacion.animales WHERE nombre = 'Bimba'    AND especie = 'Perro';
 INSERT INTO fundacion.animales_fotos (id_animal, url_foto, es_principal)
-SELECT id_animal, '/assets/imagenes/animales/amaranta.png', TRUE FROM fundacion.animales WHERE nombre = 'Amaranta' AND especie = 'Perro';
+SELECT id_animal, '/bakend/uploads/amaranta.png', TRUE FROM fundacion.animales WHERE nombre = 'Amaranta' AND especie = 'Perro';
 INSERT INTO fundacion.animales_fotos (id_animal, url_foto, es_principal)
-SELECT id_animal, '/assets/imagenes/animales/vera.png',     TRUE FROM fundacion.animales WHERE nombre = 'Vera'     AND especie = 'Perro';
+SELECT id_animal, '/bakend/uploads/vera.png',     TRUE FROM fundacion.animales WHERE nombre = 'Vera'     AND especie = 'Perro';
 INSERT INTO fundacion.animales_fotos (id_animal, url_foto, es_principal)
-SELECT id_animal, '/assets/imagenes/animales/tomas.png',    TRUE FROM fundacion.animales WHERE nombre = 'Tomás'    AND especie = 'Perro';
+SELECT id_animal, '/bakend/uploads/tomas.png',    TRUE FROM fundacion.animales WHERE nombre = 'Tomás'    AND especie = 'Perro';
 INSERT INTO fundacion.animales_fotos (id_animal, url_foto, es_principal)
-SELECT id_animal, '/assets/imagenes/animales/coco.png',     TRUE FROM fundacion.animales WHERE nombre = 'Coco'     AND especie = 'Perro';
+SELECT id_animal, '/bakend/uploads/coco.png',     TRUE FROM fundacion.animales WHERE nombre = 'Coco'     AND especie = 'Perro';
 INSERT INTO fundacion.animales_fotos (id_animal, url_foto, es_principal)
-SELECT id_animal, '/assets/imagenes/animales/celeste.png',  TRUE FROM fundacion.animales WHERE nombre = 'Celeste'  AND especie = 'Perro';
+SELECT id_animal, '/bakend/uploads/celeste.png',  TRUE FROM fundacion.animales WHERE nombre = 'Celeste'  AND especie = 'Perro';
 INSERT INTO fundacion.animales_fotos (id_animal, url_foto, es_principal)
-SELECT id_animal, '/assets/imagenes/animales/chiqui.png',   TRUE FROM fundacion.animales WHERE nombre = 'Chiqui'   AND especie = 'Perro';
+SELECT id_animal, '/bakend/uploads/chiqui.png',   TRUE FROM fundacion.animales WHERE nombre = 'Chiqui'   AND especie = 'Perro';
 INSERT INTO fundacion.animales_fotos (id_animal, url_foto, es_principal)
-SELECT id_animal, '/assets/imagenes/animales/caramelo.png', TRUE FROM fundacion.animales WHERE nombre = 'Caramelo' AND especie = 'Perro';
+SELECT id_animal, '/bakend/uploads/caramelo.png', TRUE FROM fundacion.animales WHERE nombre = 'Caramelo' AND especie = 'Perro';
 INSERT INTO fundacion.animales_fotos (id_animal, url_foto, es_principal)
-SELECT id_animal, '/assets/imagenes/animales/nyssa.png',    TRUE FROM fundacion.animales WHERE nombre = 'Nyssa'    AND especie = 'Perro';
+SELECT id_animal, '/bakend/uploads/nyssa.png',    TRUE FROM fundacion.animales WHERE nombre = 'Nyssa'    AND especie = 'Perro';
 INSERT INTO fundacion.animales_fotos (id_animal, url_foto, es_principal)
-SELECT id_animal, '/assets/imagenes/animales/dotty.png',    TRUE FROM fundacion.animales WHERE nombre = 'Dotty'    AND especie = 'Perro';
+SELECT id_animal, '/bakend/uploads/dotty.png',    TRUE FROM fundacion.animales WHERE nombre = 'Dotty'    AND especie = 'Perro';
 INSERT INTO fundacion.animales_fotos (id_animal, url_foto, es_principal)
-SELECT id_animal, '/assets/imagenes/animales/nena.png',     TRUE FROM fundacion.animales WHERE nombre = 'Nena'     AND especie = 'Perro';
+SELECT id_animal, '/bakend/uploads/nena.png',     TRUE FROM fundacion.animales WHERE nombre = 'Nena'     AND especie = 'Perro';
 INSERT INTO fundacion.animales_fotos (id_animal, url_foto, es_principal)
-SELECT id_animal, '/assets/imagenes/animales/bebita.png',   TRUE FROM fundacion.animales WHERE nombre = 'Bebita'   AND especie = 'Perro';
+SELECT id_animal, '/bakend/uploads/bebita.png',   TRUE FROM fundacion.animales WHERE nombre = 'Bebita'   AND especie = 'Perro';
 INSERT INTO fundacion.animales_fotos (id_animal, url_foto, es_principal)
-SELECT id_animal, '/assets/imagenes/animales/dottyto.png',  TRUE FROM fundacion.animales WHERE nombre = 'Dottyto'  AND especie = 'Perro';
+SELECT id_animal, '/bakend/uploads/dottyto.png',  TRUE FROM fundacion.animales WHERE nombre = 'Dottyto'  AND especie = 'Perro';
 INSERT INTO fundacion.animales_fotos (id_animal, url_foto, es_principal)
-SELECT id_animal, '/assets/imagenes/animales/dottyta.png',  TRUE FROM fundacion.animales WHERE nombre = 'Dottyta'  AND especie = 'Perro';
+SELECT id_animal, '/bakend/uploads/dottyta.png',  TRUE FROM fundacion.animales WHERE nombre = 'Dottyta'  AND especie = 'Perro';
 INSERT INTO fundacion.animales_fotos (id_animal, url_foto, es_principal)
-SELECT id_animal, '/assets/imagenes/animales/rocky.png',    TRUE FROM fundacion.animales WHERE nombre = 'Rocky'    AND especie = 'Perro';
+SELECT id_animal, '/bakend/uploads/rocky.png',    TRUE FROM fundacion.animales WHERE nombre = 'Rocky'    AND especie = 'Perro';
 
 -- GATOS
 INSERT INTO fundacion.animales_fotos (id_animal, url_foto, es_principal)
-SELECT id_animal, '/assets/imagenes/animales/anuel.png',    TRUE FROM fundacion.animales WHERE nombre = 'Anuel'    AND especie = 'Gato';
+SELECT id_animal, '/bakend/uploads/anuel.png',    TRUE FROM fundacion.animales WHERE nombre = 'Anuel'    AND especie = 'Gato';
 INSERT INTO fundacion.animales_fotos (id_animal, url_foto, es_principal)
-SELECT id_animal, '/assets/imagenes/animales/ariel.png',    TRUE FROM fundacion.animales WHERE nombre = 'Ariel'    AND especie = 'Gato';
+SELECT id_animal, '/bakend/uploads/ariel.png',    TRUE FROM fundacion.animales WHERE nombre = 'Ariel'    AND especie = 'Gato';
 INSERT INTO fundacion.animales_fotos (id_animal, url_foto, es_principal)
-SELECT id_animal, '/assets/imagenes/animales/kika.png',     TRUE FROM fundacion.animales WHERE nombre = 'Kika'     AND especie = 'Gato';
+SELECT id_animal, '/bakend/uploads/kika.png',     TRUE FROM fundacion.animales WHERE nombre = 'Kika'     AND especie = 'Gato';
 INSERT INTO fundacion.animales_fotos (id_animal, url_foto, es_principal)
-SELECT id_animal, '/assets/imagenes/animales/soya.png',     TRUE FROM fundacion.animales WHERE nombre = 'Soya'     AND especie = 'Gato';
+SELECT id_animal, '/bakend/uploads/soya.png',     TRUE FROM fundacion.animales WHERE nombre = 'Soya'     AND especie = 'Gato';
 INSERT INTO fundacion.animales_fotos (id_animal, url_foto, es_principal)
-SELECT id_animal, '/assets/imagenes/animales/negrita.png',  TRUE FROM fundacion.animales WHERE nombre = 'Negrita'  AND especie = 'Gato';
+SELECT id_animal, '/bakend/uploads/negrita.png',  TRUE FROM fundacion.animales WHERE nombre = 'Negrita'  AND especie = 'Gato';
 INSERT INTO fundacion.animales_fotos (id_animal, url_foto, es_principal)
-SELECT id_animal, '/assets/imagenes/animales/cami.png',     TRUE FROM fundacion.animales WHERE nombre = 'Cami'     AND especie = 'Gato';
+SELECT id_animal, '/bakend/uploads/cami.png',     TRUE FROM fundacion.animales WHERE nombre = 'Cami'     AND especie = 'Gato';
 INSERT INTO fundacion.animales_fotos (id_animal, url_foto, es_principal)
-SELECT id_animal, '/assets/imagenes/animales/kimi.png',     TRUE FROM fundacion.animales WHERE nombre = 'Kimi'     AND especie = 'Gato';
+SELECT id_animal, '/bakend/uploads/kimi.png',     TRUE FROM fundacion.animales WHERE nombre = 'Kimi'     AND especie = 'Gato';
 INSERT INTO fundacion.animales_fotos (id_animal, url_foto, es_principal)
-SELECT id_animal, '/assets/imagenes/animales/principe.png', TRUE FROM fundacion.animales WHERE nombre = 'Príncipe' AND especie = 'Gato';
+SELECT id_animal, '/bakend/uploads/principe.png', TRUE FROM fundacion.animales WHERE nombre = 'Príncipe' AND especie = 'Gato';
 INSERT INTO fundacion.animales_fotos (id_animal, url_foto, es_principal)
-SELECT id_animal, '/assets/imagenes/animales/oreo.png',     TRUE FROM fundacion.animales WHERE nombre = 'Oreo'     AND especie = 'Gato';
+SELECT id_animal, '/bakend/uploads/oreo.png',     TRUE FROM fundacion.animales WHERE nombre = 'Oreo'     AND especie = 'Gato';
 INSERT INTO fundacion.animales_fotos (id_animal, url_foto, es_principal)
-SELECT id_animal, '/assets/imagenes/animales/nata.png',     TRUE FROM fundacion.animales WHERE nombre = 'Nata'     AND especie = 'Gato';
+SELECT id_animal, '/bakend/uploads/nata.png',     TRUE FROM fundacion.animales WHERE nombre = 'Nata'     AND especie = 'Gato';
 INSERT INTO fundacion.animales_fotos (id_animal, url_foto, es_principal)
-SELECT id_animal, '/assets/imagenes/animales/luna.png',     TRUE FROM fundacion.animales WHERE nombre = 'Luna'     AND especie = 'Gato';
+SELECT id_animal, '/bakend/uploads/luna.png',     TRUE FROM fundacion.animales WHERE nombre = 'Luna'     AND especie = 'Gato';
 INSERT INTO fundacion.animales_fotos (id_animal, url_foto, es_principal)
-SELECT id_animal, '/assets/imagenes/animales/michi.png',    TRUE FROM fundacion.animales WHERE nombre = 'Michi'    AND especie = 'Gato';
+SELECT id_animal, '/bakend/uploads/michi.png',    TRUE FROM fundacion.animales WHERE nombre = 'Michi'    AND especie = 'Gato';
 INSERT INTO fundacion.animales_fotos (id_animal, url_foto, es_principal)
-SELECT id_animal, '/assets/imagenes/animales/canela.png',   TRUE FROM fundacion.animales WHERE nombre = 'Canela'   AND especie = 'Gato';
+SELECT id_animal, '/bakend/uploads/canela.png',   TRUE FROM fundacion.animales WHERE nombre = 'Canela'   AND especie = 'Gato';
 INSERT INTO fundacion.animales_fotos (id_animal, url_foto, es_principal)
-SELECT id_animal, '/assets/imagenes/animales/simba.png',    TRUE FROM fundacion.animales WHERE nombre = 'Simba'    AND especie = 'Gato';
+SELECT id_animal, '/bakend/uploads/simba.png',    TRUE FROM fundacion.animales WHERE nombre = 'Simba'    AND especie = 'Gato';
 INSERT INTO fundacion.animales_fotos (id_animal, url_foto, es_principal)
-SELECT id_animal, '/assets/imagenes/animales/mimi.png',     TRUE FROM fundacion.animales WHERE nombre = 'Mimi'     AND especie = 'Gato';
+SELECT id_animal, '/bakend/uploads/mimi.png',     TRUE FROM fundacion.animales WHERE nombre = 'Mimi'     AND especie = 'Gato';
 INSERT INTO fundacion.animales_fotos (id_animal, url_foto, es_principal)
-SELECT id_animal, '/assets/imagenes/animales/tobias.png',   TRUE FROM fundacion.animales WHERE nombre = 'Tobías'   AND especie = 'Gato';
+SELECT id_animal, '/bakend/uploads/tobias.png',   TRUE FROM fundacion.animales WHERE nombre = 'Tobías'   AND especie = 'Gato';
 INSERT INTO fundacion.animales_fotos (id_animal, url_foto, es_principal)
-SELECT id_animal, '/assets/imagenes/animales/perla.png',    TRUE FROM fundacion.animales WHERE nombre = 'Perla'    AND especie = 'Gato';
+SELECT id_animal, '/bakend/uploads/perla.png',    TRUE FROM fundacion.animales WHERE nombre = 'Perla'    AND especie = 'Gato';
 INSERT INTO fundacion.animales_fotos (id_animal, url_foto, es_principal)
-SELECT id_animal, '/assets/imagenes/animales/zeus.png',     TRUE FROM fundacion.animales WHERE nombre = 'Zeus'     AND especie = 'Gato';
+SELECT id_animal, '/bakend/uploads/zeus.png',     TRUE FROM fundacion.animales WHERE nombre = 'Zeus'     AND especie = 'Gato';

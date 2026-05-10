@@ -1,9 +1,9 @@
 <?php
 
-require_once __DIR__ . "/../clases/Conexion.php";
 require_once __DIR__ . "/../clases/Animal.php";
 require_once __DIR__ . "/../clases/FotoAnimal.php";
 require_once __DIR__ . "/../clases/HistorialMedico.php";
+require_once __DIR__ . "/../clases/Conexion.php";
 
 class AnimalController
 {
@@ -22,31 +22,46 @@ class AnimalController
 
     public function index()
     {
-        echo json_encode($this->animal->listar());
+        header("Content-Type: application/json");
+
+        $data = $this->animal->listar();
+
+        echo json_encode([
+            "success" => true,
+            "data" => $data
+        ]);
     }
 
     public function show($id)
     {
-        echo json_encode($this->animal->obtener($id));
+        header("Content-Type: application/json");
+
+        $data = $this->animal->obtener($id);
+
+        echo json_encode([
+            "success" => true,
+            "data" => $data
+        ]);
     }
 
     public function store($data, $files)
     {
+        header("Content-Type: application/json");
+
         try {
             $this->db->beginTransaction();
 
-            // ================= CREAR ANIMAL =================
             $idAnimal = $this->animal->crear(
-                $data['nombre'] ?? null,
-                $data['especie'] ?? null,
-                $data['fecha_nacimiento'] ?? null,
-                $data['sexo'] ?? null,
-                $data['estado_salud'] ?? null,
-                $data['descripcion'] ?? null
+                $data['nombre'],
+                $data['especie'],
+                $data['fecha_nacimiento'],
+                $data['sexo'],
+                $data['estado_salud'],
+                $data['descripcion']
             );
 
-            // ================= IMAGEN =================
-            if (isset($files['imagen']) && $files['imagen']['error'] === UPLOAD_ERR_OK) {
+            /* FOTO */
+            if (!empty($files['imagen'])) {
 
                 $file = $files['imagen'];
 
@@ -55,13 +70,12 @@ class AnimalController
 
                 $path = __DIR__ . "/../uploads/" . $name;
 
-                if (move_uploaded_file($file['tmp_name'], $path)) {
-                    $url = "/uploads/" . $name;
-                    $this->foto->agregar($idAnimal, $url);
-                }
+                move_uploaded_file($file['tmp_name'], $path);
+
+                $this->foto->agregar($idAnimal, "/uploads/" . $name);
             }
 
-            // ================= HISTORIAL =================
+            /* HISTORIAL */
             if (!empty($data['historial'])) {
 
                 $historial = json_decode($data['historial'], true);
@@ -70,8 +84,8 @@ class AnimalController
                     foreach ($historial as $h) {
                         $this->historial->agregar(
                             $idAnimal,
-                            $h['tipo'] ?? null,
-                            $h['descripcion'] ?? null,
+                            $h['tipo'],
+                            $h['descripcion'],
                             $h['veterinario'] ?? null
                         );
                     }
@@ -82,6 +96,7 @@ class AnimalController
 
             echo json_encode([
                 "success" => true,
+                "message" => "Animal creado",
                 "id_animal" => $idAnimal
             ]);
 
@@ -89,39 +104,28 @@ class AnimalController
 
             $this->db->rollBack();
 
-            http_response_code(500);
-
             echo json_encode([
                 "success" => false,
-                "error" => $e->getMessage()
+                "message" => $e->getMessage()
             ]);
         }
     }
 
     public function update($id, $data)
     {
-        try {
-            $this->animal->actualizar(
-                $id,
-                $data['nombre'] ?? null,
-                $data['estado'] ?? null,
-                $data['estado_salud'] ?? null,
-                $data['descripcion'] ?? null
-            );
+        header("Content-Type: application/json");
 
-            echo json_encode([
-                "success" => true,
-                "msg" => "Actualizado"
-            ]);
+        $ok = $this->animal->actualizar(
+            $id,
+            $data['nombre'],
+            $data['estado'],
+            $data['estado_salud'],
+            $data['descripcion']
+        );
 
-        } catch (Exception $e) {
-
-            http_response_code(500);
-
-            echo json_encode([
-                "success" => false,
-                "error" => $e->getMessage()
-            ]);
-        }
+        echo json_encode([
+            "success" => $ok,
+            "message" => $ok ? "Actualizado" : "Error al actualizar"
+        ]);
     }
 }

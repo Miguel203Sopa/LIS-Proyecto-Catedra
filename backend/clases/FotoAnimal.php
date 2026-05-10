@@ -11,7 +11,7 @@ class FotoAnimal
         $this->db = Conexion::conectar();
     }
 
-    public function agregar($id_animal, $url, $principal = false)
+    public function agregar($id_animal, $url, $principal = true)
     {
 
         $sql = "
@@ -25,7 +25,7 @@ class FotoAnimal
         return $stmt->execute([
             ":id_animal" => $id_animal,
             ":url" => $url,
-            ":principal" => $principal
+            ":principal" => TRUE
         ]);
     }
 

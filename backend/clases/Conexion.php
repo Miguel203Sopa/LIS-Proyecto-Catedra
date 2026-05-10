@@ -1,8 +1,10 @@
 <?php
-class Conexion {
+class Conexion
+{
     private static $conexion = null;
 
-    public static function conectar() {
+    public static function conectar()
+    {
         if (self::$conexion === null) {
             $host = "db";
             $dbname = "midb";
@@ -17,7 +19,10 @@ class Conexion {
                 );
                 self::$conexion->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
             } catch (PDOException $e) {
-                die("Error de conexión: " . $e->getMessage());
+                die(json_encode([
+                    "success" => false,
+                    "message" => $e->getMessage()
+                ]));
             }
         }
         return self::$conexion;
