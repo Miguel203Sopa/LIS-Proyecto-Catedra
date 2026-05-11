@@ -17,7 +17,7 @@ class Auth
         if (!isset($_SESSION['usuario'])) {
 
             header(
-                "Location: /public/login.php?error=sesion"
+                "Location: /login.php?error=sesion"
             );
 
             exit;
@@ -34,7 +34,7 @@ class Auth
         ) {
 
             header(
-                "Location: /public/login.php?error=permiso"
+                "Location: /login.php?error=permiso"
             );
 
             exit;
@@ -58,7 +58,8 @@ class Auth
 
         if (ini_get("session.use_cookies")) {
 
-            $params = session_get_cookie_params();
+            $params =
+                session_get_cookie_params();
 
             setcookie(
                 session_name(),
@@ -73,7 +74,7 @@ class Auth
 
         session_destroy();
 
-        header("Location: /public/login.php");
+        header("Location: /login.php");
 
         exit;
     }

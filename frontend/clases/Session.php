@@ -1,6 +1,6 @@
 <?php
 
-class Auth
+class Session
 {
     public static function start()
     {
@@ -10,42 +10,30 @@ class Auth
         }
     }
 
-    public static function check()
+    public static function login($usuario)
     {
         self::start();
 
-        if (!isset($_SESSION['usuario'])) {
+        $_SESSION['usuario'] = [
 
-            header(
-                "Location: /public/login.php?error=sesion"
-            );
+            "id" =>
+                $usuario['id'],
 
-            exit;
-        }
-    }
+            "uid" =>
+                $usuario['uid'],
 
-    public static function requireAdmin()
-    {
-        self::check();
+            "nombre" =>
+                $usuario['nombre'],
 
-        if (
-            !isset($_SESSION['usuario']['rol']) ||
-            $_SESSION['usuario']['rol'] !== 'admin'
-        ) {
+            "apellido" =>
+                $usuario['apellido'],
 
-            header(
-                "Location: /public/login.php?error=permiso"
-            );
+            "correo" =>
+                $usuario['correo'],
 
-            exit;
-        }
-    }
-
-    public static function user()
-    {
-        self::start();
-
-        return $_SESSION['usuario'] ?? null;
+            "rol" =>
+                $usuario['rol']
+        ];
     }
 
     public static function logout()
@@ -58,7 +46,8 @@ class Auth
 
         if (ini_get("session.use_cookies")) {
 
-            $params = session_get_cookie_params();
+            $params =
+                session_get_cookie_params();
 
             setcookie(
                 session_name(),
@@ -72,9 +61,19 @@ class Auth
         }
 
         session_destroy();
+    }
 
-        header("Location: /public/login.php");
+    public static function user()
+    {
+        self::start();
 
-        exit;
+        return $_SESSION['usuario'] ?? null;
+    }
+
+    public static function check()
+    {
+        self::start();
+
+        return isset($_SESSION['usuario']);
     }
 }

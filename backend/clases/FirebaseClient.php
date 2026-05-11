@@ -1,84 +1,79 @@
 <?php
 
-class FirebaseClient
+class Session
 {
-    private $apiKey =
-        "TU_API_KEY";
+    public static function start()
+    {
+        if (session_status() === PHP_SESSION_NONE) {
 
-    public function signIn(
-        $email,
-        $password
-    ) {
+            session_start();
+        }
+    }
 
-        $url =
-            "https://identitytoolkit.googleapis.com/v1/accounts:signInWithPassword?key="
-            . $this->apiKey;
+    public static function login($usuario)
+    {
+        self::start();
 
-        $data = [
+        $_SESSION['usuario'] = [
 
-            "email" => $email,
+            "id" =>
+                $usuario['id'],
 
-            "password" => $password,
+            "uid" =>
+                $usuario['uid'],
 
-            "returnSecureToken" => true
+            "nombre" =>
+                $usuario['nombre'],
+
+            "apellido" =>
+                $usuario['apellido'],
+
+            "correo" =>
+                $usuario['correo'],
+
+            "rol" =>
+                $usuario['rol']
         ];
+    }
 
-        $options = [
+    public static function logout()
+    {
+        self::start();
 
-            "http" => [
+        $_SESSION = [];
 
-                "header" =>
-                    "Content-Type: application/json",
+        session_unset();
 
-                "method" => "POST",
+        if (ini_get("session.use_cookies")) {
 
-                "content" =>
-                    json_encode($data),
+            $params =
+                session_get_cookie_params();
 
-                "ignore_errors" => true
-            ]
-        ];
-
-        $context =
-            stream_context_create($options);
-
-        $response =
-            @file_get_contents(
-                $url,
-                false,
-                $context
+            setcookie(
+                session_name(),
+                '',
+                time() - 42000,
+                $params["path"],
+                $params["domain"],
+                $params["secure"],
+                $params["httponly"]
             );
-
-        if ($response === false) {
-
-            return [
-
-                "success" => false,
-
-                "message" =>
-                    "Error conectando con Firebase"
-            ];
         }
 
-        $result =
-            json_decode($response, true);
+        session_destroy();
+    }
 
-        if (isset($result['error'])) {
+    public static function user()
+    {
+        self::start();
 
-            return [
+        return $_SESSION['usuario'] ?? null;
+    }
 
-                "success" => false,
+    public static function check()
+    {
+        self::start();
 
-                "message" =>
-                    $result['error']['message']
-            ];
-        }
-
-        return [
-
-            "success" => true,
-
-            "data" => $result
-        ];
+        return isset($_SESSION['usuario']);
     }
 }
