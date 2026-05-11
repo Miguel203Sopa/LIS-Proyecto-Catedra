@@ -44,6 +44,18 @@ class AuthController
 
         if (!$firebaseUser['success']) {
 
+    http_response_code(401);
+
+    echo json_encode([
+        "success" => false,
+        "firebase" => $firebaseUser
+    ]);
+
+    return;
+}
+
+ /*if (!$firebaseUser['success']) { 
+
             http_response_code(401);
 
             echo json_encode([
@@ -54,6 +66,13 @@ class AuthController
 
             return;
         }
+*/
+
+
+
+
+
+
 
         $uid =
             $firebaseUser['data']['localId'];
