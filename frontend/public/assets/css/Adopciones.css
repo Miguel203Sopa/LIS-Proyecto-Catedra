@@ -1,87 +1,137 @@
-.Adopciones{
-  font-family: 'Segoe UI', Roboto, Arial, sans-serif;
-  background-color: rgb(255,255, 255,0.3);
-  border-radius: 3%;
+.Adopcines {
+  font-family: 'Montserrat', sans-serif;
+  padding: 20px;
+  background: transparent;
 }
 
-body{
-  background: #e1ecf2;
-  background-image: url(/assets/imagenes/Fondoweb.jpg);
-  background-size: cover;
-  justify-content: center;
-  align-items: center;
-  color: #1A252F;
-}
-
-.contenedor1{
+.contenedor1 {
   display: flex;
+  flex-wrap: wrap;
   align-items: center;
-  gap: 40px;
   justify-content: space-between;
-  background-color: rgba(255, 255, 255, 0.4);
-  padding: 20px 10px 5px;
-  border-bottom: 1px solid #eee;
+  gap: 30px;
+  padding: 40px;
+  background: rgba(255, 255, 255, 0.25);
+  border-radius: 15px;
+  backdrop-filter: blur(6px);
 }
 
-.contenedor1 img{
+.conte1-texto1 {
   flex: 1;
-  min-width: 300px;
-  text-align: left; 
-  font-size: 45px;
-  color: #1A252F;
-  letter-spacing: 2px;
+  min-width: 280px;
+  color: #1a1a1a;
 }
 
-.conte1-texto1{
+.conte1-texto1 h1 {
+  font-size: 2.2rem;
+  font-weight: 700;
+}
+
+.conte1-texto1 h2 {
+  font-size: 1.4rem;
+  margin-top: 10px;
+  color: #2e4ead;
+}
+
+.conte1-texto1 p {
+  margin-top: 10px;
+  line-height: 1.5;
+}
+
+.imagen {
   flex: 1;
-  margin-left: 50px;
+  display: flex;
+  justify-content: center;
 }
 
-.contenedor2{
-  font-family: 'Segoe UI', Roboto, Arial, sans-serif;
-  background-color: rgb(255,255, 255,0.4);
-  padding-left: 3%;
-  color: #1A252F;
+.imagen img {
+  max-width: 320px;
+  width: 100%;
+  border-radius: 12px;
+  object-fit: cover;
 }
 
-.menu-bar {
-  text-align: center;
-  background-color: rgb(255,255, 255,0);
+.contenedor2 {
+  margin-top: 30px;
+  padding: 30px;
 }
 
+.conte2 {
+  background: rgba(255, 255, 255, 0.2);
+  padding: 25px;
+  border-radius: 15px;
+  backdrop-filter: blur(6px);
+}
+
+.conte2 h2 {
+  color: #1a1a1a;
+}
+
+.conte2 hr {
+  border: 0;
+  height: 1px;
+  background: rgba(0, 0, 0, 0.15);
+  margin: 15px 0;
+}
+
+.contenedorjr {
+  margin-top: 20px;
+}
+
+.lista-iconos {
+  padding-left: 20px;
+}
+
+.lista-iconos li {
+  margin-bottom: 8px;
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+}
+
+.lista-iconos i {
+  color: #2e4ead;
+  margin-top: 3px;
+}
+
+/* MENÚ FILTROS */
 .menu-bar ul {
-  display: inline-flex;
-  list-style: none;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 15px;
   padding: 0;
+  margin-top: 20px;
 }
 
 .menu-bar ul li {
-  width: 120px;
-  margin: 5px;
-  padding: 15px;
-  position: relative; 
+  position: relative;
 }
 
 .menu-bar ul li a {
-  text-decoration: none;
-  color: #1A252F;
   display: block;
+  padding: 10px 15px;
+  background: rgba(255, 255, 255, 0.35);
+  border-radius: 10px;
+  color: #1a1a1a;
+  text-decoration: none;
+  transition: .3s;
 }
 
-.menu-bar ul li:hover {
-  background: rgb(255, 255, 255, 0.4);
-  border-radius: 3px;
+.menu-bar ul li a:hover {
+  background: #2e4ead;
+  color: #fff;
 }
 
+/* SUBMENU */
 .sub-menu {
-  display: none;
   position: absolute;
   top: 100%;
   left: 0;
-  background: rgb(255,255, 255,0.4);
-  box-shadow: 0px 8px 16px rgba(0,0,0,0.1);
-  min-width: 150px;
-  z-index: 100;
+  background: rgba(255, 255, 255, 0.9);
+  border-radius: 10px;
+  display: none;
+  min-width: 120px;
+  padding: 10px;
 }
 
 .menu-bar ul li:hover .sub-menu {
@@ -89,69 +139,25 @@ body{
 }
 
 .sub-menu ul {
-  display: block; 
-  margin: 0;
-  padding: 0;
+  display: block;
 }
 
-.sub-menu ul li {
-  width: 100%;
-  margin: 0;
-  padding: 10px;
-  text-align: left;
+.sub-menu ul li a {
+  background: transparent;
+  padding: 5px;
 }
 
-.sub-menu ul li:hover {
-  background-color: #eee;
-}
-
-.contenedorjr{
-  background-color: rgba(255, 255, 255, 0.4); /* Un gris casi blanco */
-  padding: 30px 20px 0 50px;
-  border-bottom: 1px solid #eee;
-  border-radius: 10%;
-  margin-right: 30px;
-}
-
-.contenedorjr h3{
-  text-align: center;
-}
-
-.contenedorjr ol{
-  text-align: center;
-}
-
-.lista-iconos {
-  list-style: none; /* 👈 quita viñetas */
-  padding-left: 0;
-}
-
-.lista-iconos li {
-  margin-bottom: 10px;
-  font-size: 16px;
-  display: flex;
-  align-items: center;
-  gap: 10px;
-}
-
-.lista-iconos i {
-  color: #28a745; /* verde bonito */
-  font-size: 18px;
-}
-
-/*Inicio de la parte del CSS de las targetas*/
+/* FLIP CARDS */
 .flip-card {
-  background-color: transparent;
   perspective: 1000px;
-  height: 420px;
-  width: 100%;
+  height: 320px;
 }
 
 .flip-inner {
-  position: relative;
   width: 100%;
   height: 100%;
-  transition: transform 0.7s ease;
+  position: relative;
+  transition: transform .6s;
   transform-style: preserve-3d;
 }
 
@@ -159,55 +165,46 @@ body{
   transform: rotateY(180deg);
 }
 
-.front, .back {
+.front,
+.back {
   position: absolute;
   width: 100%;
   height: 100%;
   backface-visibility: hidden;
-  border-radius: 10px;
-  top: 0;
-  left: 0;
-  padding: 20px;
-  box-shadow: 0 4px 15px rgba(0,0,0,0.1);
-}
-
-.front {
-  background: #fff;
+  background: rgba(255, 255, 255, 0.35);
+  border-radius: 15px;
+  padding: 15px;
+  backdrop-filter: blur(6px);
 }
 
 .back {
-  background: #f8f9fa;
   transform: rotateY(180deg);
 }
 
-.card__img {
-  width: 120px;
-  height: 120px;
+.img-container {
+  width: 100%;
+  height: 140px;
   object-fit: cover;
-  border-radius: 40%;
-  margin: 0 auto 15px;
-  display: block;
+  border-radius: 10px;
 }
 
 .card__img-back {
-  width: 120px;
-  height: 120px;
-  border-radius: 50%;
-  margin: 0 auto 15px;
-  display: flex;
+  width: 90px;
+  height: 90px;
   object-fit: cover;
-}
-.front:hover .card__img {
-  transform: scale(1.05); /* zoom suave */
+  border-radius: 50%;
+  margin: 10px auto;
 }
 
-.img-container{
-width: 180px;
-height: 180px;
-margin: 0 auto 15px;
-display: flex;
-justify-content: center;
-align-items: center;
-background: #f5f5f5;
-border-radius: 15px;
+/* BOTÓN */
+.btn-outline-dark {
+  border-radius: 10px;
+}
+
+/* RESPONSIVE */
+@media(max-width:768px) {
+  .contenedor1 {
+    flex-direction: column;
+    text-align: center;
+  }
 }

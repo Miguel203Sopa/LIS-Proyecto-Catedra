@@ -4,90 +4,89 @@
 <head>
   <meta charset="UTF-8">
   <title>Donaciones</title>
+
   <link rel="stylesheet" href="/assets/css/styles.css">
-  <link rel="stylesheet" href="/assets/css/donaciones.css">
+  <link rel="stylesheet" href="/assets/css/donaciones.css?v=<?= time() ?>">
+
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
-  <style>
-    body {
-      margin: 0;
-      padding: 0;
-      background: transparent;
-    }
-  </style>
 </head>
 
 <body>
 
-  <section class="seccion-donar">
-    <div class="donar-banner">
-      <h1>TU AYUDA SALVA VIDAS</h1>
-      <p>Cada donación nos permite seguir rescatando, alimentando y curando a los ángeles de la calle.</p>
-    </div>
+  <section class="donaciones-page">
 
-    <div class="donar-contenedor">
-      <div class="donar-grid">
-
-        <div class="bloque-info">
-          <h2><i class="fas fa-hand-holding-heart"></i> Donaciones Bancarias</h2>
-          <hr>
-          <div class="cuenta-detalle">
-            <div class="col-img">
-              <P><strong>Banco Agricola</strong></P>
-              <p>Cuenta de Ahorros: 003100XXXXXX</p>
-            </div>
-            <div class="col-texto">
-              <img src="/assets/imagenes/BancoAgricola.jpg" alt="BancoAgricola" class="rounded float-end">
-            </div>
-          </div>
-          <div class="cuenta-detalle">
-            <div class="col-texto">
-              <p><strong>Banco Cuscatlán</strong></p>
-              <p>Cuenta Corriente: 012XXXXXXXX</p>
-            </div>
-            <div class="col-img">
-              <img src="/assets/imagenes/BancoCusca.jpg" alt="imagenCusc">
-            </div>
-          </div>
-          <br>
-          <p class="text-center">A nombre de: Fundación Somos Ángeles</p>
-        </div>
-
-        <div class="bloque-info">
-          <h2><i class="fas fa-hand-holding-heart"></i> Donaciones Viveres</h2>
-          <hr>
-          <p>Puedes donar concentrado (alimento), medicinas o artículos de limpieza directamente en nuestro refugio.</p>
-          <br>
-          <p><strong>Dirección depósitos de víveres:</strong></p>
-          <p>Ahuachapán en el municipio El Refugio, colonia El Ángel, El Salvador.</p>
-        </div>
-
-      </div>
-    </div>
-
-    <div class="donar-grid">
-      <div class="bloque-fin">
-        <h2><strong>Se un héroe</strong></h2>
-        <hr>
-        <p>Ayuda a estos angelitos a tener mejores condiciones en lo que encuentran un nuevo hogar.
-          Puedes contactarnos e informarte más sobre las donaciones:
+    <section class="hero-donaciones">
+      <div class="hero-overlay"></div>
+      <div class="hero-content">
+        <h1>Tu ayuda salva vidas</h1>
+        <p>
+          Cada donación permite alimentar, rescatar y dar atención médica
+          a animales en situación de abandono.
         </p>
-        <ul>
-          <li><a href="#"><span class="icon"><i class="fa-solid fa-phone"></i></span><span class="title"> Número
-                telefónico: 2555-5555</span></a></li>
-          <li><a href="#"><span class="icon"><i class="fa-solid fa-envelope"></i></span><span class="title">
-                Correotemporal@gmail.com</span></a></li>
-          <li><a href="#"><span class="icon"><i class="fa-brands fa-facebook"></i></span><span class="title">
-                Facebook</span></a></li>
-        </ul>
       </div>
-      <div class="bloque-info1">
-        <img src="/assets/imagenes/PinkBank.png" alt="donaciones">
+    </section>
+
+    <section class="contenedor-donaciones">
+
+      <div class="donacion-grid">
+
+        <div class="donacion-card">
+          <i class="fa-solid fa-hand-holding-heart"></i>
+          <h3>Donaciones bancarias</h3>
+
+          <div class="cuenta">
+            <strong>Banco Agrícola</strong>
+            <p>Cuenta de ahorros: 003100XXXXXX</p>
+          </div>
+
+          <div class="cuenta">
+            <strong>Banco Cuscatlán</strong>
+            <p>Cuenta corriente: 012XXXXXXXX</p>
+          </div>
+
+          <p class="footer-text">A nombre de: Fundación Somos Ángeles</p>
+        </div>
+
+        <div class="donacion-card">
+          <i class="fa-solid fa-box-open"></i>
+          <h3>Donaciones en especie</h3>
+
+          <p>
+            Puedes donar alimento, medicinas o artículos de limpieza directamente en nuestro refugio.
+          </p>
+
+          <p><strong>Dirección:</strong></p>
+          <p>Ahuachapán, municipio El Refugio, colonia El Ángel.</p>
+        </div>
+
       </div>
-    </div>
+
+      <div class="donacion-final">
+
+        <div class="donacion-texto">
+          <h2>Sé un héroe</h2>
+          <p>
+            Cada aporte, por pequeño que sea, ayuda a mejorar la vida de un animal que lo necesita.
+          </p>
+
+          <ul>
+            <li><i class="fa-solid fa-phone"></i>7682-8728</li>
+            <li><i class="fa-solid fa-envelope"></i><a href="mailto:SomosAngelesFundacion20@gmail.com">SomosAngelesFundacion20@gmail.com</a></li>
+            <li><i class="fa-brands fa-facebook"></i><a href="https://www.facebook.com/people/Fundacion-de-Proteccion-Animal-Somos-Angeles/100064739051366/" target="_blank">Facebook</a></li>
+          </ul>
+        </div>
+
+        <div class="donacion-img">
+          <img src="/assets/imagenes/PinkBank.png" alt="donaciones">
+        </div>
+
+      </div>
+
+    </section>
+
   </section>
 
-  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 
 </html>
