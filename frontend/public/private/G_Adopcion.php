@@ -82,41 +82,6 @@ $usuario = Auth::user();
 
         <div class="row g-4">
 
-            <!-- animal -->
-
-            <div class="col-md-6">
-
-                <label class="form-label">
-
-                    ID Animal
-
-                </label>
-
-                <input
-                    type="number"
-                    name="id_animal"
-                    class="form-control"
-                    required>
-
-            </div>
-
-            <!-- persona -->
-
-            <div class="col-md-6">
-
-                <label class="form-label">
-
-                    ID Persona
-
-                </label>
-
-                <input
-                    type="number"
-                    name="id_persona"
-                    class="form-control"
-                    required>
-
-            </div>
 
             <!-- estado -->
 
