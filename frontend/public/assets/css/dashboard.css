@@ -1,0 +1,66 @@
+body {
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: linear-gradient(135deg, #2e4ead, #4360b5);
+    font-family: 'Montserrat', sans-serif;
+}
+
+.panel-container {
+    margin: 100px auto;
+    width: 90%;
+    max-width: 1000px;
+    padding: 45px;
+
+    border-radius: 22px;
+
+    background: rgba(255, 255, 255, 0.35);
+    backdrop-filter: blur(14px);
+    -webkit-backdrop-filter: blur(14px);
+
+    border: 1px solid rgba(255, 255, 255, 0.6);
+
+    box-shadow: 0 25px 60px rgba(0, 0, 0, 0.25);
+    text-align: center;
+}
+
+.grid {
+    margin-top: 30px;
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 30px;
+}
+
+.card-btn {
+    padding: 40px 20px;
+    border-radius: 15px;
+    background: #f4f6fb;
+    transition: 0.3s;
+    cursor: pointer;
+    text-decoration: none;
+    color: #2e4ead;
+    border: 2px solid transparent;
+}
+
+.card-btn:hover {
+    transform: translateY(-5px);
+    border-color: #2e4ead;
+    background: #e9edfa;
+}
+
+.card-btn i {
+    font-size: 50px;
+    margin-bottom: 15px;
+}
+
+.card-btn span {
+    display: block;
+    font-size: 18px;
+    font-weight: 600;
+}
+
+.bienvenida {
+    font-size: 20px;
+    font-weight: 600;
+}
