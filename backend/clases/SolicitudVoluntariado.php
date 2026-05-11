@@ -9,16 +9,16 @@ class SolicitudVoluntariado
 
     /* ================= CREAR ================= */
 
-public function crear(
-    $nombre,
-    $apellido,
-    $dui,
-    $correo,
-    $telefono,
-    $motivacion
-) {
+    public function crear(
+        $nombre,
+        $apellido,
+        $dui,
+        $correo,
+        $telefono,
+        $motivacion
+    ) {
 
-    $stmt = $this->db->prepare("
+        $stmt = $this->db->prepare("
 
         INSERT INTO fundacion.solicitudes_voluntariado
         (
@@ -34,17 +34,17 @@ public function crear(
 
     ");
 
-    return $stmt->execute([
+        return $stmt->execute([
 
-        $nombre,
-        $apellido,
-        $dui,
-        $correo,
-        $telefono,
-        $motivacion
+            $nombre,
+            $apellido,
+            $dui,
+            $correo,
+            $telefono,
+            $motivacion
 
-    ]);
-}
+        ]);
+    }
 
 
     public function __construct()
@@ -93,6 +93,17 @@ public function crear(
             DELETE FROM fundacion.solicitudes_voluntariado
             WHERE id_solicitud = ?
         ");
+
+        return $stmt->execute([$id]);
+    }
+
+    public function aprobarConUsuario($id)
+    {
+        $stmt = $this->db->prepare("
+        UPDATE fundacion.solicitudes_voluntariado
+        SET estado = 'aprobado'
+        WHERE id_solicitud = ?
+    ");
 
         return $stmt->execute([$id]);
     }

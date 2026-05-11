@@ -151,4 +151,19 @@ class FirebaseClient
             "data" => $result
         ];
     }
+
+    public function createUser($email, $password)
+    {
+        $url =
+            "https://identitytoolkit.googleapis.com/v1/accounts:signUp?key="
+            . $this->apiKey;
+
+        $data = [
+            "email" => trim($email),
+            "password" => trim($password),
+            "returnSecureToken" => true
+        ];
+
+        return $this->request($url, $data);
+    }
 }

@@ -18,16 +18,19 @@ if (!is_numeric($id))
 switch ($method) {
 
 
-case 'POST':
+    case 'POST':
 
-    $data = json_decode(
-        file_get_contents("php://input"),
-        true
-    );
+        $data = json_decode(file_get_contents("php://input"), true);
 
-    $controller->store($data);
+        $uri = $_SERVER['REQUEST_URI'];
 
-    break;
+        if (str_contains($uri, '/aprobar')) {
+            $controller->aprobar($data);
+        } else {
+            $controller->store($data);
+        }
+
+        break;
 
     case 'GET':
 
