@@ -168,64 +168,60 @@ const API = "http://localhost:3001/api.php/adopciones";
         }
     });
 
-    /* ================= EDITAR ================= */
+  /* ================= EDITAR ================= */
 
-    async function editarAdopcion(id) {
+async function editarAdopcion(id) {
 
-        try {
+    try {
 
-            const res =
-                await fetch(`${API}?id=${id}`);
+        const res =
+            await fetch(`${API}?id=${id}`);
 
-            const json = await res.json();
+        const json =
+            await res.json();
 
-            const a = json.data;
+        const a =
+            json.data;
 
-            if (!a) {
+        if (!a) {
 
-                alert("Adopción no encontrada");
+            alert("Adopción no encontrada");
 
-                return;
-            }
-
-            editando = id;
-
-            const form =
-                document.getElementById(
-                    "formAdopcion"
-                );
-
-            form.id_animal.value =
-                a.id_animal ?? "";
-
-            form.id_persona.value =
-                a.id_persona ?? "";
-
-            form.estado.value =
-                a.estado ?? "en proceso";
-
-            form.observaciones.value =
-                a.observaciones ?? "";
-
-            document.querySelector(
-                "#formAdopcion button[type='submit']"
-            ).innerHTML = `
-                <i class="fa-solid fa-pen"></i>
-                Actualizar Adopción
-            `;
-
-            window.scrollTo({
-                top: document.body.scrollHeight,
-                behavior: "smooth"
-            });
-
-        } catch (error) {
-
-            console.error(error);
-
-            alert("Error cargando adopción");
+            return;
         }
+
+        document.getElementById(
+            "edit_id_adopcion"
+        ).value = a.id_adopcion;
+
+        document.getElementById(
+            "edit_id_animal"
+        ).value = a.id_animal;
+
+        document.getElementById(
+            "edit_id_persona"
+        ).value = a.id_persona;
+
+        document.getElementById(
+            "edit_estado"
+        ).value = a.estado;
+
+        document.getElementById(
+            "edit_observaciones"
+        ).value =
+            a.observaciones ?? "";
+
+        document.getElementById(
+            "modalEditarAdopcion"
+        ).showModal();
+
+    } catch (error) {
+
+        console.error(error);
+
+        alert("Error cargando adopción");
     }
+}
 
     /* ================= ELIMINAR ================= */
 
