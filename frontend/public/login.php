@@ -106,90 +106,76 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         Fundación Somos Ángeles - Login
     </title>
 
-    <meta
-        name="viewport"
-        content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <link
-        rel="stylesheet"
-        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
 
-    <link
-        href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css"
-        rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
 
-    <link
-        rel="stylesheet"
-        href="/assets/css/inicio.css">
+    <link rel="stylesheet" href="/assets/css/inicio.css">
 
 </head>
 
 <body>
 
-<div class="container">
+    <div class="container">
 
-    <div class="form-box login">
+        <div class="form-box login">
 
-        <form method="POST">
+            <form method="POST">
 
-            <h1>
-                <i class="fa-solid fa-paw"></i>
-                Login
-            </h1>
+                <h1>
+                    <i class="fa-solid fa-paw"></i>
+                    Login
+                </h1>
 
-            <p>Bienvenido nuevamente</p>
+                <p>Bienvenido nuevamente</p>
 
-            <hr>
+                <hr>
 
-            <?php if ($error): ?>
+                <?php if ($error): ?>
 
-                <div class="alert alert-danger">
+                    <div class="alert alert-danger">
 
-                    <?= htmlspecialchars($error) ?>
+                        <?= htmlspecialchars($error) ?>
+
+                    </div>
+
+                <?php endif; ?>
+
+                <div class="input-box">
+
+                    <input type="email" name="email" placeholder="Ingrese su correo" required>
+
+                    <i class="fa-solid fa-envelope"></i>
 
                 </div>
 
-            <?php endif; ?>
+                <div class="input-box">
 
-            <div class="input-box">
+                    <input type="password" name="password" placeholder="Ingrese contraseña" required>
 
-                <input
-                    type="email"
-                    name="email"
-                    placeholder="Ingrese su correo"
-                    required>
+                    <i class="fa-solid fa-lock"></i>
 
-                <i class="fa-solid fa-envelope"></i>
+                </div>
 
-            </div>
+                <button type="submit" class="btn">
 
-            <div class="input-box">
+                    <i class="fa-solid fa-right-to-bracket"></i>
 
-                <input
-                    type="password"
-                    name="password"
-                    placeholder="Ingrese contraseña"
-                    required>
+                    Iniciar sesión
 
-                <i class="fa-solid fa-lock"></i>
+                </button>
+                <a href="index.php" class="btn bg-secondary back-inline" style="margin-top: 10px;">
+                    <i class="fa-solid fa-arrow-left"></i> Volver
+                </a>
 
-            </div>
+            </form>
 
-            <button
-                type="submit"
-                class="btn">
-
-                <i class="fa-solid fa-right-to-bracket"></i>
-
-                Iniciar sesión
-
-            </button>
-
-        </form>
+        </div>
 
     </div>
 
-</div>
-
 </body>
+
 </html>

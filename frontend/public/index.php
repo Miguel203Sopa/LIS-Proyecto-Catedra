@@ -38,25 +38,11 @@
         <div class="logo">
           <img src="/assets/imagenes/Screenshot 2026-02-08 184854.png">
         </div>
-        <ul>
-          <li>
-            <a href="#" class="icon">
-              <i class="fa-solid fa-gear"></i>
-            </a>
-          </li>
-          <li>
-            <a href="#" class="icon">
-              <i class="fas fa-bell"></i>
-            </a>
-          </li>
-          <li>
-            <a href="#" class="icon">
-              <i class="fa-solid fa-user" data-bs-toggle="popover" data-bs-html="true"
-                data-bs-content="<a href='login.php'>Usuario</a><br><a href='#'>Iniciar sesión</a>">
-              </i>
-            </a>
-          </li>
-        </ul>
+        <div class="btn-login-container">
+          <a href="login.php" class="btn">
+            <i class="fa-solid fa-right-to-bracket"></i> Iniciar sesión
+          </a>
+        </div>
       </div>
     </div>
 
