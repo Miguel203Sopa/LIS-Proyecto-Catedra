@@ -39,6 +39,10 @@ switch ($resource) {
         require __DIR__ . "/../routes/usuarios.php";
         break;
 
+        case "solicitudes_voluntariado":
+        require __DIR__ . "/../routes/solicitudes_voluntariado.php";
+        break;
+  
     default:
 
         http_response_code(404);
