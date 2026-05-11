@@ -4,11 +4,29 @@ require_once __DIR__ . '/../controllers/AuthController.php';
 
 header("Content-Type: application/json");
 
-$method =
-    $_SERVER['REQUEST_METHOD'];
+$method = $_SERVER['REQUEST_METHOD'];
+
+/* ================= OBTENER URI ================= */
+
+$request =
+    $_SERVER['REQUEST_URI'];
+
+$request =
+    explode('/', trim($request, '/'));
+
+/*
+Ejemplo:
+
+/api.php/auth/login
+
+Resultado:
+[api.php, auth, login]
+*/
 
 $id =
-    $_GET['id'] ?? null;
+    end($request);
+
+/* ================= ROUTING ================= */
 
 switch ($method) {
 
@@ -27,7 +45,10 @@ switch ($method) {
                 "success" => false,
 
                 "message" =>
-                    "Ruta no encontrada"
+                    "Ruta no encontrada",
+
+                "debug_id" =>
+                    $id
             ]);
         }
 

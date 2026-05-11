@@ -49,4 +49,22 @@ estado VARCHAR(20) DEFAULT 'en proceso',
 observaciones TEXT
 );
 
+CREATE TABLE fundacion.solicitudes_voluntariado (
+    id_solicitud SERIAL PRIMARY KEY,
+    nombre VARCHAR(100) NOT NULL,
+    apellido VARCHAR(100) NOT NULL,
+    dui VARCHAR(10) NOT NULL,
+    correo VARCHAR(150) NOT NULL,
+    telefono VARCHAR(20) NOT NULL,
+    motivacion TEXT,
+    estado estado_solicitud DEFAULT 'pendiente',
+    fecha_creacion TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);
+
 CREATE INDEX idx_usuarios_uid ON usuarios(firebase_uid);
+
+CREATE TYPE estado_solicitud AS ENUM (
+    'pendiente',
+    'aprobado',
+    'rechazado'
+);

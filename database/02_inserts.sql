@@ -90,3 +90,12 @@ INSERT INTO fundacion.adopciones (id_animal,id_persona,id_usuario_aprobacion,obs
 ((SELECT id_animal FROM fundacion.animales WHERE nombre='Ariel'),(SELECT id_persona FROM fundacion.personas WHERE dui='04985273-1'),(SELECT id_usuario FROM fundacion.usuarios WHERE firebase_uid='xxx'),'Adopción aprobada'),
 ((SELECT id_animal FROM fundacion.animales WHERE nombre='Kika'),(SELECT id_persona FROM fundacion.personas WHERE dui='02637194-6'),(SELECT id_usuario FROM fundacion.usuarios WHERE firebase_uid='q vivan las pajas'),'Entrega programada');
 
+
+INSERT INTO fundacion.solicitudes_voluntariado
+(nombre, apellido, dui, correo, telefono, motivacion)
+VALUES
+('Lucía','Martínez Herrera','03461728-9','lu.mtzh@gmail.com','7836-2547','Deseo contribuir al bienestar de los animales y apoyar en rescates y cuidados básicos.'),
+('César','Benítez Alfaro','09718243-5','csr.benitalf@icloud.com','6153-7984','Me interesa ser voluntario para ayudar en campañas de adopción y eventos.'),
+('Natalia','Soriano Pacheco','06293875-2','naty.soripach@gmail.com','7694-1823','Quiero colaborar activamente en la fundación y aprender sobre rescate animal.'),
+('Óscar','Lemus Coreas','01847362-7','oscar.lemco@outlook.com','6328-5047','Tengo experiencia previa con mascotas y quiero apoyar en su cuidado.'),
+('Rebeca','Peraza Romero','07524916-4','rebe.perrom@gmail.com','7541-8362','Me gustaría formar parte del equipo de voluntariado y ayudar en lo que sea necesario.');
