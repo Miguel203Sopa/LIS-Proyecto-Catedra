@@ -1,6 +1,6 @@
 
 
-        const API = "http://backend_app/api.php/animales";
+    const API = "http://localhost:3001/api.php/animales";
 
         let editando = null;
 

@@ -1,5 +1,5 @@
+const API = "http://localhost:3001/api.php/adopciones";
 
-    const API = "/api.php/adopciones";
 
     let editando = null;
 
