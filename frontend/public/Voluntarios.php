@@ -64,42 +64,178 @@
             <p><strong>¿Te gustaría unirte?</strong></p>
             <button id="btn-abrir-modal" class="btn btn-primary">Reguistrate</button>
 
-            <dialog class="section" id="modal">
-              <div class="section-title">Información personal</div><hr>
-              <div class="grid-2">
-                <div class="field">
-                  <label for="nombre">Nombre <span class="req">*</span></label>
-                  <input type="text" id="nombre" placeholder="Ingrese un nombre">
-                  <br>
-                </div>
-                <div class="field">
-                  <label for="apellido">Apellido <span class="req">*</span></label>
-                  <input type="text" id="apellido" placeholder="Ingrese un apellido">
-                  <br>
-                </div>
-                <div class="field">
-                  <label for="telefono">Teléfono <span class="req">*</span></label>
-                  <input type="tel" id="telefono" placeholder="7000-0000">
-                  <br>
-                </div>
-                <div class="field span-2">
-                  <label for="email">Ingrese un correo electrónico <span class="req">*</span></label>
-                  <input type="email" id="email" placeholder="correo@ejemplo.com">
-                  <br>
-                </div>
-                <div class="field">
-                  <label for="password">Ingrese una contraseña valida: </label>
-                  <input type="password" id="password" placeholder="contraseña segura">
-                  <br>
-                </div>
-                <div class="field">
-                  <label for="password">Confirmar contraseña: </label>
-                  <input type="password" placeholder="Repetir contraseña valida">
-                </div>
-                <button class="btn btn-primary" onclick="nuevo()" id="btn-cerrar-modal">Nuevo registro</button>
-                <button class="btn btn-primary" ></button>
-              </div>
-            </dialog>
+              <dialog class="section" id="modal">
+
+    <form id="formVoluntario">
+
+        <div class="section-title">
+
+            Información personal
+
+        </div>
+
+        <hr>
+
+        <div class="grid-2">
+
+            <!-- nombre -->
+
+            <div class="field">
+
+                <label>
+
+                    Nombre
+                    <span class="req">*</span>
+
+                </label>
+
+                <input
+                    type="text"
+                    name="nombre"
+                    required
+                    placeholder="Ingrese un nombre">
+
+            </div>
+
+            <!-- apellido -->
+
+            <div class="field">
+
+                <label>
+
+                    Apellido
+                    <span class="req">*</span>
+
+                </label>
+
+                <input
+                    type="text"
+                    name="apellido"
+                    required
+                    placeholder="Ingrese un apellido">
+
+            </div>
+
+            <!-- telefono -->
+
+            <div class="field">
+
+                <label>
+
+                    Teléfono
+                    <span class="req">*</span>
+
+                </label>
+
+                <input
+                    type="tel"
+                    name="telefono"
+                    required
+                    placeholder="7000-0000">
+
+            </div>
+
+            <!-- dui -->
+
+            <div class="field">
+
+                <label>
+
+                    DUI
+
+                </label>
+
+                <input
+                    type="text"
+                    name="dui"
+                    placeholder="00000000-0">
+
+            </div>
+
+            <!-- correo -->
+
+            <div class="field span-2">
+
+                <label>
+
+                    Correo electrónico
+                    <span class="req">*</span>
+
+                </label>
+
+                <input
+                    type="email"
+                    name="correo"
+                    required
+                    placeholder="correo@ejemplo.com">
+
+            </div>
+
+            <!-- password -->
+
+            <div class="field">
+
+                <label>
+
+                    Contraseña
+
+                </label>
+
+                <input
+                    type="password"
+                    id="password"
+                    required
+                    placeholder="Contraseña segura">
+
+            </div>
+
+            <!-- confirmar -->
+
+            <div class="field">
+
+                <label>
+
+                    Confirmar contraseña
+
+                </label>
+
+                <input
+                    type="password"
+                    id="confirmPassword"
+                    required
+                    placeholder="Repetir contraseña">
+
+            </div>
+
+            <!-- botones -->
+
+            <div class="field span-2 d-flex gap-2 mt-3">
+
+                <button
+                    type="submit"
+                    class="btn btn-primary">
+
+                    Nuevo registro
+
+                </button>
+
+                <button
+                    type="button"
+                    class="btn btn-secondary"
+                    id="btn-cerrar-modal">
+
+                    Cancelar
+
+                </button>
+
+            </div>
+
+        </div>
+
+    </form>
+
+</dialog>            
+              
             <script src="/assets/js/modal.js"></script>
           </div>
         </div>
