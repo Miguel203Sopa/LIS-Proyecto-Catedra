@@ -6,6 +6,47 @@ class SolicitudVoluntariado
 {
     private $db;
 
+
+    /* ================= CREAR ================= */
+
+public function crear(
+    $nombre,
+    $apellido,
+    $dui,
+    $correo,
+    $telefono,
+    $motivacion
+) {
+
+    $stmt = $this->db->prepare("
+
+        INSERT INTO fundacion.solicitudes_voluntariado
+        (
+            nombre,
+            apellido,
+            dui,
+            correo,
+            telefono,
+            motivacion
+        )
+        VALUES
+        (?, ?, ?, ?, ?, ?)
+
+    ");
+
+    return $stmt->execute([
+
+        $nombre,
+        $apellido,
+        $dui,
+        $correo,
+        $telefono,
+        $motivacion
+
+    ]);
+}
+
+
     public function __construct()
     {
         $this->db = Conexion::conectar();

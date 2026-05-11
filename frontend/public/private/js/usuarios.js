@@ -3,12 +3,6 @@ const API = "http://localhost:3001/api.php/usuarios";
 const tabla =
     document.getElementById("tablaUsuarios");
 
-const modal =
-    document.getElementById("modalUsuario");
-
-const modalPassword =
-    document.getElementById("modalPassword");
-
 window.onload = () => {
     cargarUsuarios();
 };
@@ -17,97 +11,84 @@ window.onload = () => {
 
 async function cargarUsuarios() {
 
-    const res = await fetch(API);
+    try {
 
-    const json = await res.json();
+        const res = await fetch(API);
 
-    tabla.innerHTML = "";
+        const json = await res.json();
 
-    json.data.forEach(usuario => {
+        tabla.innerHTML = "";
 
-        tabla.innerHTML += `
-            <tr>
+        json.data.forEach(usuario => {
 
-                <td>${usuario.id_usuario}</td>
+            tabla.innerHTML += `
+                <tr>
 
-                <td>${usuario.id_persona}</td>
+                    <td>${usuario.id_usuario}</td>
 
-                <td>${usuario.firebase_uid}</td>
+                    <td>
+                        ${usuario.nombre ?? ''} 
+                        ${usuario.apellido ?? ''}
+                    </td>
 
-                <td>${usuario.rol}</td>
+                    <td>${usuario.correo ?? ''}</td>
 
-                <td>
-                    ${usuario.activo ? 'Activo' : 'Inactivo'}
-                </td>
+                    <td>${usuario.rol}</td>
 
-                <td>
+                    <td>
+                        ${usuario.activo ? 'Activo' : 'Inactivo'}
+                    </td>
 
-                    <button
-                        class="btn btn-warning btn-sm"
-                        onclick='editarUsuario(${JSON.stringify(usuario)})'>
+                    <td>
 
-                        <i class="fa-solid fa-pen"></i>
+                        <button
+                            class="btn btn-warning btn-sm"
+                            onclick='editarUsuario(${JSON.stringify(usuario)})'>
 
-                    </button>
+                            <i class="fa-solid fa-pen"></i>
 
-                    <button
-                        class="btn btn-primary btn-sm"
-                        onclick='abrirPassword(${usuario.id_usuario})'>
+                        </button>
 
-                        <i class="fa-solid fa-key"></i>
+                        <button
+                            class="btn btn-primary btn-sm"
+                            onclick='abrirPassword(${usuario.id_usuario})'>
 
-                    </button>
+                            <i class="fa-solid fa-key"></i>
 
-                    <button
-                        class="btn btn-danger btn-sm"
-                        onclick='eliminarUsuario(${usuario.id_usuario})'>
+                        </button>
 
-                        <i class="fa-solid fa-trash"></i>
+                        <button
+                            class="btn btn-danger btn-sm"
+                            onclick='eliminarUsuario(${usuario.id_usuario})'>
 
-                    </button>
+                            <i class="fa-solid fa-trash"></i>
 
-                </td>
+                        </button>
 
-            </tr>
-        `;
-    });
-}
+                    </td>
 
-/* ================= MODAL ================= */
+                </tr>
+            `;
+        });
 
-function abrirModal() {
+    } catch (error) {
 
-    document.getElementById("tituloModal").innerText =
-        "Nuevo Usuario";
+        console.error(error);
 
-    document.getElementById("id_usuario").value = "";
-    document.getElementById("id_persona").value = "";
-    document.getElementById("firebase_uid").value = "";
-    document.getElementById("rol").value = "voluntario";
-    document.getElementById("activo").value = "true";
-
-    modal.showModal();
-}
-
-function cerrarModal() {
-    modal.close();
+        alert("Error cargando usuarios");
+    }
 }
 
 /* ================= EDITAR ================= */
 
 function editarUsuario(usuario) {
 
-    document.getElementById("tituloModal").innerText =
-        "Editar Usuario";
+    document.getElementById(
+        "contenedorFormUsuario"
+    ).style.display = "block";
 
     document.getElementById("id_usuario").value =
         usuario.id_usuario;
-
-    document.getElementById("id_persona").value =
-        usuario.id_persona;
-
-    document.getElementById("firebase_uid").value =
-        usuario.firebase_uid;
 
     document.getElementById("rol").value =
         usuario.rol;
@@ -115,106 +96,147 @@ function editarUsuario(usuario) {
     document.getElementById("activo").value =
         usuario.activo ? "true" : "false";
 
-    modal.showModal();
+    document.getElementById(
+        "contenedorPassword"
+    ).style.display = "none";
+
+    window.scrollTo({
+        top: document.body.scrollHeight,
+        behavior: "smooth"
+    });
+}
+
+/* ================= CERRAR FORM ================= */
+
+function cerrarFormulario() {
+
+    document.getElementById(
+        "contenedorFormUsuario"
+    ).style.display = "none";
 }
 
 /* ================= GUARDAR ================= */
 
 async function guardarUsuario() {
 
-    const id =
-        document.getElementById("id_usuario").value;
+    try {
 
-    const data = {
+        const id =
+            document.getElementById("id_usuario").value;
 
-        id_persona:
-            document.getElementById("id_persona").value,
+        const data = {
 
-        firebase_uid:
-            document.getElementById("firebase_uid").value,
+            rol:
+                document.getElementById("rol").value,
 
-        rol:
-            document.getElementById("rol").value,
+            activo:
+                document.getElementById("activo").value === "true"
+        };
 
-        activo:
-            document.getElementById("activo").value === "true"
-    };
+        const res = await fetch(`${API}/${id}`, {
 
-    let method = "POST";
+            method: "PUT",
 
-    let url = API;
+            headers: {
+                "Content-Type": "application/json"
+            },
 
-    if (id) {
+            body: JSON.stringify(data)
+        });
 
-        method = "PUT";
+        const json = await res.json();
 
-        url += `/${id}`;
+        if (!json.success) {
+
+            alert("Error actualizando usuario");
+
+            return;
+        }
+
+        alert("Usuario actualizado");
+
+        cerrarFormulario();
+
+        cargarUsuarios();
+
+    } catch (error) {
+
+        console.error(error);
+
+        alert("Error guardando usuario");
     }
-
-    const res = await fetch(url, {
-
-        method,
-
-        headers: {
-            "Content-Type": "application/json"
-        },
-
-        body: JSON.stringify(data)
-    });
-
-    const json = await res.json();
-
-    if (!json.success) {
-        alert("Error");
-        return;
-    }
-
-    alert("Usuario guardado");
-
-    cerrarModal();
-
-    cargarUsuarios();
 }
 
 /* ================= ELIMINAR ================= */
 
 async function eliminarUsuario(id) {
 
-    if (!confirm("¿Eliminar usuario?")) return;
-
-    const res = await fetch(`${API}/${id}`, {
-        method: "DELETE"
-    });
-
-    const json = await res.json();
-
-    if (!json.success) {
-
-        alert("Error eliminando");
-
+    if (!confirm("¿Eliminar usuario?")) {
         return;
     }
 
-    alert("Usuario eliminado");
+    try {
 
-    cargarUsuarios();
+        const res = await fetch(`${API}/${id}`, {
+            method: "DELETE"
+        });
+
+        const json = await res.json();
+
+        if (!json.success) {
+
+            alert("Error eliminando usuario");
+
+            return;
+        }
+
+        alert("Usuario eliminado");
+
+        cargarUsuarios();
+
+    } catch (error) {
+
+        console.error(error);
+
+        alert("Error eliminando usuario");
+    }
 }
 
 /* ================= PASSWORD ================= */
 
 function abrirPassword(id) {
 
-    document.getElementById("password_user_id").value =
-        id;
+    document.getElementById(
+        "contenedorPassword"
+    ).style.display = "block";
 
-    document.getElementById("password").value = "";
-    document.getElementById("confirmPassword").value = "";
+    document.getElementById(
+        "contenedorFormUsuario"
+    ).style.display = "none";
 
-    modalPassword.showModal();
+    document.getElementById(
+        "password_user_id"
+    ).value = id;
+
+    document.getElementById(
+        "password"
+    ).value = "";
+
+    document.getElementById(
+        "confirmPassword"
+    ).value = "";
+
+    window.scrollTo({
+        top: document.body.scrollHeight,
+        behavior: "smooth"
+    });
 }
 
 function cerrarPassword() {
-    modalPassword.close();
+
+    document.getElementById(
+        "contenedorPassword"
+    ).style.display = "none";
 }
 
 async function cambiarPassword() {
@@ -231,10 +253,6 @@ async function cambiarPassword() {
 
         return;
     }
-
-    alert(
-        "Aquí luego conectarás Firebase Admin SDK"
-    );
 
     cerrarPassword();
 }

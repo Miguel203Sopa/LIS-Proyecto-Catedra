@@ -17,6 +17,18 @@ if (!is_numeric($id))
 
 switch ($method) {
 
+
+case 'POST':
+
+    $data = json_decode(
+        file_get_contents("php://input"),
+        true
+    );
+
+    $controller->store($data);
+
+    break;
+
     case 'GET':
 
         if ($id) {

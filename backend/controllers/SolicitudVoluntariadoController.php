@@ -6,6 +6,32 @@ class SolicitudVoluntariadoController
 {
     private $model;
 
+
+    /* ================= CREAR ================= */
+
+public function store($data)
+{
+    $ok = $this->model->crear(
+
+        $data['nombre'],
+        $data['apellido'],
+        $data['dui'],
+        $data['correo'],
+        $data['telefono'],
+        $data['motivacion'] ?? null
+
+    );
+
+    echo json_encode([
+
+        "success" => $ok,
+
+        "message" => $ok
+            ? "Solicitud enviada correctamente"
+            : "Error enviando solicitud"
+    ]);
+}
+
     public function __construct()
     {
         $this->model = new SolicitudVoluntariado();
