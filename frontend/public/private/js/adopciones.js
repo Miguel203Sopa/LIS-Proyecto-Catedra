@@ -272,3 +272,99 @@ async function editarAdopcion(id) {
         "DOMContentLoaded",
         cargarAdopciones
     );
+
+    /* ================= CERRAR MODAL ================= */
+
+function cerrarModalAdopcion() {
+
+    document.getElementById(
+        "modalEditarAdopcion"
+    ).close();
+}
+
+/* ================= GUARDAR CAMBIOS MODAL ================= */
+
+document.getElementById(
+    "formEditarAdopcion"
+).addEventListener(
+    "submit",
+    async (e) => {
+
+    e.preventDefault();
+
+    try {
+
+        const id =
+            document.getElementById(
+                "edit_id_adopcion"
+            ).value;
+
+        const body = {
+
+            id_animal:
+                document.getElementById(
+                    "edit_id_animal"
+                ).value,
+
+            id_persona:
+                document.getElementById(
+                    "edit_id_persona"
+                ).value,
+
+            estado:
+                document.getElementById(
+                    "edit_estado"
+                ).value,
+
+            observaciones:
+                document.getElementById(
+                    "edit_observaciones"
+                ).value
+        };
+
+        const res = await fetch(
+            `${API}?id=${id}`,
+            {
+
+                method: "PUT",
+
+                headers: {
+                    "Content-Type":
+                        "application/json"
+                },
+
+                body:
+                    JSON.stringify(body)
+            }
+        );
+
+        const json =
+            await res.json();
+
+        if (json.success) {
+
+            alert(
+                "Adopción actualizada"
+            );
+
+            cerrarModalAdopcion();
+
+            cargarAdopciones();
+
+        } else {
+
+            alert(
+                json.message ||
+                "Error actualizando"
+            );
+        }
+
+    } catch (error) {
+
+        console.error(error);
+
+        alert(
+            "Error actualizando adopción"
+        );
+    }
+});
