@@ -88,7 +88,6 @@ class Usuario
 
     public function actualizar(
         $id,
-        $firebase_uid,
         $rol,
         $activo
     ) {
@@ -96,14 +95,12 @@ class Usuario
         $stmt = $this->db->prepare("
             UPDATE fundacion.usuarios
             SET
-                firebase_uid = ?,
                 rol = ?,
                 activo = ?
             WHERE id_usuario = ?
         ");
 
         return $stmt->execute([
-            $firebase_uid,
             $rol,
             $activo,
             $id

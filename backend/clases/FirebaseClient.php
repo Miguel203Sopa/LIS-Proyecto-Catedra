@@ -1,79 +1,138 @@
 <?php
 
-class Session
+class FirebaseClient
 {
-    public static function start()
-    {
-        if (session_status() === PHP_SESSION_NONE) {
+    private $apiKey =
+        "AIzaSyBLqzMYMMjX6o1xiu9YBwe-RrzhnD7Zry4";
 
-            session_start();
-        }
-    }
+    public function signIn(
+        $email,
+        $password
+    ) {
 
-    public static function login($usuario)
-    {
-        self::start();
+        $url =
+            "https://identitytoolkit.googleapis.com/v1/accounts:signInWithPassword?key="
+            . $this->apiKey;
 
-        $_SESSION['usuario'] = [
+        $data = [
 
-            "id" =>
-                $usuario['id'],
+            "email" => trim($email),
 
-            "uid" =>
-                $usuario['uid'],
+            "password" => trim($password),
 
-            "nombre" =>
-                $usuario['nombre'],
-
-            "apellido" =>
-                $usuario['apellido'],
-
-            "correo" =>
-                $usuario['correo'],
-
-            "rol" =>
-                $usuario['rol']
+            "returnSecureToken" => true
         ];
-    }
 
-    public static function logout()
-    {
-        self::start();
+        $options = [
 
-        $_SESSION = [];
+            "http" => [
 
-        session_unset();
+                "header" =>
+                    "Content-Type: application/json\r\n",
 
-        if (ini_get("session.use_cookies")) {
+                "method" => "POST",
 
-            $params =
-                session_get_cookie_params();
+                "content" =>
+                    json_encode($data),
 
-            setcookie(
-                session_name(),
-                '',
-                time() - 42000,
-                $params["path"],
-                $params["domain"],
-                $params["secure"],
-                $params["httponly"]
+                "ignore_errors" => true,
+
+                "timeout" => 30
+            ]
+        ];
+
+        $context =
+            stream_context_create($options);
+
+        $response =
+            @file_get_contents(
+                $url,
+                false,
+                $context
             );
+
+        /* ================= ERROR DE CONEXION ================= */
+
+        if ($response === false) {
+
+            $error =
+                error_get_last();
+
+            return [
+
+                "success" => false,
+
+                "message" =>
+                    "Error conectando con Firebase",
+
+                "debug" =>
+                    $error
+            ];
         }
 
-        session_destroy();
-    }
+        /* ================= DECODIFICAR ================= */
 
-    public static function user()
-    {
-        self::start();
+        $result =
+            json_decode(
+                $response,
+                true
+            );
 
-        return $_SESSION['usuario'] ?? null;
-    }
+        /* ================= RESPUESTA INVALIDA ================= */
 
-    public static function check()
-    {
-        self::start();
+        if (!$result) {
 
-        return isset($_SESSION['usuario']);
+            return [
+
+                "success" => false,
+
+                "message" =>
+                    "Respuesta inválida de Firebase",
+
+                "raw_response" =>
+                    $response
+            ];
+        }
+
+        /* ================= ERROR FIREBASE ================= */
+
+        if (isset($result['error'])) {
+
+            return [
+
+                "success" => false,
+
+                "message" =>
+                    $result['error']['message'] ?? 'Error Firebase',
+
+                "firebase_error" =>
+                    $result['error']
+            ];
+        }
+
+        /* ================= LOGIN OK ================= */
+
+        return [
+
+            "success" => true,
+
+            "data" => [
+
+                "localId" =>
+                    $result['localId'] ?? null,
+
+                "email" =>
+                    $result['email'] ?? null,
+
+                "idToken" =>
+                    $result['idToken'] ?? null,
+
+                "refreshToken" =>
+                    $result['refreshToken'] ?? null,
+
+                "expiresIn" =>
+                    $result['expiresIn'] ?? null
+            ]
+        ];
     }
 }

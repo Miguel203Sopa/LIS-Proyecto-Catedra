@@ -1,79 +1,76 @@
 const API = "http://localhost:3001/api.php/usuarios";
 
-const tabla = document.getElementById("tablaUsuarios");
+const tabla =
+    document.getElementById("tablaUsuarios");
 
-const modal = document.getElementById("modalUsuario");
+const modal =
+    document.getElementById("modalUsuario");
 
-/* ================= INIT ================= */
+const modalPassword =
+    document.getElementById("modalPassword");
 
 window.onload = () => {
     cargarUsuarios();
 };
 
-/* ================= CARGAR ================= */
+/* ================= LISTAR ================= */
 
 async function cargarUsuarios() {
 
-    try {
+    const res = await fetch(API);
 
-        const res = await fetch(API);
+    const json = await res.json();
 
-        const json = await res.json();
+    tabla.innerHTML = "";
 
-        const usuarios = json.data || [];
+    json.data.forEach(usuario => {
 
-        tabla.innerHTML = "";
+        tabla.innerHTML += `
+            <tr>
 
-        usuarios.forEach(usuario => {
+                <td>${usuario.id_usuario}</td>
 
-            tabla.innerHTML += `
-                <tr>
+                <td>${usuario.id_persona}</td>
 
-                    <td>${usuario.id_usuario}</td>
+                <td>${usuario.firebase_uid}</td>
 
-                    <td>
-                        ${usuario.nombre}
-                        ${usuario.apellido}
-                    </td>
+                <td>${usuario.rol}</td>
 
-                    <td>${usuario.correo}</td>
+                <td>
+                    ${usuario.activo ? 'Activo' : 'Inactivo'}
+                </td>
 
-                    <td>${usuario.firebase_uid ?? ''}</td>
+                <td>
 
-                    <td>${usuario.rol}</td>
+                    <button
+                        class="btn btn-warning btn-sm"
+                        onclick='editarUsuario(${JSON.stringify(usuario)})'>
 
-                    <td>
-                        ${usuario.activo ? 'Sí' : 'No'}
-                    </td>
+                        <i class="fa-solid fa-pen"></i>
 
-                    <td class="acciones">
+                    </button>
 
-                        <button 
-                            class="btn-editar"
-                            onclick='editarUsuario(${JSON.stringify(usuario)})'>
+                    <button
+                        class="btn btn-primary btn-sm"
+                        onclick='abrirPassword(${usuario.id_usuario})'>
 
-                            Editar
-                        </button>
+                        <i class="fa-solid fa-key"></i>
 
-                        <button 
-                            class="btn-eliminar"
-                            onclick='eliminarUsuario(${usuario.id_usuario})'>
+                    </button>
 
-                            Eliminar
-                        </button>
+                    <button
+                        class="btn btn-danger btn-sm"
+                        onclick='eliminarUsuario(${usuario.id_usuario})'>
 
-                    </td>
+                        <i class="fa-solid fa-trash"></i>
 
-                </tr>
-            `;
-        });
+                    </button>
 
-    } catch (error) {
+                </td>
 
-        console.error(error);
-
-        alert("Error cargando usuarios");
-    }
+            </tr>
+        `;
+    });
 }
 
 /* ================= MODAL ================= */
@@ -83,26 +80,17 @@ function abrirModal() {
     document.getElementById("tituloModal").innerText =
         "Nuevo Usuario";
 
-    limpiarFormulario();
+    document.getElementById("id_usuario").value = "";
+    document.getElementById("id_persona").value = "";
+    document.getElementById("firebase_uid").value = "";
+    document.getElementById("rol").value = "voluntario";
+    document.getElementById("activo").value = "true";
 
     modal.showModal();
 }
 
 function cerrarModal() {
     modal.close();
-}
-
-function limpiarFormulario() {
-
-    document.getElementById("id_usuario").value = "";
-
-    document.getElementById("id_persona").value = "";
-
-    document.getElementById("firebase_uid").value = "";
-
-    document.getElementById("rol").value = "voluntario";
-
-    document.getElementById("activo").value = "true";
 }
 
 /* ================= EDITAR ================= */
@@ -119,7 +107,7 @@ function editarUsuario(usuario) {
         usuario.id_persona;
 
     document.getElementById("firebase_uid").value =
-        usuario.firebase_uid ?? "";
+        usuario.firebase_uid;
 
     document.getElementById("rol").value =
         usuario.rol;
@@ -134,102 +122,119 @@ function editarUsuario(usuario) {
 
 async function guardarUsuario() {
 
-    try {
+    const id =
+        document.getElementById("id_usuario").value;
 
-        const id =
-            document.getElementById("id_usuario").value;
+    const data = {
 
-        const datos = {
+        id_persona:
+            document.getElementById("id_persona").value,
 
-            id_persona:
-                document.getElementById("id_persona").value,
+        firebase_uid:
+            document.getElementById("firebase_uid").value,
 
-            firebase_uid:
-                document.getElementById("firebase_uid").value,
+        rol:
+            document.getElementById("rol").value,
 
-            rol:
-                document.getElementById("rol").value,
+        activo:
+            document.getElementById("activo").value === "true"
+    };
 
-            activo:
-                document.getElementById("activo").value === "true"
-        };
+    let method = "POST";
 
-        let url = API;
+    let url = API;
 
-        let method = "POST";
+    if (id) {
 
-        if (id) {
+        method = "PUT";
 
-            url = `${API}/${id}`;
-
-            method = "PUT";
-        }
-
-        const res = await fetch(url, {
-
-            method: method,
-
-            headers: {
-                "Content-Type": "application/json"
-            },
-
-            body: JSON.stringify(datos)
-        });
-
-        const json = await res.json();
-
-        if (!json.success) {
-
-            alert(json.message);
-
-            return;
-        }
-
-        alert(json.message);
-
-        cerrarModal();
-
-        cargarUsuarios();
-
-    } catch (error) {
-
-        console.error(error);
-
-        alert("Error guardando usuario");
+        url += `/${id}`;
     }
+
+    const res = await fetch(url, {
+
+        method,
+
+        headers: {
+            "Content-Type": "application/json"
+        },
+
+        body: JSON.stringify(data)
+    });
+
+    const json = await res.json();
+
+    if (!json.success) {
+        alert("Error");
+        return;
+    }
+
+    alert("Usuario guardado");
+
+    cerrarModal();
+
+    cargarUsuarios();
 }
 
 /* ================= ELIMINAR ================= */
 
 async function eliminarUsuario(id) {
 
-    if (!confirm("¿Eliminar usuario?")) {
+    if (!confirm("¿Eliminar usuario?")) return;
+
+    const res = await fetch(`${API}/${id}`, {
+        method: "DELETE"
+    });
+
+    const json = await res.json();
+
+    if (!json.success) {
+
+        alert("Error eliminando");
+
         return;
     }
 
-    try {
+    alert("Usuario eliminado");
 
-        const res = await fetch(`${API}/${id}`, {
-            method: "DELETE"
-        });
+    cargarUsuarios();
+}
 
-        const json = await res.json();
+/* ================= PASSWORD ================= */
 
-        if (!json.success) {
+function abrirPassword(id) {
 
-            alert(json.message);
+    document.getElementById("password_user_id").value =
+        id;
 
-            return;
-        }
+    document.getElementById("password").value = "";
+    document.getElementById("confirmPassword").value = "";
 
-        alert(json.message);
+    modalPassword.showModal();
+}
 
-        cargarUsuarios();
+function cerrarPassword() {
+    modalPassword.close();
+}
 
-    } catch (error) {
+async function cambiarPassword() {
 
-        console.error(error);
+    const pass =
+        document.getElementById("password").value;
 
-        alert("Error eliminando usuario");
+    const confirm =
+        document.getElementById("confirmPassword").value;
+
+    if (pass !== confirm) {
+
+        alert("Las contraseñas no coinciden");
+
+        return;
     }
+
+    alert(
+        "Aquí luego conectarás Firebase Admin SDK"
+    );
+
+    cerrarPassword();
 }

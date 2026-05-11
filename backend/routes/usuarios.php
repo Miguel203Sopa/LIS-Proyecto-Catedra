@@ -2,6 +2,8 @@
 
 require_once __DIR__ . "/../controllers/UsuarioController.php";
 
+header("Content-Type: application/json");
+
 $controller = new UsuarioController();
 
 $data = json_decode(
@@ -23,21 +25,13 @@ switch ($method) {
 
     case 'POST':
 
-        $controller->store([
-            "id_persona" => $data["id_persona"] ?? null,
-            "firebase_uid" => $data["firebase_uid"] ?? null,
-            "rol" => $data["rol"] ?? null
-        ]);
+        $controller->store($data);
 
         break;
 
     case 'PUT':
 
-        $controller->update($id, [
-            "firebase_uid" => $data["firebase_uid"] ?? null,
-            "rol" => $data["rol"] ?? null,
-            "activo" => $data["activo"] ?? true
-        ]);
+        $controller->update($id, $data);
 
         break;
 

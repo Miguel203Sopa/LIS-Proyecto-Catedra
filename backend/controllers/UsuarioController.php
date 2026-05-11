@@ -11,148 +11,54 @@ class UsuarioController
         $this->model = new Usuario();
     }
 
-    /* ================= LISTAR ================= */
-
     public function index()
     {
-        header("Content-Type: application/json");
-
-        try {
-
-            $usuarios = $this->model->listar();
-
-            echo json_encode([
-                "success" => true,
-                "data" => $usuarios
-            ]);
-
-        } catch (Exception $e) {
-
-            http_response_code(500);
-
-            echo json_encode([
-                "success" => false,
-                "message" => $e->getMessage()
-            ]);
-        }
+        echo json_encode([
+            "success" => true,
+            "data" => $this->model->listar()
+        ]);
     }
-
-    /* ================= OBTENER ================= */
 
     public function show($id)
     {
-        header("Content-Type: application/json");
-
-        try {
-
-            $usuario = $this->model->obtener($id);
-
-            echo json_encode([
-                "success" => true,
-                "data" => $usuario
-            ]);
-
-        } catch (Exception $e) {
-
-            http_response_code(500);
-
-            echo json_encode([
-                "success" => false,
-                "message" => $e->getMessage()
-            ]);
-        }
+        echo json_encode([
+            "success" => true,
+            "data" => $this->model->obtener($id)
+        ]);
     }
-
-    /* ================= CREAR ================= */
 
     public function store($data)
     {
-        header("Content-Type: application/json");
+        $ok = $this->model->crear(
+            $data['id_persona'],
+            $data['firebase_uid'],
+            $data['rol']
+        );
 
-        try {
-
-            $ok = $this->model->crear(
-                $data['id_persona'],
-                $data['firebase_uid'],
-                $data['rol']
-            );
-
-            echo json_encode([
-                "success" => $ok,
-                "message" => $ok
-                    ? "Usuario creado"
-                    : "Error al crear usuario"
-            ]);
-
-        } catch (Exception $e) {
-
-            http_response_code(500);
-
-            echo json_encode([
-                "success" => false,
-                "message" => $e->getMessage()
-            ]);
-        }
+        echo json_encode([
+            "success" => $ok
+        ]);
     }
-
-    /* ================= ACTUALIZAR ================= */
 
     public function update($id, $data)
     {
-        header("Content-Type: application/json");
+        $ok = $this->model->actualizar(
+            $id,
+            $data['rol'],
+            $data['activo']
+        );
 
-        try {
-
-            $ok = $this->model->actualizar(
-                $id,
-                $data['firebase_uid'],
-                $data['rol'],
-                $data['activo']
-            );
-
-            echo json_encode([
-                "success" => $ok,
-                "message" => $ok
-                    ? "Usuario actualizado"
-                    : "Error al actualizar"
-            ]);
-
-        } catch (Exception $e) {
-
-            http_response_code(500);
-
-            echo json_encode([
-                "success" => false,
-                "message" => $e->getMessage()
-            ]);
-        }
+        echo json_encode([
+            "success" => $ok
+        ]);
     }
-
-    /* ================= ELIMINAR ================= */
 
     public function delete($id)
     {
-        header("Content-Type: application/json");
+        $ok = $this->model->eliminar($id);
 
-        try {
-
-            $ok = $this->model->eliminar($id);
-
-            echo json_encode([
-                "success" => $ok,
-                "message" => $ok
-                    ? "Usuario eliminado"
-                    : "Error al eliminar"
-            ]);
-
-        } catch (Exception $e) {
-
-            http_response_code(500);
-
-            echo json_encode([
-                "success" => false,
-                "message" => $e->getMessage()
-            ]);
-        }
+        echo json_encode([
+            "success" => $ok
+        ]);
     }
 }
