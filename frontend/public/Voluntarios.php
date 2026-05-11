@@ -175,17 +175,7 @@
 
             <div class="field">
 
-                <label>
-
-                    Contraseña
-
-                </label>
-
-                <input
-                    type="password"
-                    id="password"
-                    required
-                    placeholder="Contraseña segura">
+                
 
             </div>
 
@@ -193,17 +183,9 @@
 
             <div class="field">
 
-                <label>
 
-                    Confirmar contraseña
 
-                </label>
-
-                <input
-                    type="password"
-                    id="confirmPassword"
-                    required
-                    placeholder="Repetir contraseña">
+       
 
             </div>
 
