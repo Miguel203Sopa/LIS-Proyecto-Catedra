@@ -30,7 +30,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $context = stream_context_create($options);
 
     $response = file_get_contents(
-        "http://localhost:3001/api.php/auth/login",
+        "http://backend_app/api.php/auth/login",
         false,
         $context
     );
