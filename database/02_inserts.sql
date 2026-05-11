@@ -20,13 +20,23 @@ INSERT INTO fundacion.personas (nombre, apellido, dui, correo, telefono) VALUES
 ('Óscar','Lemus Coreas','01847362-7','oscar.lemco@outlook.com','6328-5047'),
 ('Rebeca','Peraza Romero','07524916-4','rebe.perrom@gmail.com','7541-8362');
 
+
+--INSERT INTO fundacion.usuarios (id_persona, firebase_uid, rol) VALUES
+--((SELECT id_persona FROM fundacion.personas WHERE dui='06789413-5'),'20hlJDy4AxRHLiUptYRjqvwLr0v1','admin'),
+--((SELECT id_persona FROM fundacion.personas WHERE dui='04729183-6'),'alewjandro aramburu','voluntario'),
+--((SELECT id_persona FROM fundacion.personas WHERE dui='07163842-1'),'iñaki godoy','voluntario'),
+--((SELECT id_persona FROM fundacion.personas WHERE dui='02984751-3'),'han jisung','voluntario'),
+--((SELECT id_persona FROM fundacion.personas WHERE dui='08341627-9'),'lee felix','voluntario'),
+--((SELECT id_persona FROM fundacion.personas WHERE dui='05617394-2'),'choi yeonjun','voluntario');
+
 INSERT INTO fundacion.usuarios (id_persona, firebase_uid, rol) VALUES
 ((SELECT id_persona FROM fundacion.personas WHERE dui='06789413-5'),'20hlJDy4AxRHLiUptYRjqvwLr0v1','admin'),
-((SELECT id_persona FROM fundacion.personas WHERE dui='04729183-6'),'alewjandro aramburu','voluntario'),
-((SELECT id_persona FROM fundacion.personas WHERE dui='07163842-1'),'iñaki godoy','voluntario'),
-((SELECT id_persona FROM fundacion.personas WHERE dui='02984751-3'),'han jisung','voluntario'),
-((SELECT id_persona FROM fundacion.personas WHERE dui='08341627-9'),'lee felix','voluntario'),
-((SELECT id_persona FROM fundacion.personas WHERE dui='05617394-2'),'choi yeonjun','voluntario');
+((SELECT id_persona FROM fundacion.personas WHERE dui='04729183-6'),'Bl5QbhqcsjhMeaHbm0vWfri1Lyz2','voluntario'),
+((SELECT id_persona FROM fundacion.personas WHERE dui='07163842-1'),'GNijIUndfdSWWRzxeLnFJ65WsRI2','voluntario'),
+((SELECT id_persona FROM fundacion.personas WHERE dui='02984751-3'),'bSWpFJyV1QYDhGkHXWFOD4MNFle2','voluntario'),
+((SELECT id_persona FROM fundacion.personas WHERE dui='08341627-9'),'IsTMFkE0aTWTkaAlRIezRVlJwY73','voluntario'),
+((SELECT id_persona FROM fundacion.personas WHERE dui='05617394-2'),'vfGtUfIjOneTyy1Y1CcqBPf6epj1','voluntario');
+
 
 INSERT INTO fundacion.animales (nombre, especie, fecha_nacimiento, sexo, estado, estado_salud, fecha_rescate, descripcion, foto_url, historial_medico) VALUES
 
