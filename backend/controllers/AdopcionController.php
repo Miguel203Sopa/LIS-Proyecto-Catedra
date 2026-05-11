@@ -41,18 +41,37 @@ class AdopcionController
     {
         header("Content-Type: application/json");
 
+        require_once __DIR__ . "/../clases/Persona.php";
+
+        $personaModel = new Persona();
+
+        $dui = $data['dui'];
+
+        $persona = $personaModel->obtenerPorDui($dui);
+
+        if (!$persona) {
+
+            $personaModel->crear(
+                $data['nombre'],
+                $data['apellido'],
+                $data['dui'],
+                $data['correo'],
+                $data['telefono']
+            );
+
+            $persona = $personaModel->obtenerPorDui($dui);
+        }
+
         $ok = $this->model->crear(
             $data['id_animal'],
-            $data['id_persona'],
-            $data['estado'] ?? 'en proceso',
+            $persona['id_persona'],
+            "en proceso",
             $data['observaciones'] ?? null
         );
 
         echo json_encode([
             "success" => $ok,
-            "message" => $ok
-                ? "Adopción creada"
-                : "No se pudo crear"
+            "message" => $ok ? "Adopción creada correctamente" : "Error"
         ]);
     }
 

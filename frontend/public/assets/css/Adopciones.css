@@ -4,6 +4,8 @@
   background: transparent;
 }
 
+/* ================= SECCIÓN PRINCIPAL ================= */
+
 .contenedor1 {
   display: flex;
   flex-wrap: wrap;
@@ -51,6 +53,8 @@
   object-fit: cover;
 }
 
+/* ================= CONTENIDO ================= */
+
 .contenedor2 {
   margin-top: 30px;
   padding: 30px;
@@ -94,13 +98,18 @@
   margin-top: 3px;
 }
 
-/* MENÚ FILTROS */
+.menu-bar {
+  position: relative;
+  z-index: 10;
+}
+
 .menu-bar ul {
   display: flex;
   flex-wrap: wrap;
-  gap: 15px;
+  gap: 12px;
   padding: 0;
   margin-top: 20px;
+  list-style: none;
 }
 
 .menu-bar ul li {
@@ -122,16 +131,16 @@
   color: #fff;
 }
 
-/* SUBMENU */
 .sub-menu {
   position: absolute;
   top: 100%;
   left: 0;
-  background: rgba(255, 255, 255, 0.9);
+  background: rgba(255, 255, 255, 0.95);
   border-radius: 10px;
   display: none;
   min-width: 120px;
   padding: 10px;
+  z-index: 50;
 }
 
 .menu-bar ul li:hover .sub-menu {
@@ -140,24 +149,21 @@
 
 .sub-menu ul {
   display: block;
+  list-style: none;
+  margin: 0;
+  padding: 0;
 }
 
-.sub-menu ul li a {
-  background: transparent;
-  padding: 5px;
-}
-
-/* FLIP CARDS */
 .flip-card {
   perspective: 1000px;
   height: 320px;
 }
 
 .flip-inner {
+  position: relative;
   width: 100%;
   height: 100%;
-  position: relative;
-  transition: transform .6s;
+  transition: transform 0.6s;
   transform-style: preserve-3d;
 }
 
@@ -168,43 +174,146 @@
 .front,
 .back {
   position: absolute;
+  inset: 0;
   width: 100%;
   height: 100%;
+  padding: 20px;
+  border-radius: 16px;
+  background: #fff;
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.1);
+
   backface-visibility: hidden;
-  background: rgba(255, 255, 255, 0.35);
-  border-radius: 15px;
-  padding: 15px;
-  backdrop-filter: blur(6px);
+  -webkit-backface-visibility: hidden;
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+  gap: 12px;
+}
+.img-container {
+  width: 100%;
+  height: 180px;
+  object-fit: cover;
+  border-radius: 12px;
+}
+
+.front h3 {
+  font-size: 20px;
+  font-weight: 700;
+  color: #2e4ead;
+}
+
+.front span {
+  font-size: 13px;
+  color: #5a5a5a;
 }
 
 .back {
   transform: rotateY(180deg);
 }
 
-.img-container {
-  width: 100%;
-  height: 140px;
-  object-fit: cover;
-  border-radius: 10px;
-}
-
 .card__img-back {
   width: 90px;
   height: 90px;
-  object-fit: cover;
   border-radius: 50%;
-  margin: 10px auto;
+  object-fit: cover;
 }
 
-/* BOTÓN */
-.btn-outline-dark {
+.back p {
+  font-size: 14px;
+  color: #4b5563;
+}
+
+.menu-bar a.active-filter {
+  background: #2e4ead !important;
+  color: #fff !important;
+  box-shadow: 0 4px 10px rgba(46, 78, 173, 0.3);
+  transform: translateY(-1px);
+}
+
+.menu-bar a {
+  transition: all 0.2s ease;
+}
+
+dialog#modalAdopcion {
+  border: none;
+  padding: 0;
+  border-radius: 16px;
+  width: min(420px, 92%);
+  background: transparent;
+}
+
+dialog#modalAdopcion::backdrop {
+  background: rgba(0, 0, 0, 0.6);
+  backdrop-filter: blur(4px);
+}
+
+#formAdopcion {
+  background: rgba(255, 255, 255, 0.9);
+  padding: 25px;
+  border-radius: 16px;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+#formAdopcion h2 {
+  font-size: 1.4rem;
+  font-weight: 700;
+  color: #2e4ead;
+  margin-bottom: 10px;
+}
+
+#formAdopcion input,
+#formAdopcion textarea {
+  width: 100%;
+  padding: 10px 12px;
   border-radius: 10px;
+  border: 1px solid rgba(0,0,0,0.1);
+  outline: none;
+  font-size: 14px;
+  transition: 0.2s;
+  background: #fff;
 }
 
-/* RESPONSIVE */
-@media(max-width:768px) {
-  .contenedor1 {
-    flex-direction: column;
-    text-align: center;
-  }
+#formAdopcion textarea {
+  resize: none;
+  min-height: 80px;
+}
+
+#formAdopcion input:focus,
+#formAdopcion textarea:focus {
+  border-color: #2e4ead;
+  box-shadow: 0 0 0 3px rgba(46, 78, 173, 0.15);
+}
+
+#formAdopcion button {
+  padding: 10px 14px;
+  border-radius: 10px;
+  border: none;
+  font-weight: 600;
+  cursor: pointer;
+  transition: 0.2s;
+}
+
+#formAdopcion button[type="submit"] {
+  background: #2e4ead;
+  color: white;
+}
+
+#formAdopcion button[type="submit"]:hover {
+  background: #1f3a8a;
+  transform: translateY(-1px);
+}
+
+#formAdopcion button[type="button"] {
+  background: #e5e7eb;
+  color: #111;
+}
+
+#formAdopcion button[type="button"]:hover {
+  background: #d1d5db;
 }

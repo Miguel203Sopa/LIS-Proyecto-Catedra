@@ -55,8 +55,6 @@ body {
     margin-bottom: 30px;
 }
 
-/* ================= INTRO ================= */
-
 .contenedor-voluntarios {
     width: 100%;
     padding: 20px 10px 60px;
@@ -99,8 +97,6 @@ body {
     line-height: 1.7;
     margin: 0;
 }
-
-/* ================= GALERIA ================= */
 
 .galeria-section {
     margin-top: 30px;
@@ -146,8 +142,6 @@ body {
     transform: scale(1.03);
 }
 
-/* ================= CTA ================= */
-
 .cta-section {
     padding: 70px 20px;
 }
@@ -174,8 +168,6 @@ body {
     line-height: 1.8;
     margin-bottom: 30px;
 }
-
-/* ================= MODAL ================= */
 
 #modalVoluntario {
     border: none;
@@ -211,8 +203,6 @@ body {
     color: #24418f;
     font-weight: 700;
 }
-
-/* ================= FORM ================= */
 
 .grid-form {
     display: grid;
@@ -258,8 +248,6 @@ body {
     margin-top: 28px;
 }
 
-/* ================= BOTONES ================= */
-
 .btn-primary {
     background: #2e4ead !important;
     border: none !important;
@@ -275,8 +263,6 @@ body {
     border-radius: 14px !important;
     padding: 12px 22px !important;
 }
-
-/* ================= RESPONSIVE ================= */
 
 @media(max-width: 992px) {
 
