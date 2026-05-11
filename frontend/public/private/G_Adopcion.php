@@ -10,146 +10,124 @@ $usuario = Auth::user();
 <html lang="es">
 
 <head>
-
     <meta charset="UTF-8">
-
     <title>Gestión de Adopciones</title>
-
-    <link
-        rel="stylesheet"
-        href="/assets/css/admin.css?v=<?= time() ?>">
-
-    <link
-        href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css"
-        rel="stylesheet">
-
-    <link
-        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"
-        rel="stylesheet">
-
+    <link rel="shortcut icon" href="/assets/imagenes/Puppy.png">
+    <link rel="stylesheet" href="/assets/css/admin.css?v=<?= time() ?>">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" rel="stylesheet">
 </head>
 
 <body>
 
-<?php include __DIR__ . '/navbar.php'; ?>
+    <?php include __DIR__ . '/navbar.php'; ?>
+    <div class="panel-container">
+        <h1 class="mb-4">
+            <i class="fa-solid fa-heart-circle-check"></i>
+            Gestión de Adopciones
+        </h1>
 
-<div class="panel-container">
+        <!-- ================= TABLA ================= -->
 
-    <h1 class="mb-4">
+        <table class="table table-hover mt-4" id="tabla-adopciones">
 
-        <i class="fa-solid fa-heart-circle-check"></i>
-        Gestión de Adopciones
+            <thead>
 
-    </h1>
+                <tr>
 
-    <!-- ================= TABLA ================= -->
+                    <th>ID</th>
+                    <th>ID Animal</th>
+                    <th>ID Persona</th>
+                    <th>Estado</th>
+                    <th>Observaciones</th>
+                    <th>Acciones</th>
 
-    <table
-        class="table table-hover mt-4"
-        id="tabla-adopciones">
+                </tr>
 
-        <thead>
+            </thead>
 
-            <tr>
+            <tbody></tbody>
 
-                <th>ID</th>
-                <th>ID Animal</th>
-                <th>ID Persona</th>
-                <th>Estado</th>
-                <th>Observaciones</th>
-                <th>Acciones</th>
+        </table>
 
-            </tr>
+        <hr class="my-5">
 
-        </thead>
+        <!-- ================= FORM ================= -->
 
-        <tbody></tbody>
+        <h3 class="mb-4">
 
-    </table>
+            <i class="fa-solid fa-plus"></i>
+            Registrar / Editar Adopción
 
-    <hr class="my-5">
+        </h3>
 
-    <!-- ================= FORM ================= -->
+        <form id="formAdopcion">
 
-    <h3 class="mb-4">
-
-        <i class="fa-solid fa-plus"></i>
-        Registrar / Editar Adopción
-
-    </h3>
-
-    <form id="formAdopcion">
-
-        <div class="row g-4">
+            <div class="row g-4">
 
 
-            <!-- estado -->
+                <!-- estado -->
 
-            <div class="col-md-6">
+                <div class="col-md-6">
 
-                <label class="form-label">
+                    <label class="form-label">
 
-                    Estado
+                        Estado
 
-                </label>
+                    </label>
 
-                <select
-                    name="estado"
-                    class="form-select">
+                    <select name="estado" class="form-select">
 
-                    <option value="en proceso">
-                        En proceso
-                    </option>
+                        <option value="en proceso">
+                            En proceso
+                        </option>
 
-                    <option value="aprobada">
-                        Aprobada
-                    </option>
+                        <option value="aprobada">
+                            Aprobada
+                        </option>
 
-                    <option value="rechazada">
-                        Rechazada
-                    </option>
+                        <option value="rechazada">
+                            Rechazada
+                        </option>
 
-                </select>
+                    </select>
 
-            </div>
+                </div>
 
-            <!-- observaciones -->
+                <!-- observaciones -->
 
-            <div class="col-md-6">
+                <div class="col-md-6">
 
-                <label class="form-label">
+                    <label class="form-label">
 
-                    Observaciones
+                        Observaciones
 
-                </label>
+                    </label>
 
-                <textarea
-                    name="observaciones"
-                    class="form-control"></textarea>
+                    <textarea name="observaciones" class="form-control"></textarea>
 
-            </div>
+                </div>
 
-            <!-- submit -->
+                <!-- submit -->
 
-            <div class="col-12">
+                <div class="col-12">
 
-                <button
-                    type="submit"
-                    class="btn btn-success w-100 py-2">
+                    <button type="submit" class="btn btn-success w-100 py-2">
 
-                    <i class="fa-solid fa-floppy-disk"></i>
-                    Guardar Adopción
+                        <i class="fa-solid fa-floppy-disk"></i>
+                        Guardar Adopción
 
-                </button>
+                    </button>
+
+                </div>
 
             </div>
 
-        </div>
+        </form>
 
-    </form>
-
-</div>
- <script src="js/adopciones.js"></script>
+    </div>
+    <script src="js/adopciones.js"></script>
 
 </body>
+
 </html>
