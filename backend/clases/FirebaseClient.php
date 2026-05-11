@@ -5,6 +5,8 @@ class FirebaseClient
     private $apiKey =
         "AIzaSyBLqzMYMMjX6o1xiu9YBwe-RrzhnD7Zry4";
 
+    /* ================= LOGIN ================= */
+
     public function signIn(
         $email,
         $password
@@ -22,6 +24,46 @@ class FirebaseClient
 
             "returnSecureToken" => true
         ];
+
+        return $this->request($url, $data);
+    }
+
+    /* ================= CAMBIAR PASSWORD ================= */
+
+    public function changePassword(
+        $idToken,
+        $newPassword
+    ) {
+
+        $url =
+            "https://identitytoolkit.googleapis.com/v1/accounts:update?key="
+            . $this->apiKey;
+
+        $data = [
+
+            "idToken" => $idToken,
+
+            "password" => trim($newPassword),
+
+            "returnSecureToken" => true
+        ];
+
+        return $this->request($url, $data);
+    }
+
+    /* ================= OBTENER TOKEN POR UID ================= */
+
+    public function loginByEmail(
+        $email,
+        $password
+    ) {
+        return $this->signIn($email, $password);
+    }
+
+    /* ================= REQUEST GENERAL ================= */
+
+    private function request($url, $data)
+    {
 
         $options = [
 
@@ -51,8 +93,6 @@ class FirebaseClient
                 $context
             );
 
-        /* ================= ERROR DE CONEXION ================= */
-
         if ($response === false) {
 
             $error =
@@ -70,15 +110,11 @@ class FirebaseClient
             ];
         }
 
-        /* ================= DECODIFICAR ================= */
-
         $result =
             json_decode(
                 $response,
                 true
             );
-
-        /* ================= RESPUESTA INVALIDA ================= */
 
         if (!$result) {
 
@@ -94,8 +130,6 @@ class FirebaseClient
             ];
         }
 
-        /* ================= ERROR FIREBASE ================= */
-
         if (isset($result['error'])) {
 
             return [
@@ -110,29 +144,11 @@ class FirebaseClient
             ];
         }
 
-        /* ================= LOGIN OK ================= */
-
         return [
 
             "success" => true,
 
-            "data" => [
-
-                "localId" =>
-                    $result['localId'] ?? null,
-
-                "email" =>
-                    $result['email'] ?? null,
-
-                "idToken" =>
-                    $result['idToken'] ?? null,
-
-                "refreshToken" =>
-                    $result['refreshToken'] ?? null,
-
-                "expiresIn" =>
-                    $result['expiresIn'] ?? null
-            ]
+            "data" => $result
         ];
     }
 }

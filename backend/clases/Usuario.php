@@ -11,8 +11,6 @@ class Usuario
         $this->db = Conexion::conectar();
     }
 
-    /* ================= LISTAR ================= */
-
     public function listar()
     {
         $stmt = $this->db->query("
@@ -33,8 +31,6 @@ class Usuario
 
         return $stmt->fetchAll(PDO::FETCH_ASSOC);
     }
-
-    /* ================= OBTENER ================= */
 
     public function obtener($id)
     {
@@ -59,8 +55,6 @@ class Usuario
         return $stmt->fetch(PDO::FETCH_ASSOC);
     }
 
-    /* ================= CREAR ================= */
-
     public function crear(
         $id_persona,
         $firebase_uid,
@@ -84,8 +78,6 @@ class Usuario
         ]);
     }
 
-    /* ================= ACTUALIZAR ================= */
-
     public function actualizar(
         $id,
         $rol,
@@ -107,8 +99,6 @@ class Usuario
         ]);
     }
 
-    /* ================= ELIMINAR ================= */
-
     public function eliminar($id)
     {
         $stmt = $this->db->prepare("
@@ -117,5 +107,23 @@ class Usuario
         ");
 
         return $stmt->execute([$id]);
+    }
+
+    /* ================= OBTENER EMAIL ================= */
+
+    public function obtenerCorreo($id)
+    {
+        $stmt = $this->db->prepare("
+            SELECT
+                p.correo
+            FROM fundacion.usuarios u
+            INNER JOIN fundacion.personas p
+                ON p.id_persona = u.id_persona
+            WHERE u.id_usuario = ?
+        ");
+
+        $stmt->execute([$id]);
+
+        return $stmt->fetch(PDO::FETCH_ASSOC);
     }
 }

@@ -11,6 +11,34 @@ $data = json_decode(
     true
 );
 
+$uri =
+    $_SERVER['REQUEST_URI'];
+
+$segments =
+    explode('/', trim($uri, '/'));
+
+$id = null;
+
+$passwordRoute = false;
+
+foreach ($segments as $index => $segment) {
+
+    if (is_numeric($segment)) {
+
+        $id = $segment;
+
+        if (
+            isset($segments[$index + 1]) &&
+            $segments[$index + 1] === 'password'
+        ) {
+
+            $passwordRoute = true;
+        }
+
+        break;
+    }
+}
+
 switch ($method) {
 
     case 'GET':
@@ -31,7 +59,20 @@ switch ($method) {
 
     case 'PUT':
 
-        $controller->update($id, $data);
+        if ($passwordRoute) {
+
+            $controller->cambiarPassword(
+                $id,
+                $data
+            );
+
+        } else {
+
+            $controller->update(
+                $id,
+                $data
+            );
+        }
 
         break;
 
