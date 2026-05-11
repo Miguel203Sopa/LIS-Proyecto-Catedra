@@ -49,23 +49,59 @@ Auth::requireAdmin();
         </table>
 
     </div>
-    <dialog id="modalVoluntario">
+    <dialog id="modalAprobacion">
 
-        <h3>Aprobar voluntario</h3>
+        <div class="p-3" style="min-width:350px;">
 
-        <input type="email" id="correoVoluntario" readonly>
+            <h4 class="mb-3">
+                Aprobar voluntario
+            </h4>
 
-        <input type="password" id="passwordVoluntario" placeholder="Crear contraseña">
+            <div class="mb-3">
 
-        <div style="display:flex; gap:10px; justify-content:flex-end; margin-top:10px;">
+                <label class="form-label">
+                    Correo
+                </label>
 
-            <button class="btn btn-success" onclick="confirmarAprobacion()">
-                Confirmar
-            </button>
+                <input type="email" id="correoUsuario" class="form-control" readonly>
 
-            <button class="btn btn-secondary" onclick="document.getElementById('modalVoluntario').close()">
-                Cancelar
-            </button>
+            </div>
+
+            <div class="mb-3">
+
+                <label class="form-label">
+                    Contraseña
+                </label>
+
+                <input type="password" id="password" class="form-control">
+
+            </div>
+
+            <div class="mb-3">
+
+                <label class="form-label">
+                    Confirmar contraseña
+                </label>
+
+                <input type="password" id="confirmPassword" class="form-control">
+
+            </div>
+
+            <div class="d-flex justify-content-end gap-2">
+
+                <button class="btn btn-secondary" onclick="document.getElementById('modalAprobacion').close()">
+
+                    Cancelar
+
+                </button>
+
+                <button class="btn btn-success" onclick="confirmarAprobacion()">
+
+                    Confirmar
+
+                </button>
+
+            </div>
 
         </div>
 

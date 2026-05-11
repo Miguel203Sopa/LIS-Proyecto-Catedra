@@ -2,7 +2,7 @@ const API = "http://localhost:3001/api.php/solicitudes_voluntariado";
 
 const tabla = document.getElementById("tablaSolicitudes");
 
-let solicitudSeleccionada = null;
+let solicitudActual = null;
 
 window.onload = () => cargar();
 
@@ -15,8 +15,19 @@ async function cargar() {
 
     json.data.forEach(s => {
 
+        let badge = "bg-warning";
+
+        if (s.estado === "aprobado") {
+            badge = "bg-success";
+        }
+
+        if (s.estado === "rechazado") {
+            badge = "bg-danger";
+        }
+
         tabla.innerHTML += `
             <tr>
+
                 <td>${s.id_solicitud}</td>
                 <td>${s.nombre} ${s.apellido}</td>
                 <td>${s.dui}</td>
@@ -24,74 +35,139 @@ async function cargar() {
                 <td>${s.telefono}</td>
 
                 <td>
-                    <span class="badge bg-warning">
+                    <span class="badge ${badge}">
                         ${s.estado}
                     </span>
                 </td>
 
                 <td>
 
-                    <button class="btn btn-success btn-sm"
-                        onclick="abrirAprobacion(${s.id_solicitud}, '${s.correo}')">
-                        <i class="fa-solid fa-check"></i>
-                    </button>
+                    ${s.estado !== "aprobado" ? `
 
-                    <button class="btn btn-danger btn-sm"
-                        onclick="cambiarEstado(${s.id_solicitud}, 'rechazado')">
-                        <i class="fa-solid fa-xmark"></i>
-                    </button>
+                        <button
+                            class="btn btn-success btn-sm"
+                            onclick='abrirModal(${JSON.stringify(s)})'>
 
+                            <i class="fa-solid fa-check"></i>
+
+                        </button>
+
+                        <button
+                            class="btn btn-danger btn-sm"
+                            onclick="cambiarEstado(${s.id_solicitud}, 'rechazado')">
+
+                            <i class="fa-solid fa-xmark"></i>
+
+                        </button>
+                    ` : ""}
                 </td>
+
             </tr>
         `;
     });
 }
 
-window.abrirAprobacion = function (id, correo) {
+window.abrirModal = function (solicitud) {
 
-    solicitudSeleccionada = id;
+    solicitudActual = solicitud;
 
-    document.getElementById("correoVoluntario").value = correo;
-    document.getElementById("passwordVoluntario").value = "";
+    document.getElementById("correoUsuario").value =
+        solicitud.correo;
 
-    document.getElementById("modalVoluntario").showModal();
+    document.getElementById("password").value = "";
+
+    document.getElementById("confirmPassword").value = "";
+
+    document.getElementById("modalAprobacion").showModal();
 };
 
-window.confirmarAprobacion = async function () {
+async function confirmarAprobacion() {
 
-    const correo = document.getElementById("correoVoluntario").value;
-    const password = document.getElementById("passwordVoluntario").value;
+    const password =
+        document.getElementById("password").value.trim();
 
-    if (!password) {
-        alert("Ingresa una contraseña");
+    const confirmPassword =
+        document.getElementById("confirmPassword").value.trim();
+
+    if (!password || !confirmPassword) {
+        alert("Complete las contraseñas");
         return;
     }
 
-    await fetch(`${API}/aprobar`, {
-        method: "POST",
-        headers: {
-            "Content-Type": "application/json"
-        },
-        body: JSON.stringify({
-            id: solicitudSeleccionada,
-            correo,
-            password
-        })
-    });
+    if (password !== confirmPassword) {
+        alert("Las contraseñas no coinciden");
+        return;
+    }
 
-    document.getElementById("modalVoluntario").close();
-    cargar();
-};
+    try {
+
+        const res = await fetch(`${API}/aprobar`, {
+
+            method: "POST",
+
+            headers: {
+                "Content-Type": "application/json"
+            },
+
+            body: JSON.stringify({
+
+                id_solicitud:
+                    solicitudActual.id_solicitud,
+
+                correo:
+                    solicitudActual.correo,
+
+                password
+
+            })
+        });
+
+        const json = await res.json();
+
+        if (!json.success) {
+
+            alert(json.message || "Error");
+
+            return;
+        }
+
+        alert("Usuario aprobado correctamente");
+
+        document
+            .getElementById("modalAprobacion")
+            .close();
+
+        cargar();
+
+    } catch (err) {
+
+        console.error(err);
+
+        alert("Error de Firebase");
+    }
+}
 
 async function cambiarEstado(id, estado) {
 
-    await fetch(`${API}/${id}`, {
+    const res = await fetch(`${API}/${id}`, {
+
         method: "PUT",
+
         headers: {
             "Content-Type": "application/json"
         },
+
         body: JSON.stringify({ estado })
     });
+
+    const json = await res.json();
+
+    if (!json.success) {
+
+        alert("Error actualizando estado");
+
+        return;
+    }
 
     cargar();
 }

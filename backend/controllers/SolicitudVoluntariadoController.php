@@ -1,15 +1,17 @@
 <?php
 
-require_once __DIR__ . "/../clases/FirebaseClient.php";
 require_once __DIR__ . "/../clases/SolicitudVoluntariado.php";
-
+require_once __DIR__ . "/../clases/FirebaseClient.php";
+require_once __DIR__ . "/../clases/Conexion.php";
 
 class SolicitudVoluntariadoController
 {
     private $model;
 
-
-    /* ================= CREAR ================= */
+    public function __construct()
+    {
+        $this->model = new SolicitudVoluntariado();
+    }
 
     public function store($data)
     {
@@ -32,11 +34,6 @@ class SolicitudVoluntariadoController
                 ? "Solicitud enviada correctamente"
                 : "Error enviando solicitud"
         ]);
-    }
-
-    public function __construct()
-    {
-        $this->model = new SolicitudVoluntariado();
     }
 
     public function index()
@@ -76,66 +73,187 @@ class SolicitudVoluntariadoController
         ]);
     }
 
-
     public function aprobar($data)
     {
-        $firebase = new FirebaseClient();
+        $idSolicitud =
+            $data['id_solicitud'] ?? null;
 
-        $correo = $data['correo'];
-        $password = $data['password'];
-        $id = $data['id'];
+        $correo =
+            trim($data['correo'] ?? '');
 
-        // 1. crear usuario en Firebase
-        $firebaseUser = $firebase->createUser($correo, $password);
+        $password =
+            trim($data['password'] ?? '');
 
-        if (!$firebaseUser['success']) {
+        if (
+            !$idSolicitud ||
+            !$correo ||
+            !$password
+        ) {
+
             echo json_encode([
                 "success" => false,
-                "message" => "Error creando usuario en Firebase",
-                "firebase" => $firebaseUser
+                "message" => "Datos incompletos"
             ]);
+
             return;
         }
 
-        $uid = $firebaseUser['data']['localId'];
+        $solicitud =
+            $this->model->obtener($idSolicitud);
 
-        // 2. guardar en tabla personas/usuarios
-        $conn = Conexion::conectar();
+        if (!$solicitud) {
 
-        $conn->beginTransaction();
+            echo json_encode([
+                "success" => false,
+                "message" => "Solicitud no encontrada"
+            ]);
+
+            return;
+        }
+
+        $firebase =
+            new FirebaseClient();
+
+        $firebaseUser =
+            $firebase->crearUsuario(
+                $correo,
+                $password
+            );
+
+        if (!$firebaseUser['success']) {
+
+            echo json_encode([
+                "success" => false,
+                "message" =>
+                    $firebaseUser['message']
+            ]);
+
+            return;
+        }
+
+        $uid =
+            $firebaseUser['data']['localId'];
 
         try {
 
-            // persona básica
-            $stmt = $conn->prepare("
-            INSERT INTO fundacion.personas
-            (nombre, apellido, correo, activo)
-            SELECT nombre, apellido, correo, 1
-            FROM fundacion.solicitudes_voluntariado
-            WHERE id_solicitud = ?
-        ");
+            $conn =
+                Conexion::conectar();
 
-            $stmt->execute([$id]);
+            $conn->beginTransaction();
 
-            $personaId = $conn->lastInsertId();
+            $stmtBuscar =
+                $conn->prepare("
 
-            // usuario
-            $stmt2 = $conn->prepare("
-            INSERT INTO fundacion.usuarios
-            (id_persona, firebase_uid, rol, activo)
-            VALUES (?, ?, 'voluntario', 1)
-        ");
+                    SELECT id_persona
+                    FROM fundacion.personas
+                    WHERE dui = ?
+                    OR correo = ?
+                    LIMIT 1
 
-            $stmt2->execute([$personaId, $uid]);
+                ");
 
-            // actualizar solicitud
-            $this->model->aprobarConUsuario($id);
+            $stmtBuscar->execute([
+
+                $solicitud['dui'],
+                $solicitud['correo']
+
+            ]);
+
+            $persona =
+                $stmtBuscar->fetch(PDO::FETCH_ASSOC);
+
+            if ($persona) {
+
+                $idPersona =
+                    $persona['id_persona'];
+
+            } else {
+
+                $stmtPersona =
+                    $conn->prepare("
+
+                        INSERT INTO fundacion.personas
+                        (
+                            nombre,
+                            apellido,
+                            dui,
+                            correo,
+                            telefono,
+                            activo
+                        )
+                        VALUES
+                        (?, ?, ?, ?, ?, true)
+
+                    ");
+
+                $stmtPersona->execute([
+
+                    $solicitud['nombre'],
+                    $solicitud['apellido'],
+                    $solicitud['dui'],
+                    $solicitud['correo'],
+                    $solicitud['telefono']
+
+                ]);
+
+                $idPersona =
+                    $conn->lastInsertId();
+            }
+
+            $stmtExisteUsuario =
+                $conn->prepare("
+
+                    SELECT id_usuario
+                    FROM fundacion.usuarios
+                    WHERE id_persona = ?
+                    LIMIT 1
+
+                ");
+
+            $stmtExisteUsuario->execute([
+                $idPersona
+            ]);
+
+            $usuarioExistente =
+                $stmtExisteUsuario->fetch(PDO::FETCH_ASSOC);
+
+            if ($usuarioExistente) {
+
+                throw new Exception(
+                    "La persona ya posee un usuario"
+                );
+            }
+
+            $stmtUsuario =
+                $conn->prepare("
+
+                    INSERT INTO fundacion.usuarios
+                    (
+                        id_persona,
+                        firebase_uid,
+                        rol,
+                        activo
+                    )
+                    VALUES
+                    (?, ?, 'voluntario', true)
+
+                ");
+
+            $stmtUsuario->execute([
+
+                $idPersona,
+                $uid
+
+            ]);
+
+            $this->model->aprobarConUsuario(
+                $idSolicitud
+            );
 
             $conn->commit();
 
             echo json_encode([
-                "success" => true,
-                "message" => "Usuario creado y solicitud aprobada"
+                "success" => true
             ]);
 
         } catch (Exception $e) {
@@ -144,8 +262,7 @@ class SolicitudVoluntariadoController
 
             echo json_encode([
                 "success" => false,
-                "message" => "Error en proceso de aprobación",
-                "error" => $e->getMessage()
+                "message" => $e->getMessage()
             ]);
         }
     }
