@@ -29,11 +29,22 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
     $context = stream_context_create($options);
 
-    $response = file_get_contents(
-        "http://backend_app/api.php/auth/login",
-        false,
-        $context
+    $response = @file_get_contents(
+    "http://backend_app/api.php/auth/login",
+    false,
+    $context
+);
+
+if ($response === false) {
+
+    $errorInfo = error_get_last();
+
+    die(
+        "<pre>" .
+        print_r($errorInfo, true) .
+        "</pre>"
     );
+}
 
     if ($response !== false) {
 
